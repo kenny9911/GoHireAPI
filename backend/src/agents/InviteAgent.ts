@@ -1,77 +1,113 @@
-import { BaseAgent } from './BaseAgent.js';
-import { InvitationEmail, InviteCandidateRequest } from '../types/index.js';
+import { InviteCandidateRequest, GoHireInvitationResponse } from '../types/index.js';
+import { logger } from '../services/LoggerService.js';
+
+const GOHIRE_INVITATION_API = 'https://report-agent.gohire.top/instant/instant/v1/invitation';
 
 /**
- * Agent for generating interview invitation emails
- * Creates personalized, professional invitation emails based on resume and JD
+ * Agent for sending interview invitations via GoHire 一键邀约 API
+ * Calls the external API to create invitation and send email to candidate
  */
-export class InviteAgent extends BaseAgent<InviteCandidateRequest, InvitationEmail> {
+export class InviteAgent {
+  private agentName: string;
+
   constructor() {
-    super('InviteAgent');
+    this.agentName = 'InviteAgent';
   }
 
-  protected getAgentPrompt(): string {
-    return `You are a professional HR recruiter crafting interview invitation emails. Your task is to create a personalized, warm, and professional invitation email for a candidate.
-
-The email should:
-1. Address the candidate by name (extract from resume)
-2. Mention the specific position they're being considered for
-3. Highlight why they were selected (based on their qualifications matching the JD)
-4. Be professional yet warm and welcoming
-5. Include a clear call to action
-
-Provide your response in the following JSON format (and ONLY this JSON format, no additional text):
-
-\`\`\`json
-{
-  "subject": "<email subject line>",
-  "body": "<full email body with proper formatting, use \\n for line breaks>"
-}
-\`\`\`
-
-Make the email feel personalized and genuine, not like a template. Reference specific skills or experiences from the candidate's resume that make them a good fit.`;
-  }
-
-  protected formatInput(input: InviteCandidateRequest): string {
-    return `## Candidate's Resume:
-${input.resume}
-
-## Job Description:
-${input.jd}
-
-Please generate a professional interview invitation email for this candidate.`;
-  }
-
-  protected parseOutput(response: string): InvitationEmail {
-    // Try to extract JSON from the response
-    const jsonMatch = response.match(/```json\s*([\s\S]*?)\s*```/) ||
-                      response.match(/```\s*([\s\S]*?)\s*```/) ||
-                      response.match(/(\{[\s\S]*\})/);
+  /**
+   * Send an interview invitation via GoHire API
+   */
+  async sendInvitation(
+    resume: string,
+    jd: string,
+    recruiterEmail?: string,
+    interviewerRequirement?: string,
+    requestId?: string
+  ): Promise<GoHireInvitationResponse> {
+    const stepId = logger.startStep(requestId || '', `${this.agentName}: Call GoHire API`);
     
-    if (jsonMatch && jsonMatch[1]) {
-      try {
-        return JSON.parse(jsonMatch[1].trim()) as InvitationEmail;
-      } catch {
-        // Continue to try parsing the entire response
-      }
-    }
+    // Use provided email or fall back to environment variable
+    const email = recruiterEmail || process.env.RECRUITER_EMAIL || process.env.recruiter_email || 'hr@lightark.ai';
     
+    const requestBody = {
+      recruiter_email: email,
+      jd_content: jd,
+      interviewer_requirement: interviewerRequirement || '',
+      resume_text: resume,
+    };
+
+    logger.info(this.agentName, 'Sending invitation request to GoHire API', {
+      recruiter_email: email,
+      jd_length: jd.length,
+      resume_length: resume.length,
+      has_interviewer_requirement: !!interviewerRequirement,
+    }, requestId);
+
     try {
-      return JSON.parse(response) as InvitationEmail;
-    } catch {
-      // Return a default structure if parsing fails
-      return {
-        subject: 'Interview Invitation',
-        body: response,
-      };
+      const startTime = Date.now();
+      
+      const response = await fetch(GOHIRE_INVITATION_API, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      const elapsed = Date.now() - startTime;
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        logger.error(this.agentName, 'GoHire API request failed', {
+          status: response.status,
+          statusText: response.statusText,
+          error: errorText,
+        }, requestId);
+        logger.endStep(requestId || '', stepId, 'failed', { error: errorText });
+        throw new Error(`GoHire API error: ${response.status} - ${errorText}`);
+      }
+
+      const result = await response.json() as GoHireInvitationResponse;
+
+      logger.info(this.agentName, 'GoHire API response received', {
+        candidate_email: result.email,
+        candidate_name: result.name,
+        job_title: result.job_title,
+        user_id: result.user_id,
+        message: result.message,
+        elapsed_ms: elapsed,
+      }, requestId);
+
+      logger.endStep(requestId || '', stepId, 'completed', {
+        candidate_email: result.email,
+        job_title: result.job_title,
+        elapsed_ms: elapsed,
+      });
+
+      return result;
+    } catch (error) {
+      logger.error(this.agentName, 'Failed to send invitation', {
+        error: error instanceof Error ? error.message : String(error),
+      }, requestId);
+      logger.endStep(requestId || '', stepId, 'failed', {
+        error: error instanceof Error ? error.message : String(error),
+      });
+      throw error;
     }
   }
 
   /**
-   * Generate an interview invitation email
+   * Generate an interview invitation (legacy method for backward compatibility)
+   * Now calls the GoHire API instead of generating email locally
    */
-  async generateInvitation(resume: string, jd: string, requestId?: string): Promise<InvitationEmail> {
-    return this.executeWithJsonResponse({ resume, jd }, jd, requestId);
+  async generateInvitation(
+    resume: string,
+    jd: string,
+    requestId?: string,
+    recruiterEmail?: string,
+    interviewerRequirement?: string
+  ): Promise<GoHireInvitationResponse> {
+    return this.sendInvitation(resume, jd, recruiterEmail, interviewerRequirement, requestId);
   }
 }
 

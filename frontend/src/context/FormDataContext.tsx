@@ -8,6 +8,8 @@ interface MatchResumeData {
 interface InviteCandidateData {
   resume: string;
   jd: string;
+  recruiterEmail: string;
+  interviewerRequirement: string;
 }
 
 interface EvaluateInterviewData {
@@ -34,7 +36,7 @@ interface FormDataContextType {
 
 const defaultFormData: FormDataState = {
   matchResume: { resume: '', jd: '' },
-  inviteCandidate: { resume: '', jd: '' },
+  inviteCandidate: { resume: '', jd: '', recruiterEmail: '', interviewerRequirement: '' },
   evaluateInterview: { resume: '', jd: '', interviewScript: '' },
 };
 
@@ -100,7 +102,7 @@ export function FormDataProvider({ children }: { children: ReactNode }) {
     setFormData(prev => ({
       ...prev,
       matchResume: { resume: '', jd: '' },
-      inviteCandidate: { resume: '', jd: '' },
+      inviteCandidate: { ...prev.inviteCandidate, resume: '', jd: '' },
       evaluateInterview: { ...prev.evaluateInterview, resume: '', jd: '' },
     }));
   };
@@ -109,7 +111,7 @@ export function FormDataProvider({ children }: { children: ReactNode }) {
     setFormData(prev => ({
       ...prev,
       matchResume: { resume: '', jd: '' },
-      inviteCandidate: { resume: '', jd: '' },
+      inviteCandidate: { resume: '', jd: '', recruiterEmail: prev.inviteCandidate.recruiterEmail, interviewerRequirement: '' },
       evaluateInterview: { ...prev.evaluateInterview, resume: '', jd: '' },
     }));
   };
@@ -118,7 +120,7 @@ export function FormDataProvider({ children }: { children: ReactNode }) {
     setFormData(prev => ({
       ...prev,
       matchResume: { resume: '', jd: '' },
-      inviteCandidate: { resume: '', jd: '' },
+      inviteCandidate: { ...prev.inviteCandidate, resume: '', jd: '' },
       evaluateInterview: { resume: '', jd: '', interviewScript: '' },
     }));
   };

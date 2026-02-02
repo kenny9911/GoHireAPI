@@ -93,14 +93,14 @@ router.post('/match-resume', async (req: Request, res: Response) => {
 
 /**
  * POST /api/v1/invite-candidate
- * Generate an interview invitation email
+ * Send interview invitation via GoHire 一键邀约 API
  */
 router.post('/invite-candidate', async (req: Request, res: Response) => {
   const requestId = generateRequestId();
   logger.startRequest(requestId, '/api/v1/invite-candidate', 'POST');
 
   try {
-    const { resume, jd } = req.body as InviteCandidateRequest;
+    const { resume, jd, recruiter_email, interviewer_requirement } = req.body as InviteCandidateRequest;
 
     // Step 1: Validate input
     const validateStep = logger.startStep(requestId, 'Validate input');
@@ -116,10 +116,18 @@ router.post('/invite-candidate', async (req: Request, res: Response) => {
     logger.endStep(requestId, validateStep, 'completed', {
       resumeLength: resume.length,
       jdLength: jd.length,
+      hasRecruiterEmail: !!recruiter_email,
+      hasInterviewerRequirement: !!interviewer_requirement,
     });
 
-    // Step 2: Execute agent
-    const result = await inviteAgent.generateInvitation(resume, jd, requestId);
+    // Step 2: Call GoHire 一键邀约 API
+    const result = await inviteAgent.generateInvitation(
+      resume,
+      jd,
+      requestId,
+      recruiter_email,
+      interviewer_requirement
+    );
 
     logger.endRequest(requestId, 'success', 200);
     return res.json({

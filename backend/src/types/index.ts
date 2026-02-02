@@ -399,6 +399,28 @@ export interface InvitationEmail {
   body: string;
 }
 
+// 一键邀约 API Response
+export interface GoHireInvitationResponse {
+  email: string;
+  bcc: string[];
+  name: string;
+  login_url: string;
+  home_url: string;
+  display_name: string;
+  user_id: number;
+  request_introduction_id: string;
+  expiration: number;
+  expiration_time: number;
+  company_name: string;
+  job_title: string;
+  job_interview_duration: number;
+  job_summary: string;
+  interview_req: string | null;
+  qrcode_url: string;
+  password: string | null;
+  message: string;
+}
+
 // Interview Evaluation Types
 export interface InterviewEvaluation {
   overallScore: number;
@@ -421,6 +443,8 @@ export interface MatchResumeRequest {
 export interface InviteCandidateRequest {
   resume: string;
   jd: string;
+  recruiter_email?: string;
+  interviewer_requirement?: string;
 }
 
 export interface EvaluateInterviewRequest {
