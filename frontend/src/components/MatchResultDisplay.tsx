@@ -353,6 +353,12 @@ export default function MatchResultDisplay({ data, requestId }: Props) {
     return { bg: 'bg-red-500', border: 'border-red-500' };
   }, [data.overallFit.hiringRecommendation]);
 
+  const niceToHaveExtracted = data.niceToHaveAnalysis?.extractedNiceToHaves ?? {
+    skills: [],
+    experiences: [],
+    qualifications: [],
+  };
+
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       {/* Hero Section - Overall Score */}
@@ -706,7 +712,7 @@ export default function MatchResultDisplay({ data, requestId }: Props) {
                 <div>
                   <h5 className="text-sm font-medium text-blue-600 mb-2">Preferred Skills</h5>
                   <div className="space-y-2">
-                    {data.niceToHaveAnalysis.extractedNiceToHaves.skills.map((s, i) => (
+                    {niceToHaveExtracted.skills.map((s, i) => (
                       <div key={i} className="bg-white rounded p-2 text-sm">
                         <p className="font-medium text-gray-800">{s.skill}</p>
                         <p className="text-gray-500 text-xs">{s.valueAdd}</p>
@@ -718,7 +724,7 @@ export default function MatchResultDisplay({ data, requestId }: Props) {
                 <div>
                   <h5 className="text-sm font-medium text-blue-600 mb-2">Preferred Experience</h5>
                   <div className="space-y-2">
-                    {data.niceToHaveAnalysis.extractedNiceToHaves.experiences.map((e, i) => (
+                    {niceToHaveExtracted.experiences.map((e, i) => (
                       <div key={i} className="bg-white rounded p-2 text-sm">
                         <p className="font-medium text-gray-800">{e.experience}</p>
                         <p className="text-gray-500 text-xs">{e.valueAdd}</p>
@@ -730,7 +736,7 @@ export default function MatchResultDisplay({ data, requestId }: Props) {
                 <div>
                   <h5 className="text-sm font-medium text-blue-600 mb-2">Preferred Qualifications</h5>
                   <div className="space-y-2">
-                    {data.niceToHaveAnalysis.extractedNiceToHaves.qualifications.map((q, i) => (
+                    {niceToHaveExtracted.qualifications.map((q, i) => (
                       <div key={i} className="bg-white rounded p-2 text-sm">
                         <p className="font-medium text-gray-800">{q.qualification}</p>
                         <p className="text-gray-500 text-xs">{q.valueAdd}</p>
