@@ -13,6 +13,9 @@ export interface AuthUser {
   updatedAt: Date;
 }
 
+// API Key scope type
+export type ApiKeyScope = 'read' | 'write';
+
 // Extend Express User type to include our properties
 declare global {
   namespace Express {
@@ -29,6 +32,8 @@ declare global {
     }
     interface Request {
       sessionToken?: string;
+      apiKeyId?: string;
+      apiKeyScopes?: ApiKeyScope[];
     }
   }
 }

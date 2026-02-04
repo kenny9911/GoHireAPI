@@ -1,228 +1,442 @@
-import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useRef, useEffect, useCallback } from 'react';
+import { Link, useSearchParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../context/AuthContext';
+import type { HiringTemplate } from '../data/hiringTemplates';
+import { getLocalizedTemplates } from '../data/hiringTemplates';
 
 interface Message {
   id: string;
   role: 'assistant' | 'user';
   content: string;
-  timestamp: Date;
+  timestamp: string;
+}
+
+interface ChatSession {
+  id: string;
+  title: string | null;
+  status: string;
+  messages: Message[];
+  createdAt: string;
+  updatedAt: string;
 }
 
 export default function StartHiring() {
   const { t } = useTranslation();
   const { isAuthenticated, isLoading: authLoading } = useAuth();
+  const [searchParams, setSearchParams] = useSearchParams();
   
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: '1',
-      role: 'assistant',
-      content: t('hiring.welcome', "Welcome! I'm your AI hiring assistant. Tell me about the role you're hiring for, and I'll help you find the perfect candidates.\n\nYou can describe your ideal candidate, paste a job description, or upload a JD file. What are you looking for?"),
-      timestamp: new Date(),
-    },
-  ]);
+  // State
+  const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isProcessing, setIsProcessing] = useState(false);
-  const [jobDescription, setJobDescription] = useState('');
-  const [step, setStep] = useState<'requirements' | 'review' | 'complete'>('requirements');
+  const [, setSessions] = useState<ChatSession[]>([]);
+  const [activeSessionId, setActiveSessionId] = useState<string | null>(null);
+  const [step, setStep] = useState<'initial' | 'requirements' | 'complete'>('initial');
   const [hiringData, setHiringData] = useState({
     title: '',
     requirements: '',
     jobDescription: '',
-    webhookUrl: '',
   });
+  const [attachedFile, setAttachedFile] = useState<File | null>(null);
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+  const skipLoadSessionId = useRef<string | null>(null);
+  const MAX_CHAT_HISTORY = 12;
+  const CHAT_ERROR_FALLBACK = t(
+    'hiring.chatError',
+    'Sorry, I ran into an issue while processing that. Please try again.'
+  );
+
+  // Auto-resize textarea
+  useEffect(() => {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      textarea.style.height = `${Math.min(textarea.scrollHeight, 150)}px`;
+    }
+  }, [input]);
 
   // Scroll to bottom when messages change
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   }, [messages]);
 
-  // Add assistant message helper
-  const addAssistantMessage = (content: string) => {
-    const newMessage: Message = {
-      id: Date.now().toString(),
-      role: 'assistant',
-      content,
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, newMessage]);
+  // Load sessions on mount (if authenticated)
+  useEffect(() => {
+    if (isAuthenticated) {
+      loadSessions();
+    }
+  }, [isAuthenticated]);
+
+  // Load session from URL param (skip freshly created local sessions)
+  useEffect(() => {
+    const sessionId = searchParams.get('session');
+    if (!sessionId || !isAuthenticated) return;
+    if (skipLoadSessionId.current === sessionId) return;
+    if (sessionId !== activeSessionId || messages.length === 0) {
+      loadSession(sessionId);
+    }
+  }, [searchParams, isAuthenticated, activeSessionId, messages.length]);
+
+  const getAuthHeaders = useCallback(() => {
+    const token = localStorage.getItem('auth_token');
+    const headers: HeadersInit = { 'Content-Type': 'application/json' };
+    if (token) {
+      (headers as Record<string, string>).Authorization = `Bearer ${token}`;
+    }
+    return headers;
+  }, []);
+
+  const loadSessions = async () => {
+    try {
+      const response = await fetch('/api/v1/hiring-sessions', {
+        headers: getAuthHeaders(),
+        credentials: 'include',
+      });
+      const data = await response.json();
+      if (data.success) {
+        setSessions(data.data);
+      }
+    } catch (error) {
+      console.error('Failed to load sessions:', error);
+    }
   };
 
-  // Add user message helper
-  const addUserMessage = (content: string) => {
-    const newMessage: Message = {
-      id: Date.now().toString(),
-      role: 'user',
-      content,
-      timestamp: new Date(),
-    };
-    setMessages((prev) => [...prev, newMessage]);
+  const loadSession = async (sessionId: string) => {
+    try {
+      const response = await fetch(`/api/v1/hiring-sessions/${sessionId}`, {
+        headers: getAuthHeaders(),
+        credentials: 'include',
+      });
+      const data = await response.json();
+      if (data.success) {
+        setActiveSessionId(sessionId);
+        setMessages(data.data.messages || []);
+        setStep('requirements');
+      }
+    } catch (error) {
+      console.error('Failed to load session:', error);
+    }
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!input.trim() || isProcessing) return;
-
-    const userInput = input.trim();
-    setInput('');
-    addUserMessage(userInput);
-    setIsProcessing(true);
-
-    // Simulate AI processing
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    if (step === 'requirements') {
-      // Parse the requirements and extract key info
-      setHiringData((prev) => ({
-        ...prev,
-        requirements: prev.requirements ? `${prev.requirements}\n${userInput}` : userInput,
-      }));
-
-      // Check if user provided enough information
-      const hasEnoughInfo = userInput.length > 50 || hiringData.requirements.length > 50;
-
-      if (hasEnoughInfo) {
-        addAssistantMessage(
-          t('hiring.gotIt', "Great! I've captured your requirements. Let me summarize what I understand:\n\n") +
-            `**Position:** ${extractTitle(userInput, hiringData.requirements)}\n\n` +
-            `**Key Requirements:**\n${summarizeRequirements(userInput, hiringData.requirements)}\n\n` +
-            t('hiring.confirm', "Does this look correct? You can:\n- Type 'yes' to start hiring\n- Add more details\n- Upload a full JD for more context")
-        );
-        setHiringData((prev) => ({
-          ...prev,
-          title: extractTitle(userInput, prev.requirements),
-        }));
-        setStep('review');
-      } else {
-        addAssistantMessage(
-          t('hiring.moreInfo', "That's a good start! Can you tell me more about:\n\n") +
-            "- **Required skills** (must-haves vs nice-to-haves)\n" +
-            "- **Experience level** (years, seniority)\n" +
-            "- **Specific responsibilities**\n\n" +
-            t('hiring.orUpload', "Or you can upload a job description file for more detailed matching.")
-        );
+  const createSession = async (): Promise<string | null> => {
+    if (!isAuthenticated) return null;
+    
+    try {
+      const response = await fetch('/api/v1/hiring-sessions', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        credentials: 'include',
+        body: JSON.stringify({ messages: [] }),
+      });
+      const data = await response.json();
+      if (data.success) {
+        skipLoadSessionId.current = data.data.id;
+        setActiveSessionId(data.data.id);
+        setSessions((prev) => [data.data, ...prev]);
+        setSearchParams({ session: data.data.id });
+        return data.data.id;
       }
-    } else if (step === 'review') {
-      const lowerInput = userInput.toLowerCase();
-      if (lowerInput === 'yes' || lowerInput === 'confirm' || lowerInput === 'start' || lowerInput === 'ok') {
-        // User confirmed - create hiring request
-        if (!isAuthenticated) {
-          addAssistantMessage(
-            t('hiring.loginRequired', "To create your hiring request and start receiving candidates, you'll need to sign in first.\n\n") +
-              t('hiring.loginPrompt', "Click the button below to sign in or create an account. Your hiring requirements will be saved.")
-          );
-          setStep('complete');
-        } else {
-          await createHiringRequest();
-        }
-      } else {
-        // User is adding more info
-        setHiringData((prev) => ({
-          ...prev,
-          requirements: `${prev.requirements}\n${userInput}`,
-        }));
-        addAssistantMessage(
-          t('hiring.updated', "Got it! I've updated your requirements. Ready to start hiring? Type 'yes' to proceed, or continue adding details.")
-        );
+    } catch (error) {
+      console.error('Failed to create session:', error);
+    }
+    return null;
+  };
+
+  const addMessage = useCallback(
+    async (role: 'assistant' | 'user', content: string) => {
+      const message: Message = {
+        id: `msg_${Date.now()}_${Math.random().toString(36).substring(2, 9)}`,
+        role,
+        content,
+        timestamp: new Date().toISOString(),
+      };
+      setMessages((prev) => [...prev, message]);
+      if (skipLoadSessionId.current) {
+        skipLoadSessionId.current = null;
       }
+
+      return message;
+    },
+    []
+  );
+
+  const buildChatContext = useCallback(() => {
+    const context: {
+      role?: string;
+      jobDescription?: string;
+    } = {};
+
+    if (hiringData.title) {
+      context.role = hiringData.title;
     }
 
-    setIsProcessing(false);
+    if (hiringData.jobDescription) {
+      context.jobDescription = hiringData.jobDescription;
+    }
+
+    return context;
+  }, [hiringData.title, hiringData.jobDescription]);
+
+  const buildHistoryForChat = useCallback(
+    (userMessage: string) => {
+      const compactHistory = [
+        ...messages.map((message) => ({
+          role: message.role,
+          content: message.content,
+        })),
+        { role: 'user' as const, content: userMessage },
+      ];
+
+      return compactHistory.slice(-MAX_CHAT_HISTORY);
+    },
+    [messages, MAX_CHAT_HISTORY]
+  );
+
+  const sendChatMessage = useCallback(
+    async (
+      userMessage: string,
+      sessionId?: string | null,
+      contextOverride?: { role?: string; jobDescription?: string }
+    ) => {
+      const context = {
+        ...buildChatContext(),
+        ...(contextOverride || {}),
+      };
+
+      const payload = {
+        message: userMessage,
+        sessionId: sessionId || undefined,
+        history: isAuthenticated ? undefined : buildHistoryForChat(userMessage),
+        context,
+      };
+
+      const response = await fetch('/api/v1/hiring-chat', {
+        method: 'POST',
+        headers: getAuthHeaders(),
+        credentials: 'include',
+        body: JSON.stringify(payload),
+      });
+
+      const data = await response.json();
+      if (!data.success) {
+        throw new Error(data.error || 'Failed to get assistant response');
+      }
+
+      if (data.data?.sessionId && !activeSessionId) {
+        setActiveSessionId(data.data.sessionId);
+      }
+
+      return data.data as { message?: Message; action?: string; sessionId?: string };
+    },
+    [
+      activeSessionId,
+      buildChatContext,
+      buildHistoryForChat,
+      getAuthHeaders,
+      isAuthenticated,
+    ]
+  );
+
+  const handleTemplateSelect = async (template: HiringTemplate) => {
+    let sessionId = activeSessionId;
+    if (!sessionId && isAuthenticated) {
+      sessionId = await createSession();
+    }
+
+    setStep('requirements');
+    const userPrompt = t('hiring.templateSelected', 'I want to hire: {{title}}', {
+      title: template.title,
+    });
+    await addMessage('user', userPrompt);
+
+    setHiringData({
+      title: template.title,
+      requirements: template.requirements,
+      jobDescription: '',
+    });
+
+    setIsProcessing(true);
+    try {
+      const result = await sendChatMessage(userPrompt, sessionId, { role: template.title });
+      if (result?.message?.content) {
+        await addMessage('assistant', result.message.content);
+      }
+      await handleChatAction(result?.action);
+    } catch (error) {
+      console.error('Failed to process chat message:', error);
+      await addMessage('assistant', CHAT_ERROR_FALLBACK);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleQuickStart = async (role: string) => {
+    let sessionId = activeSessionId;
+    if (!sessionId && isAuthenticated) {
+      sessionId = await createSession();
+    }
+
+    setStep('requirements');
+    setHiringData((prev) => ({ ...prev, title: role }));
+    const userPrompt = t('hiring.quickStartSelected', 'I want to hire a {{role}}', { role });
+    await addMessage('user', userPrompt);
+
+    setIsProcessing(true);
+    try {
+      const result = await sendChatMessage(userPrompt, sessionId, { role });
+      if (result?.message?.content) {
+        await addMessage('assistant', result.message.content);
+      }
+      await handleChatAction(result?.action);
+    } catch (error) {
+      console.error('Failed to process chat message:', error);
+      await addMessage('assistant', CHAT_ERROR_FALLBACK);
+    } finally {
+      setIsProcessing(false);
+    }
+  };
+
+  const handleSubmit = async () => {
+    const messageText = input.trim();
+    if (!messageText && !attachedFile) return;
+
+    let sessionId = activeSessionId;
+    if (!sessionId && isAuthenticated && step === 'initial') {
+      sessionId = await createSession();
+    }
+
+    if (step === 'initial') {
+      setStep('requirements');
+    }
+
+    let jobDescriptionText: string | undefined;
+    let jdSnippet: string | undefined;
+
+    if (attachedFile) {
+      const text = await attachedFile.text();
+      jobDescriptionText = text;
+      jdSnippet = `From JD:\n${text.substring(0, 500)}...`;
+    }
+
+    setHiringData((prev) => {
+      let nextRequirements = prev.requirements;
+
+      if (messageText) {
+        nextRequirements = nextRequirements ? `${nextRequirements}\n${messageText}` : messageText;
+      }
+
+      if (jdSnippet) {
+        nextRequirements = nextRequirements
+          ? `${nextRequirements}\n\n${jdSnippet}`
+          : jobDescriptionText || jdSnippet;
+      }
+
+      const inferredTitle = prev.title || inferTitle(`${messageText} ${nextRequirements ?? ''}`);
+
+      return {
+        ...prev,
+        title: inferredTitle || prev.title,
+        jobDescription: jobDescriptionText ?? prev.jobDescription,
+        requirements: nextRequirements,
+      };
+    });
+
+    const userContent = attachedFile
+      ? messageText
+        ? `${messageText}\n\n[Attached: ${attachedFile.name}]`
+        : `[Attached: ${attachedFile.name}]`
+      : messageText;
+
+    await addMessage('user', userContent);
+    setInput('');
+    setAttachedFile(null);
+    setIsProcessing(true);
+    try {
+      const result = await sendChatMessage(
+        userContent,
+        sessionId,
+        jobDescriptionText ? { jobDescription: jobDescriptionText } : undefined
+      );
+      if (result?.message?.content) {
+        await addMessage('assistant', result.message.content);
+      }
+      await handleChatAction(result?.action);
+    } catch (error) {
+      console.error('Failed to process chat message:', error);
+      await addMessage('assistant', CHAT_ERROR_FALLBACK);
+    } finally {
+      setIsProcessing(false);
+    }
   };
 
   const createHiringRequest = async () => {
     try {
-      const token = localStorage.getItem('auth_token');
-      const headers: HeadersInit = {
-        'Content-Type': 'application/json',
-      };
-      if (token) {
-        (headers as Record<string, string>).Authorization = `Bearer ${token}`;
-      }
       const response = await fetch('/api/v1/hiring-requests', {
         method: 'POST',
-        headers,
+        headers: getAuthHeaders(),
         credentials: 'include',
         body: JSON.stringify({
           title: hiringData.title || 'New Hiring Request',
           requirements: hiringData.requirements,
-          jobDescription: hiringData.jobDescription || jobDescription,
-          webhookUrl: hiringData.webhookUrl,
+          jobDescription: hiringData.jobDescription,
         }),
       });
 
       const data = await response.json();
 
       if (data.success) {
-        addAssistantMessage(
-          t('hiring.success', "Your hiring request has been created! 🎉\n\n") +
-            t('hiring.nextSteps', "**What happens next:**\n") +
-            "1. Our AI will start screening incoming candidates\n" +
-            "2. Matched candidates will be interviewed automatically\n" +
-            "3. You'll receive evaluation reports for top matches\n\n" +
-            t('hiring.dashboard', "Visit your dashboard to track progress and manage candidates.")
+        await addMessage(
+          'assistant',
+          t('hiring.success', 'Your hiring request has been created! 🎉\n\n') +
+            t('hiring.nextSteps', '**What happens next:**\n') +
+            `1. ${t('hiring.step1', 'Our AI will start screening incoming candidates')}\n` +
+            `2. ${t('hiring.step2', 'Matched candidates will be interviewed automatically')}\n` +
+            `3. ${t('hiring.step3', "You'll receive evaluation reports for top matches")}\n\n` +
+            t('hiring.visitDashboard', 'Visit your dashboard to track progress and manage candidates.')
         );
         setStep('complete');
       } else {
-        addAssistantMessage(
-          t('hiring.error', "There was an issue creating your request: ") + data.error + "\n\n" +
-            t('hiring.tryAgain', "Please try again or contact support if the issue persists.")
+        await addMessage(
+          'assistant',
+          t('hiring.errorCreating', 'There was an issue creating your request: ') +
+            data.error +
+            '\n\n' +
+            t('hiring.tryAgain', 'Please try again or contact support if the issue persists.')
         );
       }
     } catch (error) {
-      addAssistantMessage(
-        t('hiring.error', "There was an issue creating your request. Please try again.")
+      await addMessage(
+        'assistant',
+        t('hiring.errorGeneric', 'There was an issue creating your request. Please try again.')
       );
     }
   };
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const handleChatAction = useCallback(
+    async (action?: string) => {
+      if (action !== 'create_request') return;
 
-    addUserMessage(`Uploaded: ${file.name}`);
-    setIsProcessing(true);
+      if (!isAuthenticated) {
+        setStep('complete');
+        return;
+      }
 
-    // Read file content
-    const text = await file.text();
-    setJobDescription(text);
-    setHiringData((prev) => ({
-      ...prev,
-      jobDescription: text,
-      requirements: prev.requirements ? `${prev.requirements}\n\nFrom JD:\n${text.substring(0, 500)}...` : text,
-    }));
+      await createHiringRequest();
+    },
+    [createHiringRequest, isAuthenticated]
+  );
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-
-    addAssistantMessage(
-      t('hiring.jdParsed', "I've analyzed your job description. Here's what I found:\n\n") +
-        `**Position:** ${extractTitle(text, '')}\n\n` +
-        `**Key Requirements:**\n${summarizeRequirements(text, '')}\n\n` +
-        t('hiring.jdConfirm', "Would you like to proceed with these requirements, or would you like to add any specific criteria?")
-    );
-    
-    setHiringData((prev) => ({
-      ...prev,
-      title: extractTitle(text, ''),
-    }));
-    setStep('review');
-    setIsProcessing(false);
-  };
-
-  // Helper functions
-  const extractTitle = (text: string, existingReqs: string): string => {
-    const combined = `${text} ${existingReqs}`.toLowerCase();
-    
-    // Common job titles
+  const inferTitle = (text: string): string => {
+    const combined = text.toLowerCase();
     const titles = [
       'Senior Software Engineer', 'Software Engineer', 'Frontend Developer',
       'Backend Developer', 'Full Stack Developer', 'Product Manager',
-      'Data Scientist', 'DevOps Engineer', 'UI/UX Designer',
-      'Engineering Manager', 'Technical Lead', 'QA Engineer',
+      'Data Scientist', 'DevOps Engineer', 'UI/UX Designer', 'UX Designer',
+      'Engineering Manager', 'Technical Lead', 'QA Engineer', 'Account Executive',
     ];
 
     for (const title of titles) {
@@ -231,171 +445,185 @@ export default function StartHiring() {
       }
     }
 
-    // Try to extract from common patterns
-    const patterns = [
-      /looking for (?:a |an )?([^.]+)/i,
-      /hiring (?:a |an )?([^.]+)/i,
-      /need (?:a |an )?([^.]+)/i,
-    ];
+    return '';
+  };
 
-    for (const pattern of patterns) {
-      const match = combined.match(pattern);
-      if (match) {
-        return match[1].trim().substring(0, 50);
-      }
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
     }
-
-    return 'New Position';
   };
 
-  const summarizeRequirements = (text: string, existingReqs: string): string => {
-    const combined = `${text} ${existingReqs}`;
-    const lines = combined.split(/[.;\n]/).filter((line) => line.trim().length > 10);
-    const requirements = lines.slice(0, 5).map((line) => `- ${line.trim()}`);
-    return requirements.join('\n') || '- (Requirements will be extracted from your description)';
-  };
+  // Quick start roles
+  const quickRoles = [
+    { id: 'engineer', label: t('hiring.quickRoles.engineer', 'Software Engineer') },
+    { id: 'pm', label: t('hiring.quickRoles.pm', 'Product Manager') },
+    { id: 'designer', label: t('hiring.quickRoles.designer', 'UX Designer') },
+    { id: 'data', label: t('hiring.quickRoles.data', 'Data Scientist') },
+  ];
+
+  const localizedTemplates = getLocalizedTemplates(t);
+  // Featured templates (just show 6)
+  const featuredTemplates = localizedTemplates.slice(0, 6);
 
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="w-8 h-8 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin" />
       </div>
     );
   }
 
-  return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-4 py-3">
-        <div className="max-w-4xl mx-auto flex items-center justify-between">
-          <Link to="/" className="flex items-center gap-2 text-xl font-bold text-indigo-600">
-            <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-            <span>RoboHire</span>
-          </Link>
-          <div className="flex items-center gap-3">
-            {isAuthenticated ? (
-              <Link
-                to="/dashboard"
-                className="text-gray-600 hover:text-indigo-600 font-medium transition-colors"
+  // Chat view (when conversation started)
+  if (step !== 'initial' || messages.length > 0) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        {/* Header */}
+        <header className="bg-white border-b border-gray-200">
+          <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+            <Link to="/" className="flex items-center gap-2 text-xl font-bold text-indigo-600">
+              <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+              <span>RoboHire</span>
+            </Link>
+            <div className="flex items-center gap-4">
+              <button
+                onClick={() => {
+                  setMessages([]);
+                  setStep('initial');
+                  setHiringData({ title: '', requirements: '', jobDescription: '' });
+                  setSearchParams({});
+                  setActiveSessionId(null);
+                }}
+                className="text-sm text-gray-600 hover:text-gray-900"
               >
-                {t('hiring.dashboard', 'Dashboard')}
-              </Link>
-            ) : (
-              <Link
-                to="/login"
-                className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
-              >
-                {t('hiring.signIn', 'Sign In')}
-              </Link>
-            )}
-          </div>
-        </div>
-      </header>
-
-      {/* Chat Area */}
-      <main className="flex-1 overflow-hidden">
-        <div className="max-w-4xl mx-auto h-full flex flex-col px-4 py-6">
-          {/* Messages */}
-          <div className="flex-1 overflow-y-auto space-y-6 pb-4">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-              >
-                <div
-                  className={`max-w-[85%] rounded-2xl px-5 py-4 ${
-                    message.role === 'user'
-                      ? 'bg-indigo-600 text-white'
-                      : 'bg-white border border-gray-200 text-gray-800'
-                  }`}
-                >
-                  <div className="whitespace-pre-wrap text-sm leading-relaxed">
-                    {message.content.split('\n').map((line, i) => {
-                      // Handle bold text
-                      const parts = line.split(/\*\*(.+?)\*\*/g);
-                      return (
-                        <p key={i} className={i > 0 ? 'mt-2' : ''}>
-                          {parts.map((part, j) =>
-                            j % 2 === 1 ? <strong key={j}>{part}</strong> : part
-                          )}
-                        </p>
-                      );
-                    })}
-                  </div>
-                </div>
-              </div>
-            ))}
-
-            {/* Processing indicator */}
-            {isProcessing && (
-              <div className="flex justify-start">
-                <div className="bg-white border border-gray-200 rounded-2xl px-5 py-4">
-                  <div className="flex items-center gap-2">
-                    <div className="flex gap-1">
-                      <span className="w-2 h-2 bg-indigo-600 rounded-full animate-bounce" style={{ animationDelay: '0ms' }}></span>
-                      <span className="w-2 h-2 bg-indigo-600 rounded-full animate-bounce" style={{ animationDelay: '150ms' }}></span>
-                      <span className="w-2 h-2 bg-indigo-600 rounded-full animate-bounce" style={{ animationDelay: '300ms' }}></span>
-                    </div>
-                    <span className="text-gray-500 text-sm">{t('hiring.thinking', 'Thinking...')}</span>
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {/* Login prompt for unauthenticated users */}
-            {step === 'complete' && !isAuthenticated && (
-              <div className="flex justify-center">
-                <div className="bg-indigo-50 border border-indigo-200 rounded-xl p-6 text-center max-w-md">
-                  <h3 className="text-lg font-semibold text-indigo-900 mb-2">
-                    {t('hiring.readyToStart', 'Ready to Start Hiring?')}
-                  </h3>
-                  <p className="text-indigo-700 text-sm mb-4">
-                    {t('hiring.signInToSave', 'Sign in to save your hiring request and start receiving candidates.')}
-                  </p>
-                  <Link
-                    to="/login"
-                    state={{ from: { pathname: '/start-hiring' } }}
-                    className="inline-block px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
-                  >
-                    {t('hiring.signInToContinue', 'Sign In to Continue')}
-                  </Link>
-                </div>
-              </div>
-            )}
-
-            {/* Dashboard link after success */}
-            {step === 'complete' && isAuthenticated && (
-              <div className="flex justify-center">
-                <Link
-                  to="/dashboard"
-                  className="inline-flex items-center gap-2 px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
-                >
-                  {t('hiring.goToDashboard', 'Go to Dashboard')}
-                  <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
+                {t('hiring.newRequest', 'New Request')}
+              </button>
+              {isAuthenticated ? (
+                <Link to="/dashboard" className="text-sm font-medium text-indigo-600 hover:text-indigo-700">
+                  {t('landing.nav.dashboard', 'Dashboard')}
                 </Link>
-              </div>
-            )}
+              ) : (
+                <Link to="/login" className="text-sm font-medium text-indigo-600 hover:text-indigo-700">
+                  {t('landing.nav.signIn', 'Sign In')}
+                </Link>
+              )}
+            </div>
+          </div>
+        </header>
 
-            <div ref={messagesEndRef} />
+        {/* Chat */}
+        <main className="flex-1 overflow-hidden flex flex-col">
+          <div className="flex-1 overflow-y-auto">
+            <div className="max-w-3xl mx-auto px-6 py-8">
+              <div className="space-y-6">
+                {messages.map((message) => (
+                  <div key={message.id} className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}>
+                    <div className={`max-w-[80%] ${message.role === 'user' ? 'order-2' : ''}`}>
+                      {message.role === 'assistant' && (
+                        <div className="flex items-center gap-2 mb-2">
+                          <div className="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center">
+                            <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                          </div>
+                          <span className="text-sm font-medium text-gray-700">RoboHire</span>
+                        </div>
+                      )}
+                      <div className={`rounded-2xl px-4 py-3 ${
+                        message.role === 'user'
+                          ? 'bg-indigo-600 text-white'
+                          : 'bg-white border border-gray-200 text-gray-800'
+                      }`}>
+                        <div className="text-sm leading-relaxed whitespace-pre-wrap">
+                          {message.content.split('\n').map((line, i) => {
+                            const parts = line.split(/\*\*(.+?)\*\*/g);
+                            return (
+                              <p key={i} className={i > 0 ? 'mt-2' : ''}>
+                                {parts.map((part, j) =>
+                                  j % 2 === 1 ? <strong key={j}>{part}</strong> : part
+                                )}
+                              </p>
+                            );
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+
+                {isProcessing && (
+                  <div className="flex justify-start">
+                    <div className="flex items-center gap-2 mb-2">
+                      <div className="w-6 h-6 rounded-full bg-indigo-600 flex items-center justify-center">
+                        <svg className="w-3.5 h-3.5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="bg-white border border-gray-200 rounded-2xl px-4 py-3 ml-8">
+                      <div className="flex gap-1">
+                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                        <span className="w-2 h-2 bg-gray-400 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {step === 'complete' && !isAuthenticated && (
+                  <div className="flex justify-center pt-4">
+                    <Link
+                      to="/login"
+                      state={{ from: { pathname: '/start-hiring' } }}
+                      className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
+                    >
+                      {t('hiring.signInToContinue', 'Sign In to Continue')}
+                    </Link>
+                  </div>
+                )}
+
+                {step === 'complete' && isAuthenticated && (
+                  <div className="flex justify-center pt-4">
+                    <Link
+                      to="/dashboard"
+                      className="px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-medium rounded-lg transition-colors"
+                    >
+                      {t('hiring.goToDashboard', 'Go to Dashboard')}
+                    </Link>
+                  </div>
+                )}
+
+                <div ref={messagesEndRef} />
+              </div>
+            </div>
           </div>
 
-          {/* Input Area */}
+          {/* Input */}
           {step !== 'complete' && (
-            <div className="border-t border-gray-200 pt-4">
-              <form onSubmit={handleSubmit} className="relative">
-                <div className="flex items-end gap-3 bg-white rounded-2xl border border-gray-200 p-3 shadow-sm focus-within:border-indigo-300 focus-within:ring-2 focus-within:ring-indigo-100">
-                  {/* File Upload Button */}
+            <div className="border-t border-gray-200 bg-white px-6 py-4">
+              <div className="max-w-3xl mx-auto">
+                {attachedFile && (
+                  <div className="flex items-center gap-2 mb-3 text-sm text-gray-600">
+                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                    </svg>
+                    <span>{attachedFile.name}</span>
+                    <button onClick={() => setAttachedFile(null)} className="text-gray-400 hover:text-gray-600">
+                      <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                  </div>
+                )}
+                <div className="flex items-end gap-3">
                   <button
-                    type="button"
                     onClick={() => fileInputRef.current?.click()}
-                    className="p-2 text-gray-400 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors"
-                    title={t('hiring.uploadJd', 'Upload Job Description')}
+                    className="p-2.5 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
@@ -404,48 +632,292 @@ export default function StartHiring() {
                   <input
                     ref={fileInputRef}
                     type="file"
-                    accept=".txt,.pdf,.doc,.docx"
-                    onChange={handleFileUpload}
                     className="hidden"
+                    accept=".pdf,.doc,.docx,.txt"
+                    onChange={(e) => setAttachedFile(e.target.files?.[0] || null)}
                   />
-
-                  {/* Text Input */}
-                  <textarea
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' && !e.shiftKey) {
-                        e.preventDefault();
-                        handleSubmit(e);
-                      }
-                    }}
-                    placeholder={t('hiring.inputPlaceholder', 'Describe your ideal candidate...')}
-                    className="flex-1 resize-none border-0 focus:ring-0 text-gray-800 placeholder-gray-400 max-h-32"
-                    rows={1}
-                    disabled={isProcessing}
-                  />
-
-                  {/* Send Button */}
+                  <div className="flex-1 relative">
+                    <textarea
+                      ref={textareaRef}
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      onKeyDown={handleKeyDown}
+                      placeholder={t('hiring.inputPlaceholder', 'Describe your ideal candidate...')}
+                      rows={1}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl resize-none focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                      style={{ minHeight: '48px', maxHeight: '150px' }}
+                    />
+                  </div>
                   <button
-                    type="submit"
-                    disabled={!input.trim() || isProcessing}
-                    className="p-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                    onClick={handleSubmit}
+                    disabled={!input.trim() && !attachedFile}
+                    className="p-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8" />
                     </svg>
                   </button>
                 </div>
-
-                {/* Helper Text */}
-                <p className="text-xs text-gray-400 mt-2 text-center">
-                  {t('hiring.helperText', 'Press Enter to send, Shift+Enter for new line. Upload a JD file for more detailed matching.')}
-                </p>
-              </form>
+              </div>
             </div>
           )}
+        </main>
+      </div>
+    );
+  }
+
+  // Initial landing view
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Header */}
+      <header className="border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+          <Link to="/" className="flex items-center gap-2 text-xl font-bold text-indigo-600">
+            <svg className="w-7 h-7" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 17L12 22L22 17" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M2 12L12 17L22 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <span>RoboHire</span>
+          </Link>
+          <div className="flex items-center gap-6">
+            <Link to="/developers" className="text-sm text-gray-600 hover:text-gray-900">
+              {t('landing.nav.api', 'API')}
+            </Link>
+            <Link to="/docs" className="text-sm text-gray-600 hover:text-gray-900">
+              {t('landing.nav.docs', 'Docs')}
+            </Link>
+            {isAuthenticated ? (
+              <Link to="/dashboard" className="text-sm font-medium text-indigo-600 hover:text-indigo-700">
+                {t('landing.nav.dashboard', 'Dashboard')}
+              </Link>
+            ) : (
+              <Link to="/login" className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg transition-colors">
+                {t('landing.nav.signIn', 'Sign In')}
+              </Link>
+            )}
+          </div>
         </div>
-      </main>
+      </header>
+
+      {/* Hero Section */}
+      <section className="pt-20 pb-16 px-6">
+        <div className="max-w-3xl mx-auto text-center">
+          <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 tracking-tight mb-6">
+            {t('hiring.heroTitle', 'Start hiring with AI')}
+          </h1>
+          <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
+            {t(
+              'hiring.heroSubtitle',
+              "Tell us who you're looking for. Our AI will help you find, screen, and evaluate candidates automatically."
+            )}
+          </p>
+
+          {/* Main Input */}
+          <div className="bg-white rounded-2xl border border-gray-200 shadow-lg p-2 mb-8">
+            <div className="flex items-end gap-2">
+              <button
+                onClick={() => fileInputRef.current?.click()}
+                className="p-3 text-gray-400 hover:text-gray-600 hover:bg-gray-50 rounded-xl transition-colors"
+                title={t('hiring.uploadJd', 'Upload Job Description')}
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
+                </svg>
+              </button>
+              <input
+                ref={fileInputRef}
+                type="file"
+                className="hidden"
+                accept=".pdf,.doc,.docx,.txt"
+                onChange={(e) => {
+                  const file = e.target.files?.[0];
+                  if (file) {
+                    setAttachedFile(file);
+                    handleQuickStart(t('hiring.quickStartFromJd', 'candidate based on job description'));
+                  }
+                }}
+              />
+              <textarea
+                ref={textareaRef}
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder={t('hiring.inputPlaceholder', 'Describe your ideal candidate...')}
+                rows={1}
+                className="flex-1 px-2 py-3 text-gray-900 placeholder-gray-400 bg-transparent resize-none focus:outline-none"
+                style={{ minHeight: '48px', maxHeight: '120px' }}
+              />
+              <button
+                onClick={handleSubmit}
+                disabled={!input.trim()}
+                className="p-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+              >
+                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Quick Start Pills */}
+          <div className="flex flex-wrap justify-center gap-2">
+            {quickRoles.map((role) => (
+              <button
+                key={role.id}
+                onClick={() => handleQuickStart(role.label)}
+                className="px-4 py-2 text-sm text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-full transition-colors"
+              >
+                {role.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Templates Section */}
+      <section className="py-16 px-6 bg-gray-50">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+              {t('hiring.templatesTitle', 'Popular role templates')}
+            </h2>
+            <p className="text-gray-600">
+              {t('hiring.templatesSubtitle', 'Start with a pre-built template or describe your own requirements')}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {featuredTemplates.map((template) => (
+              <button
+                key={template.id}
+                onClick={() => handleTemplateSelect(template)}
+                className="group text-left p-5 bg-white rounded-xl border border-gray-200 hover:border-indigo-300 hover:shadow-md transition-all"
+              >
+                <h3 className="font-medium text-gray-900 group-hover:text-indigo-600 mb-1">
+                  {template.title}
+                </h3>
+                <p className="text-sm text-gray-500 mb-3 line-clamp-2">
+                  {template.requirements.substring(0, 80)}...
+                </p>
+                <div className="flex flex-wrap gap-1.5">
+                  {template.skills.slice(0, 3).map((skill) => (
+                    <span key={skill} className="px-2 py-0.5 text-xs text-gray-600 bg-gray-100 rounded">
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </button>
+            ))}
+          </div>
+
+          <div className="text-center mt-8">
+            <Link
+              to="/templates"
+              className="text-sm font-medium text-indigo-600 hover:text-indigo-700"
+            >
+              {t('hiring.viewAllTemplates', 'View all templates')}
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* How it Works */}
+      <section className="py-20 px-6">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-2">
+              {t('hiring.howItWorksTitle', 'How it works')}
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-indigo-100 rounded-full flex items-center justify-center">
+                <span className="text-lg font-semibold text-indigo-600">1</span>
+              </div>
+              <h3 className="font-medium text-gray-900 mb-2">
+                {t('hiring.howItWorks.step1.title', 'Describe your role')}
+              </h3>
+              <p className="text-sm text-gray-600">
+                {t(
+                  'hiring.howItWorks.step1.desc',
+                  "Tell us about the skills, experience, and qualities you're looking for."
+                )}
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-indigo-100 rounded-full flex items-center justify-center">
+                <span className="text-lg font-semibold text-indigo-600">2</span>
+              </div>
+              <h3 className="font-medium text-gray-900 mb-2">
+                {t('hiring.howItWorks.step2.title', 'AI screens candidates')}
+              </h3>
+              <p className="text-sm text-gray-600">
+                {t(
+                  'hiring.howItWorks.step2.desc',
+                  'Our AI reviews resumes, conducts initial interviews, and evaluates fit.'
+                )}
+              </p>
+            </div>
+            <div className="text-center">
+              <div className="w-12 h-12 mx-auto mb-4 bg-indigo-100 rounded-full flex items-center justify-center">
+                <span className="text-lg font-semibold text-indigo-600">3</span>
+              </div>
+              <h3 className="font-medium text-gray-900 mb-2">
+                {t('hiring.howItWorks.step3.title', 'Review top matches')}
+              </h3>
+              <p className="text-sm text-gray-600">
+                {t(
+                  'hiring.howItWorks.step3.desc',
+                  'Get detailed reports on your best candidates and make faster hiring decisions.'
+                )}
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-16 px-6 bg-indigo-600">
+        <div className="max-w-3xl mx-auto text-center">
+          <h2 className="text-2xl font-semibold text-white mb-4">
+            {t('hiring.ctaTitle', 'Ready to streamline your hiring?')}
+          </h2>
+          <p className="text-indigo-100 mb-8">
+            {t('hiring.ctaSubtitle', 'Join thousands of companies using AI to hire faster and smarter.')}
+          </p>
+          <button
+            onClick={() => textareaRef.current?.focus()}
+            className="px-6 py-3 bg-white text-indigo-600 font-medium rounded-lg hover:bg-indigo-50 transition-colors"
+          >
+            {t('hiring.ctaButton', 'Start hiring now')}
+          </button>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-8 px-6 border-t border-gray-100">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p className="text-sm text-gray-500">
+            © 2026 RoboHire. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            <Link to="/developers" className="text-sm text-gray-500 hover:text-gray-700">
+              {t('landing.nav.api', 'API')}
+            </Link>
+            <Link to="/docs" className="text-sm text-gray-500 hover:text-gray-700">
+              {t('landing.nav.docs', 'Docs')}
+            </Link>
+            <Link to="/privacy" className="text-sm text-gray-500 hover:text-gray-700">
+              {t('landing.footer.privacy', 'Privacy')}
+            </Link>
+            <Link to="/terms" className="text-sm text-gray-500 hover:text-gray-700">
+              {t('landing.footer.terms', 'Terms')}
+            </Link>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }

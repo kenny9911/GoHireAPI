@@ -98,6 +98,8 @@
     "nav": {
       "services": "Services",
       "howItWorks": "How It Works",
+      "api": "API",
+      "docs": "Docs",
       "features": "Features",
       "pricing": "Pricing",
       "signIn": "Sign In",
@@ -109,7 +111,7 @@
       "headline": "Hire Elite Candidates",
       "headlineHighlight": "Before Others",
       "subheadline": "Say goodbye to spending long hours going through piles of resumes. Our AI hiring agent vets candidates, conducts interviews, and delivers comprehensive evaluation reports automatically.",
-      "ctaPrimary": "Start Hiring Free",
+      "ctaPrimary": "Start Easy Hiring",
       "ctaSecondary": "Explore API",
       "stat1": "Time Saved",
       "stat2": "Faster Screening",
@@ -202,7 +204,7 @@
     "cta": {
       "title": "Ready to Hire Smarter?",
       "subtitle": "Join hundreds of companies using AI to find elite candidates faster. Start your free trial today - no credit card required.",
-      "primary": "Start Hiring Free",
+      "primary": "Start Easy Hiring",
       "secondary": "Talk to Sales",
       "benefit1": "No credit card required",
       "benefit2": "14-day free trial",
@@ -212,8 +214,15 @@
       "tagline": "AI-powered hiring platform that helps you find and hire elite candidates before others.",
       "product": "Product",
       "startHiring": "Start Hiring",
+      "api": "API",
+      "playground": "Playground",
       "apiDocs": "API Documentation",
       "pricing": "Pricing",
+      "developers": "Developers",
+      "docs": "Documentation",
+      "apiReference": "API Reference",
+      "quickStart": "Quick Start",
+      "apiKeys": "API Keys",
       "changelog": "Changelog",
       "company": "Company",
       "about": "About Us",
@@ -223,7 +232,6 @@
       "resources": "Resources",
       "help": "Help Center",
       "guides": "Guides",
-      "api": "API Reference",
       "status": "Status",
       "legal": "Legal",
       "privacy": "Privacy Policy",
@@ -257,7 +265,207 @@
     "goToDashboard": "Go to Dashboard",
     "uploadJd": "Upload Job Description",
     "inputPlaceholder": "Describe your ideal candidate...",
-    "helperText": "Press Enter to send, Shift+Enter for new line. Upload a JD file for more detailed matching."
+    "helperText": "Press Enter to send, Shift+Enter for new line. Upload a JD file for more detailed matching.",
+    "inputHelperText": "Press Enter to send, Shift+Enter for new line. Upload JD files for faster setup.",
+    "heroTitle": "Start hiring with AI",
+    "heroSubtitle": "Tell us who you're looking for. Our AI will help you find, screen, and evaluate candidates automatically.",
+    "templatesTitle": "Popular role templates",
+    "templatesSubtitle": "Start with a pre-built template or describe your own requirements",
+    "viewAllTemplates": "View all templates",
+    "howItWorksTitle": "How it works",
+    "howItWorks": {
+      "step1": {
+        "title": "Describe your role",
+        "desc": "Tell us about the skills, experience, and qualities you're looking for."
+      },
+      "step2": {
+        "title": "AI screens candidates",
+        "desc": "Our AI reviews resumes, conducts initial interviews, and evaluates fit."
+      },
+      "step3": {
+        "title": "Review top matches",
+        "desc": "Get detailed reports on your best candidates and make faster hiring decisions."
+      }
+    },
+    "ctaTitle": "Ready to streamline your hiring?",
+    "ctaSubtitle": "Join thousands of companies using AI to hire faster and smarter.",
+    "ctaButton": "Start hiring now",
+    "newRequest": "New Request",
+    "quickStartSelected": "I want to hire a {{role}}",
+    "quickStartFromJd": "candidate based on job description",
+    "quickRoles": {
+      "engineer": "Software Engineer",
+      "pm": "Product Manager",
+      "designer": "UX Designer",
+      "data": "Data Scientist"
+    },
+    "history": "History",
+    "expandSidebar": "Expand sidebar",
+    "collapseSidebar": "Collapse sidebar",
+    "newChat": "New Chat",
+    "backToDashboard": "Back to Dashboard",
+    "today": "Today",
+    "yesterday": "Yesterday",
+    "lastWeek": "Last 7 days",
+    "older": "Older",
+    "chatSessions": "Chat Sessions",
+    "noSessions": "No chat sessions yet",
+    "pastRequisitions": "Past Requisitions",
+    "noRequisitions": "No hiring requests yet",
+    "untitledChat": "Untitled Chat",
+    "deleteSession": "Delete session",
+    "confirmDelete": "Are you sure you want to delete this chat?",
+    "useTemplate": "Use Template",
+    "searchTemplates": "Search templates...",
+    "allCategories": "All",
+    "noTemplatesFound": "No templates found",
+    "tryDifferentSearch": "Try a different search term or category",
+    "showingTemplates": "Showing {{count}} templates",
+    "categories": {
+      "engineering": "Engineering",
+      "product": "Product",
+      "design": "Design",
+      "sales": "Sales",
+      "marketing": "Marketing",
+      "operations": "Operations",
+      "finance": "Finance",
+      "hr": "People & HR"
+    },
+    "templates": {
+      "aiSoftwareEngineer": {
+        "title": "AI Software Engineer",
+        "description": "Build AI products end-to-end with modern ML stacks",
+        "experienceLevel": "4+ years",
+        "requirements": "We are hiring an AI Software Engineer to build AI-powered products end-to-end.\n\n**Responsibilities:**\n- Build AI features from prototype to production\n- Integrate model APIs, vector search, and data pipelines\n- Design scalable inference services and monitoring\n- Collaborate with product to define AI user experiences\n\n**Requirements:**\n- 4+ years of software engineering experience\n- Strong Python/TypeScript and backend skills\n- Experience with LLM APIs or ML frameworks\n- Familiarity with vector databases and RAG patterns\n- Solid knowledge of cloud services and observability\n\n**Nice to have:**\n- Experience with model fine-tuning or evaluation\n- MLOps or ML platform experience\n- Background in NLP",
+        "skills": ["Python", "TypeScript", "LLMs", "Vector Search", "MLOps"]
+      },
+      "aiLlmEngineer": {
+        "title": "AI LLM Engineer",
+        "description": "Own LLM pipelines, evaluation, and model performance",
+        "experienceLevel": "3+ years",
+        "requirements": "We are looking for an AI LLM Engineer to own our LLM stack and evaluation.\n\n**Responsibilities:**\n- Build prompt and retrieval pipelines for LLM applications\n- Optimize latency, cost, and quality of model outputs\n- Implement evaluation frameworks and guardrails\n- Work with data to improve model performance\n\n**Requirements:**\n- 3+ years in ML/AI engineering\n- Deep experience with LLMs, RAG, and embeddings\n- Proficiency in Python and modern ML tooling\n- Experience with vector stores and evaluation metrics\n- Strong understanding of prompt design and safety\n\n**Nice to have:**\n- Fine-tuning experience with OpenAI/Anthropic/OSS models\n- Experience with LangChain or LlamaIndex\n- Research background in NLP",
+        "skills": ["LLMs", "RAG", "Embeddings", "Python", "Evaluation"]
+      },
+      "fullStackEngineer": {
+        "title": "Full Stack Engineer",
+        "description": "Ship features across frontend, backend, and data",
+        "experienceLevel": "4+ years",
+        "requirements": "We are hiring a Full Stack Engineer to ship features across frontend and backend.\n\n**Responsibilities:**\n- Build and maintain web apps and APIs\n- Own features from UI to database\n- Collaborate with design and product to deliver polished UX\n- Improve performance, reliability, and testing\n\n**Requirements:**\n- 4+ years of full stack development\n- Strong React and TypeScript skills\n- Experience building REST APIs (Node, Python, or Go)\n- Proficient with SQL databases and ORM\n- Familiarity with cloud deployment and CI/CD\n\n**Nice to have:**\n- Experience with Next.js\n- Observability/monitoring experience\n- Prior startup experience",
+        "skills": ["React", "TypeScript", "Node.js", "SQL", "API Design"]
+      },
+      "seniorSoftwareEngineer": {
+        "title": "Senior Software Engineer",
+        "description": "Build scalable systems and mentor junior developers",
+        "experienceLevel": "5+ years",
+        "requirements": "We are looking for a Senior Software Engineer to join our team.\n\n**Responsibilities:**\n- Design and implement scalable backend services\n- Lead technical discussions and code reviews\n- Mentor junior developers and contribute to engineering culture\n- Collaborate with product and design teams\n\n**Requirements:**\n- 5+ years of software development experience\n- Strong proficiency in one or more programming languages (Python, Java, TypeScript, Go)\n- Experience with cloud services (AWS, GCP, or Azure)\n- Experience with databases (SQL and NoSQL)\n- Strong problem-solving skills and attention to detail\n\n**Nice to have:**\n- Experience with microservices architecture\n- Familiarity with containerization (Docker, Kubernetes)\n- Open source contributions",
+        "skills": ["Python", "TypeScript", "AWS", "System Design", "Microservices"]
+      },
+      "frontendDeveloper": {
+        "title": "Frontend Developer",
+        "description": "Create beautiful and performant user interfaces",
+        "experienceLevel": "3+ years",
+        "requirements": "We are hiring a Frontend Developer to build exceptional user experiences.\n\n**Responsibilities:**\n- Develop responsive web applications using React/Vue\n- Implement pixel-perfect designs from Figma\n- Optimize application performance\n- Write clean, maintainable code with tests\n\n**Requirements:**\n- 3+ years of frontend development experience\n- Expert knowledge of React or Vue.js\n- Strong CSS skills (Tailwind, styled-components)\n- Experience with TypeScript\n- Understanding of web performance optimization\n\n**Nice to have:**\n- Experience with Next.js or Nuxt.js\n- Mobile development experience (React Native)\n- UI/UX design sensibility",
+        "skills": ["React", "TypeScript", "CSS", "Tailwind", "Next.js"]
+      },
+      "devopsEngineer": {
+        "title": "DevOps Engineer",
+        "description": "Build and maintain robust CI/CD pipelines",
+        "experienceLevel": "4+ years",
+        "requirements": "We need a DevOps Engineer to improve our infrastructure and deployment processes.\n\n**Responsibilities:**\n- Design and maintain CI/CD pipelines\n- Manage cloud infrastructure (AWS/GCP)\n- Implement monitoring and alerting systems\n- Ensure security best practices\n\n**Requirements:**\n- 4+ years of DevOps/SRE experience\n- Strong knowledge of AWS or GCP\n- Experience with Kubernetes and Docker\n- Proficiency in infrastructure as code (Terraform, CloudFormation)\n- Scripting skills (Python, Bash)\n\n**Nice to have:**\n- Security certifications\n- Experience with GitOps\n- On-call rotation experience",
+        "skills": ["AWS", "Kubernetes", "Terraform", "Docker", "CI/CD"]
+      },
+      "dataScientist": {
+        "title": "Data Scientist",
+        "description": "Turn data into actionable insights and ML models",
+        "experienceLevel": "3+ years",
+        "requirements": "We are looking for a Data Scientist to help us leverage our data.\n\n**Responsibilities:**\n- Build and deploy machine learning models\n- Analyze large datasets to extract insights\n- Collaborate with product teams on data-driven features\n- Create dashboards and visualizations\n\n**Requirements:**\n- 3+ years of data science experience\n- Strong Python skills (pandas, scikit-learn, TensorFlow/PyTorch)\n- Experience with SQL and data warehouses\n- Statistics and machine learning fundamentals\n- Excellent communication skills\n\n**Nice to have:**\n- Experience with NLP or computer vision\n- MLOps experience\n- PhD in a quantitative field",
+        "skills": ["Python", "Machine Learning", "SQL", "TensorFlow", "Statistics"]
+      },
+      "productManager": {
+        "title": "Product Manager",
+        "description": "Define product strategy and drive execution",
+        "experienceLevel": "4+ years",
+        "requirements": "We need a Product Manager to lead our product development.\n\n**Responsibilities:**\n- Define product roadmap and strategy\n- Gather and prioritize requirements\n- Work closely with engineering and design\n- Analyze metrics and drive product decisions\n\n**Requirements:**\n- 4+ years of product management experience\n- Experience with agile methodologies\n- Strong analytical and problem-solving skills\n- Excellent communication and stakeholder management\n- Technical background is a plus\n\n**Nice to have:**\n- Experience in B2B SaaS\n- SQL and data analysis skills\n- MBA or relevant degree",
+        "skills": ["Product Strategy", "Agile", "Data Analysis", "Roadmapping", "Stakeholder Management"]
+      },
+      "scrumMaster": {
+        "title": "Scrum Master",
+        "description": "Facilitate agile processes and team efficiency",
+        "experienceLevel": "3+ years",
+        "requirements": "We are hiring a Scrum Master to help our teams deliver effectively.\n\n**Responsibilities:**\n- Facilitate sprint ceremonies\n- Remove impediments and coach the team\n- Track and improve team metrics\n- Foster continuous improvement\n\n**Requirements:**\n- 3+ years as a Scrum Master\n- Certified Scrum Master (CSM) or equivalent\n- Experience with multiple agile frameworks\n- Strong facilitation skills\n- Experience with Jira or similar tools\n\n**Nice to have:**\n- Technical background\n- SAFe certification\n- Coaching certification",
+        "skills": ["Scrum", "Agile", "Facilitation", "Jira", "Team Coaching"]
+      },
+      "uxDesigner": {
+        "title": "UX Designer",
+        "description": "Create intuitive and delightful user experiences",
+        "experienceLevel": "3+ years",
+        "requirements": "We need a UX Designer to shape our product experience.\n\n**Responsibilities:**\n- Conduct user research and usability testing\n- Create wireframes, prototypes, and user flows\n- Collaborate with product and engineering teams\n- Maintain and evolve design system\n\n**Requirements:**\n- 3+ years of UX design experience\n- Proficiency in Figma\n- Strong portfolio demonstrating UX process\n- Experience with user research methodologies\n- Understanding of accessibility standards\n\n**Nice to have:**\n- UI design skills\n- Motion design experience\n- Experience with design systems",
+        "skills": ["Figma", "User Research", "Prototyping", "Wireframing", "Usability Testing"]
+      },
+      "uiDesigner": {
+        "title": "UI Designer",
+        "description": "Craft beautiful visual designs and interfaces",
+        "experienceLevel": "2+ years",
+        "requirements": "We are looking for a UI Designer to create stunning interfaces.\n\n**Responsibilities:**\n- Design beautiful, pixel-perfect interfaces\n- Create and maintain design system components\n- Work with developers on implementation\n- Create marketing and brand materials\n\n**Requirements:**\n- 2+ years of UI design experience\n- Expert-level Figma skills\n- Strong visual design portfolio\n- Understanding of design principles and typography\n- Basic understanding of HTML/CSS\n\n**Nice to have:**\n- Animation and motion design skills\n- Illustration abilities\n- Brand design experience",
+        "skills": ["Figma", "Visual Design", "Design Systems", "Typography", "Color Theory"]
+      },
+      "accountExecutive": {
+        "title": "Account Executive",
+        "description": "Close deals and grow enterprise accounts",
+        "experienceLevel": "3+ years",
+        "requirements": "We need an Account Executive to drive revenue growth.\n\n**Responsibilities:**\n- Manage full sales cycle from prospecting to close\n- Build relationships with enterprise clients\n- Meet and exceed quarterly quotas\n- Collaborate with SDRs and customer success\n\n**Requirements:**\n- 3+ years of B2B SaaS sales experience\n- Track record of meeting/exceeding quota\n- Experience with enterprise sales cycles\n- Excellent presentation and negotiation skills\n- CRM proficiency (Salesforce)\n\n**Nice to have:**\n- Experience selling to HR/recruiting teams\n- Technical background\n- Existing network in target industry",
+        "skills": ["B2B Sales", "Salesforce", "Enterprise Sales", "Negotiation", "Prospecting"]
+      },
+      "salesEngineer": {
+        "title": "Sales Engineer",
+        "description": "Bridge technical and sales conversations",
+        "experienceLevel": "4+ years",
+        "requirements": "We are hiring a Sales Engineer to support our sales team.\n\n**Responsibilities:**\n- Lead technical demonstrations and POCs\n- Answer technical questions during sales process\n- Create technical documentation and proposals\n- Work with product on customer feedback\n\n**Requirements:**\n- 4+ years of sales engineering or solutions architect experience\n- Strong technical background (software development)\n- Excellent presentation and communication skills\n- Ability to understand and explain complex technical concepts\n- Experience with APIs and integrations\n\n**Nice to have:**\n- Previous software development experience\n- Industry certifications\n- Experience in recruiting/HR tech",
+        "skills": ["Technical Demo", "API Integration", "Solution Architecture", "Presentation", "POC"]
+      },
+      "marketingManager": {
+        "title": "Marketing Manager",
+        "description": "Lead marketing campaigns and brand strategy",
+        "experienceLevel": "4+ years",
+        "requirements": "We need a Marketing Manager to grow our brand presence.\n\n**Responsibilities:**\n- Plan and execute marketing campaigns\n- Manage marketing budget and ROI\n- Lead content and brand strategy\n- Analyze marketing metrics and optimize\n\n**Requirements:**\n- 4+ years of marketing experience\n- Experience with B2B SaaS marketing\n- Strong analytical skills\n- Excellent writing and communication\n- Experience with marketing tools (HubSpot, Google Analytics)\n\n**Nice to have:**\n- Product marketing experience\n- Demand generation expertise\n- Team management experience",
+        "skills": ["Campaign Management", "Content Strategy", "Analytics", "B2B Marketing", "HubSpot"]
+      },
+      "contentWriter": {
+        "title": "Content Writer",
+        "description": "Create compelling content that converts",
+        "experienceLevel": "2+ years",
+        "requirements": "We are looking for a Content Writer to tell our story.\n\n**Responsibilities:**\n- Write blog posts, case studies, and whitepapers\n- Create website and product copy\n- Develop email marketing content\n- SEO optimization\n\n**Requirements:**\n- 2+ years of content writing experience\n- Excellent writing and editing skills\n- Understanding of SEO best practices\n- Experience with B2B/SaaS content\n- Ability to explain technical concepts clearly\n\n**Nice to have:**\n- Portfolio of published work\n- Experience with content management systems\n- Video script writing experience",
+        "skills": ["Copywriting", "SEO", "Blog Writing", "Email Marketing", "Storytelling"]
+      },
+      "operationsManager": {
+        "title": "Operations Manager",
+        "description": "Streamline processes and scale the business",
+        "experienceLevel": "5+ years",
+        "requirements": "We need an Operations Manager to optimize our processes.\n\n**Responsibilities:**\n- Design and implement operational processes\n- Manage vendor relationships\n- Track and report on operational metrics\n- Drive efficiency improvements\n\n**Requirements:**\n- 5+ years of operations experience\n- Strong project management skills\n- Experience with process optimization\n- Excellent analytical abilities\n- Experience with operational tools\n\n**Nice to have:**\n- Six Sigma or Lean certification\n- Experience in tech/SaaS companies\n- Team management experience",
+        "skills": ["Process Optimization", "Project Management", "Vendor Management", "Analytics", "Lean"]
+      },
+      "financialAnalyst": {
+        "title": "Financial Analyst",
+        "description": "Drive financial planning and analysis",
+        "experienceLevel": "3+ years",
+        "requirements": "We are hiring a Financial Analyst to support our finance team.\n\n**Responsibilities:**\n- Build financial models and forecasts\n- Prepare monthly financial reports\n- Analyze business performance\n- Support budgeting process\n\n**Requirements:**\n- 3+ years of FP&A experience\n- Advanced Excel skills\n- Experience with financial modeling\n- Understanding of SaaS metrics\n- Strong attention to detail\n\n**Nice to have:**\n- CPA or CFA\n- Experience with NetSuite or similar\n- SQL skills",
+        "skills": ["Financial Modeling", "Excel", "FP&A", "Budgeting", "SaaS Metrics"]
+      },
+      "hrManager": {
+        "title": "HR Manager",
+        "description": "Build culture and support our people",
+        "experienceLevel": "4+ years",
+        "requirements": "We need an HR Manager to lead our people operations.\n\n**Responsibilities:**\n- Manage full employee lifecycle\n- Develop HR policies and programs\n- Handle employee relations\n- Lead compensation and benefits\n\n**Requirements:**\n- 4+ years of HR experience\n- Knowledge of employment laws\n- Experience with HRIS systems\n- Strong interpersonal skills\n- Experience in tech companies preferred\n\n**Nice to have:**\n- PHR or SHRM certification\n- Experience building HR from scratch\n- International HR experience",
+        "skills": ["Employee Relations", "HRIS", "Compensation", "Compliance", "Culture Building"]
+      },
+      "technicalRecruiter": {
+        "title": "Technical Recruiter",
+        "description": "Find and attract top engineering talent",
+        "experienceLevel": "3+ years",
+        "requirements": "We are looking for a Technical Recruiter to grow our team.\n\n**Responsibilities:**\n- Full-cycle recruiting for engineering roles\n- Source and engage passive candidates\n- Partner with hiring managers\n- Improve recruiting processes\n\n**Requirements:**\n- 3+ years of technical recruiting experience\n- Strong sourcing skills\n- Experience with ATS systems\n- Understanding of technical roles and skills\n- Excellent communication skills\n\n**Nice to have:**\n- In-house tech company experience\n- Employer branding experience\n- Diversity recruiting expertise",
+        "skills": ["Technical Sourcing", "ATS", "Interviewing", "Employer Branding", "LinkedIn Recruiting"]
+      }
+    }
   },
   "dashboard": {
     "nav": {
@@ -294,6 +502,79 @@
     "startHiring": "Start Hiring",
     "endpoints": "API Endpoints",
     "logout": "Logout"
+  },
+  "apiLanding": {
+    "hero": {
+      "badge": "RoboHire API",
+      "headline": "Build AI-powered hiring in minutes",
+      "subheadline": "Integrate intelligent resume matching, interview evaluation, and candidate screening into your application with just a few lines of code.",
+      "getKey": "Get your API key",
+      "readDocs": "Read the docs"
+    },
+    "what": {
+      "badge": "What is it?",
+      "title": "Powerful AI recruitment APIs",
+      "description": "RoboHire API provides a complete suite of AI-powered recruitment tools. Match resumes to job descriptions, parse documents, evaluate interviews, and automate candidate communication - all through simple REST API endpoints.",
+      "exploreDocs": "Explore documentation"
+    },
+    "howItWorks": {
+      "badge": "Getting Started",
+      "title": "How it works"
+    },
+    "steps": {
+      "signup": {
+        "title": "Sign up or log in",
+        "desc": "Create a free account or log in to access your RoboHire API dashboard."
+      },
+      "apikey": {
+        "title": "Get your API key",
+        "desc": "Generate an API key from your dashboard to start making API calls."
+      },
+      "develop": {
+        "title": "Start building",
+        "desc": "Integrate RoboHire into your application with our comprehensive documentation."
+      }
+    },
+    "features": {
+      "badge": "Key Features",
+      "title": "Everything you need to automate hiring",
+      "subtitle": "Powerful APIs that handle the complex AI work behind the scenes.",
+      "matching": {
+        "title": "AI Resume Matching",
+        "desc": "Match resumes against job descriptions with AI-powered scoring and detailed analysis."
+      },
+      "parsing": {
+        "title": "Document Parsing",
+        "desc": "Extract structured data from resumes and job descriptions in PDF format."
+      },
+      "evaluation": {
+        "title": "Interview Evaluation",
+        "desc": "Analyze interview transcripts with comprehensive scoring and cheating detection."
+      },
+      "invitation": {
+        "title": "Candidate Invitations",
+        "desc": "Generate professional interview invitation emails automatically."
+      },
+      "multilingual": {
+        "title": "Multilingual Support",
+        "desc": "Support for 7 languages including English, Chinese, Japanese, and more."
+      },
+      "webhooks": {
+        "title": "Webhook Integration",
+        "desc": "Receive real-time updates via webhooks when candidates are processed."
+      }
+    },
+    "playground": {
+      "title": "Try it in the Playground",
+      "description": "Test our APIs interactively before integrating them into your application.",
+      "cta": "Open Playground"
+    },
+    "cta": {
+      "title": "Get your API key",
+      "description": "Start building AI-powered hiring features today. Free to start, no credit card required.",
+      "getStarted": "Get started",
+      "viewDocs": "View documentation"
+    }
   },
   "pages": {
     "matchResume": {

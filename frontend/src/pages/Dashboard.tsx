@@ -98,6 +98,9 @@ export default function Dashboard() {
               <Link to="/start-hiring" className="text-gray-600 hover:text-indigo-600 font-medium transition-colors">
                 {t('dashboard.nav.newHiring', 'New Hiring')}
               </Link>
+              <Link to="/dashboard/api-keys" className="text-gray-600 hover:text-indigo-600 font-medium transition-colors">
+                {t('dashboard.nav.apiKeys', 'API Keys')}
+              </Link>
               <Link to="/api-playground" className="text-gray-600 hover:text-indigo-600 font-medium transition-colors">
                 {t('dashboard.nav.apiPlayground', 'API Playground')}
               </Link>
@@ -146,7 +149,7 @@ export default function Dashboard() {
         </div>
 
         {/* Quick Actions */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
           <Link
             to="/start-hiring"
             className="bg-gradient-to-br from-indigo-500 to-purple-600 rounded-xl p-6 text-white hover:shadow-lg transition-shadow"
@@ -160,6 +163,23 @@ export default function Dashboard() {
               <div>
                 <h3 className="font-semibold">{t('dashboard.actions.newHiring', 'Start New Hiring')}</h3>
                 <p className="text-indigo-100 text-sm">{t('dashboard.actions.newHiringDesc', 'Create a new job opening')}</p>
+              </div>
+            </div>
+          </Link>
+
+          <Link
+            to="/dashboard/api-keys"
+            className="bg-white border border-gray-200 rounded-xl p-6 hover:border-indigo-300 hover:shadow-lg transition-all"
+          >
+            <div className="flex items-center gap-4">
+              <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                <svg className="w-6 h-6 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+                </svg>
+              </div>
+              <div>
+                <h3 className="font-semibold text-gray-900">{t('dashboard.actions.apiKeys', 'API Keys')}</h3>
+                <p className="text-gray-500 text-sm">{t('dashboard.actions.apiKeysDesc', 'Manage API access')}</p>
               </div>
             </div>
           </Link>

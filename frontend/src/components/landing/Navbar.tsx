@@ -12,8 +12,8 @@ export default function Navbar() {
   const navLinks = [
     { href: '#services', label: t('landing.nav.services', 'Services') },
     { href: '#how-it-works', label: t('landing.nav.howItWorks', 'How It Works') },
-    { href: '#features', label: t('landing.nav.features', 'Features') },
-    { href: '#pricing', label: t('landing.nav.pricing', 'Pricing') },
+    { href: '/developers', label: t('landing.nav.api', 'API'), isRoute: true },
+    { href: '/docs', label: t('landing.nav.docs', 'Docs'), isRoute: true },
   ];
 
   return (
@@ -33,13 +33,23 @@ export default function Navbar() {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-8">
             {navLinks.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-gray-600 hover:text-indigo-600 font-medium transition-colors"
-              >
-                {link.label}
-              </a>
+              link.isRoute ? (
+                <Link
+                  key={link.href}
+                  to={link.href}
+                  className="text-gray-600 hover:text-indigo-600 font-medium transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className="text-gray-600 hover:text-indigo-600 font-medium transition-colors"
+                >
+                  {link.label}
+                </a>
+              )
             ))}
           </div>
 
@@ -50,7 +60,7 @@ export default function Navbar() {
               <>
                 <Link
                   to="/dashboard"
-                  className="flex items-center gap-2 text-gray-700 hover:text-indigo-600 font-medium transition-colors"
+                  className="flex items-center gap-2 text-sm text-gray-700 hover:text-indigo-600 font-medium transition-colors"
                 >
                   {user?.avatar ? (
                     <img src={user.avatar} alt="" className="w-8 h-8 rounded-full" />
@@ -103,14 +113,25 @@ export default function Navbar() {
           <div className="lg:hidden py-4 border-t border-gray-100">
             <div className="flex flex-col gap-4">
               {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="text-gray-600 hover:text-indigo-600 font-medium transition-colors"
-                >
-                  {link.label}
-                </a>
+                link.isRoute ? (
+                  <Link
+                    key={link.href}
+                    to={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-gray-600 hover:text-indigo-600 font-medium transition-colors"
+                  >
+                    {link.label}
+                  </Link>
+                ) : (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsMobileMenuOpen(false)}
+                    className="text-gray-600 hover:text-indigo-600 font-medium transition-colors"
+                  >
+                    {link.label}
+                  </a>
+                )
               ))}
               
               {/* Mobile Language Selector */}

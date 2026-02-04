@@ -10,9 +10,18 @@ export default function Footer() {
       title: t('landing.footer.product', 'Product'),
       links: [
         { label: t('landing.footer.startHiring', 'Start Hiring'), href: '/start-hiring' },
-        { label: t('landing.footer.apiDocs', 'API Documentation'), href: '/api-playground' },
+        { label: t('landing.footer.api', 'API'), href: '/developers' },
+        { label: t('landing.footer.playground', 'Playground'), href: '/api-playground' },
         { label: t('landing.footer.pricing', 'Pricing'), href: '#pricing' },
-        { label: t('landing.footer.changelog', 'Changelog'), href: '/changelog' },
+      ],
+    },
+    developers: {
+      title: t('landing.footer.developers', 'Developers'),
+      links: [
+        { label: t('landing.footer.docs', 'Documentation'), href: '/docs' },
+        { label: t('landing.footer.apiReference', 'API Reference'), href: '/docs/api/match-resume' },
+        { label: t('landing.footer.quickStart', 'Quick Start'), href: '/docs/quick-start' },
+        { label: t('landing.footer.apiKeys', 'API Keys'), href: '/dashboard/api-keys' },
       ],
     },
     company: {
@@ -22,15 +31,6 @@ export default function Footer() {
         { label: t('landing.footer.blog', 'Blog'), href: '/blog' },
         { label: t('landing.footer.careers', 'Careers'), href: '/careers' },
         { label: t('landing.footer.contact', 'Contact'), href: '/contact' },
-      ],
-    },
-    resources: {
-      title: t('landing.footer.resources', 'Resources'),
-      links: [
-        { label: t('landing.footer.help', 'Help Center'), href: '/help' },
-        { label: t('landing.footer.guides', 'Guides'), href: '/guides' },
-        { label: t('landing.footer.api', 'API Reference'), href: '/api-playground' },
-        { label: t('landing.footer.status', 'Status'), href: '/status' },
       ],
     },
     legal: {

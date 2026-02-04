@@ -7,9 +7,11 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Landing from './pages/Landing';
 import Login from './pages/Login';
 import StartHiring from './pages/StartHiring';
+import APILanding from './pages/APILanding';
 
 // Protected Pages
 import Dashboard from './pages/Dashboard';
+import APIKeys from './pages/APIKeys';
 import APIPlayground from './layouts/APIPlayground';
 
 // API Playground Pages (existing)
@@ -18,6 +20,21 @@ import InviteCandidate from './pages/InviteCandidate';
 import ParseResume from './pages/ParseResume';
 import ParseJD from './pages/ParseJD';
 import EvaluateInterview from './pages/EvaluateInterview';
+
+// Documentation Layout and Pages
+import DocsLayout from './layouts/DocsLayout';
+import {
+  DocsOverview,
+  DocsQuickStart,
+  DocsAuthentication,
+  DocsMatchResume,
+  DocsParseResume,
+  DocsParseJD,
+  DocsInviteCandidate,
+  DocsEvaluateInterview,
+  DocsWebhooks,
+  DocsErrorHandling,
+} from './pages/docs';
 
 function App() {
   return (
@@ -28,6 +45,7 @@ function App() {
           <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
           <Route path="/start-hiring" element={<StartHiring />} />
+          <Route path="/developers" element={<APILanding />} />
 
           {/* Protected Routes */}
           <Route
@@ -46,6 +64,14 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/dashboard/api-keys"
+            element={
+              <ProtectedRoute>
+                <APIKeys />
+              </ProtectedRoute>
+            }
+          />
 
           {/* API Playground Routes (Public) */}
           <Route path="/api-playground" element={<APIPlayground />}>
@@ -55,6 +81,21 @@ function App() {
             <Route path="parse-resume" element={<ParseResume />} />
             <Route path="parse-jd" element={<ParseJD />} />
             <Route path="evaluate" element={<EvaluateInterview />} />
+          </Route>
+
+          {/* Documentation Routes (Public) */}
+          <Route path="/docs" element={<DocsLayout />}>
+            <Route index element={<Navigate to="overview" replace />} />
+            <Route path="overview" element={<DocsOverview />} />
+            <Route path="quick-start" element={<DocsQuickStart />} />
+            <Route path="authentication" element={<DocsAuthentication />} />
+            <Route path="api/match-resume" element={<DocsMatchResume />} />
+            <Route path="api/parse-resume" element={<DocsParseResume />} />
+            <Route path="api/parse-jd" element={<DocsParseJD />} />
+            <Route path="api/invite-candidate" element={<DocsInviteCandidate />} />
+            <Route path="api/evaluate-interview" element={<DocsEvaluateInterview />} />
+            <Route path="webhooks" element={<DocsWebhooks />} />
+            <Route path="errors" element={<DocsErrorHandling />} />
           </Route>
 
           {/* Catch all - redirect to home */}

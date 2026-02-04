@@ -65,6 +65,440 @@
       "title": "JSON-Antwort"
     }
   },
+  "landing": {
+    "nav": {
+      "services": "Leistungen",
+      "howItWorks": "So funktioniert’s",
+      "api": "API",
+      "docs": "Dokumentation",
+      "features": "Funktionen",
+      "pricing": "Preise",
+      "signIn": "Anmelden",
+      "getStarted": "Loslegen",
+      "dashboard": "Dashboard"
+    },
+    "hero": {
+      "badge": "KI-gestützte Recruiting-Plattform",
+      "headline": "Top-Talente einstellen",
+      "headlineHighlight": "vor der Konkurrenz",
+      "subheadline": "Schluss mit stundenlangem CV-Sichten. Unser KI‑Recruiter filtert, interviewt und liefert vollständige Reports – automatisch.",
+      "ctaPrimary": "Einfach einstellen",
+      "ctaSecondary": "API entdecken",
+      "stat1": "Zeit gespart",
+      "stat2": "Schnelleres Screening",
+      "stat3": "Unternehmen",
+      "stat4": "Rund um die Uhr"
+    },
+    "services": {
+      "title": "Zwei starke Wege, um zu rekrutieren",
+      "subtitle": "Wählen Sie die Lösung, die zu Ihnen passt – oder kombinieren Sie beide für maximale Effizienz.",
+      "hiring": {
+        "title": "Jetzt einstellen",
+        "subtitle": "KI‑Recruiter",
+        "description": "Die KI übernimmt die Fleißarbeit: Lebensläufe prüfen, Interviews führen, Reports erstellen. Sie sprechen nur mit den besten Kandidaten.",
+        "feature1": "Automatisches CV‑Screening",
+        "feature2": "KI‑Interviews",
+        "feature3": "Umfassende Bewertungsberichte",
+        "feature4": "Webhook‑Integration",
+        "cta": "Jetzt starten",
+        "badge": "Beliebt"
+      },
+      "api": {
+        "title": "RoboHire API",
+        "subtitle": "Für Entwickler",
+        "description": "Integrieren Sie KI‑Recruiting in Ihre Systeme: Parsing, Matching, Interview‑Bewertung und mehr.",
+        "feature1": "Lebenslauf- & JD‑Parsing",
+        "feature2": "KI‑Matching",
+        "feature3": "Interview‑Bewertung",
+        "feature4": "REST‑API Endpunkte",
+        "cta": "API entdecken"
+      }
+    },
+    "howItWorks": {
+      "badge": "Einfacher Prozess",
+      "title": "So funktioniert RoboHire",
+      "subtitle": "Die KI agiert als Recruiter: prüft CVs, kontaktiert & interviewt passende Kandidaten und liefert Reports.",
+      "step1": {
+        "title": "Stelle anlegen",
+        "description": "Beschreiben Sie Wunschprofil oder laden Sie eine Stellenbeschreibung hoch. Must‑haves, Erfahrung, Nice‑to‑haves – wir machen den Rest."
+      },
+      "step2": {
+        "title": "In Ihren Workflow integrieren",
+        "description": "ATS per API oder Webhook anbinden. Kein Aufwand – Pipeline auf RoboHire zeigen, fertig."
+      },
+      "step3": {
+        "title": "Beste Matches erhalten",
+        "description": "KI prüft jede Bewerbung, führt Erstinterviews und rankt nach Fit."
+      },
+      "step4": {
+        "title": "Sofortige Reports",
+        "description": "Bewertungsberichte via Webhook: Skills‑Analyse, Interview‑Insights, Empfehlung."
+      }
+    },
+    "features": {
+      "badge": "Starke Features",
+      "title": "Alles, was Sie für besseres Hiring brauchen",
+      "subtitle": "Von KI‑Screening bis automatisierte Interviews.",
+      "aiScreening": {
+        "title": "KI‑Lebenslauf‑Screening",
+        "description": "Die KI vergleicht jeden CV mit Ihren Anforderungen und erkennt Skills & Lücken."
+      },
+      "autoInterviews": {
+        "title": "Automatisierte Interviews",
+        "description": "24/7‑Interviews mit relevanten Fragen und Echtzeit‑Bewertung."
+      },
+      "evalReports": {
+        "title": "Bewertungsberichte",
+        "description": "Reports mit Skill‑Assessment, Interview‑Analyse, Stärken/Schwächen und Empfehlung."
+      },
+      "timeSavings": {
+        "title": "90 % Zeitersparnis",
+        "description": "Keine Stunden mehr mit unpassenden Kandidaten – Fokus auf die besten."
+      },
+      "apiAccess": {
+        "title": "Developer‑API",
+        "description": "REST‑Zugriff für Parsing, Matching und Bewertung."
+      },
+      "webhooks": {
+        "title": "Webhook‑Zustellung",
+        "description": "Shortlist und Reports automatisch per Webhook."
+      },
+      "multilingual": {
+        "title": "Mehrsprachiger Support",
+        "description": "7 Sprachen: Englisch, Chinesisch, Japanisch, Spanisch, Französisch, Portugiesisch, Deutsch."
+      },
+      "cheatingDetection": {
+        "title": "Cheating‑Erkennung",
+        "description": "KI erkennt AI‑Assistenz und bewertet echte Fähigkeiten."
+      }
+    },
+    "cta": {
+      "title": "Bereit für smarteres Recruiting?",
+      "subtitle": "Schließen Sie sich hunderten Unternehmen an, die schneller mit KI einstellen. Kostenlos starten – ohne Kreditkarte.",
+      "primary": "Einfach einstellen",
+      "secondary": "Mit Sales sprechen",
+      "benefit1": "Keine Kreditkarte nötig",
+      "benefit2": "14 Tage kostenlos",
+      "benefit3": "Jederzeit kündbar"
+    },
+    "footer": {
+      "tagline": "KI‑Recruiting‑Plattform, mit der Sie Top‑Talente früher einstellen.",
+      "product": "Produkt",
+      "startHiring": "Jetzt einstellen",
+      "api": "API",
+      "playground": "Playground",
+      "apiDocs": "API‑Dokumentation",
+      "pricing": "Preise",
+      "developers": "Entwickler",
+      "docs": "Dokumentation",
+      "apiReference": "API‑Referenz",
+      "quickStart": "Schnellstart",
+      "apiKeys": "API‑Schlüssel",
+      "changelog": "Changelog",
+      "company": "Unternehmen",
+      "about": "Über uns",
+      "blog": "Blog",
+      "careers": "Karriere",
+      "contact": "Kontakt",
+      "resources": "Ressourcen",
+      "help": "Hilfezentrum",
+      "guides": "Guides",
+      "status": "Status",
+      "legal": "Rechtliches",
+      "privacy": "Datenschutz",
+      "terms": "Nutzungsbedingungen",
+      "cookies": "Cookies",
+      "security": "Sicherheit",
+      "rights": "Alle Rechte vorbehalten."
+    }
+  },
+  "apiLanding": {
+    "hero": {
+      "badge": "RoboHire API",
+      "headline": "Bauen Sie KI-gestützte Einstellung in Minuten",
+      "subheadline": "Integrieren Sie intelligente Lebenslauf-Matching, Interview-Bewertung und Kandidaten-Screening in Ihre Anwendung mit nur wenigen Codezeilen.",
+      "getKey": "API-Schlüssel erhalten",
+      "readDocs": "Dokumentation lesen"
+    },
+    "what": {
+      "badge": "Was ist das?",
+      "title": "Leistungsstarke KI-Recruiting-APIs",
+      "description": "RoboHire API bietet eine vollständige Suite von KI-gestützten Recruiting-Tools. Gleichen Sie Lebensläufe mit Stellenbeschreibungen ab, analysieren Sie Dokumente, bewerten Sie Interviews und automatisieren Sie die Kandidatenkommunikation - alles über einfache REST-API-Endpunkte.",
+      "exploreDocs": "Dokumentation erkunden"
+    },
+    "howItWorks": {
+      "badge": "Erste Schritte",
+      "title": "So funktioniert es"
+    },
+    "steps": {
+      "signup": {
+        "title": "Registrieren oder anmelden",
+        "desc": "Erstellen Sie ein kostenloses Konto oder melden Sie sich an, um auf Ihr RoboHire API Dashboard zuzugreifen."
+      },
+      "apikey": {
+        "title": "API-Schlüssel erhalten",
+        "desc": "Generieren Sie einen API-Schlüssel aus Ihrem Dashboard, um API-Aufrufe zu starten."
+      },
+      "develop": {
+        "title": "Mit dem Bauen beginnen",
+        "desc": "Integrieren Sie RoboHire in Ihre Anwendung mit unserer umfassenden Dokumentation."
+      }
+    },
+    "features": {
+      "badge": "Hauptfunktionen",
+      "title": "Alles was Sie brauchen, um Einstellung zu automatisieren",
+      "subtitle": "Leistungsstarke APIs, die die komplexe KI-Arbeit im Hintergrund erledigen.",
+      "matching": {
+        "title": "KI-Lebenslauf-Matching",
+        "desc": "Gleichen Sie Lebensläufe mit Stellenbeschreibungen ab - mit KI-gestützter Bewertung und detaillierter Analyse."
+      },
+      "parsing": {
+        "title": "Dokumentenanalyse",
+        "desc": "Extrahieren Sie strukturierte Daten aus Lebensläufen und Stellenbeschreibungen im PDF-Format."
+      },
+      "evaluation": {
+        "title": "Interview-Bewertung",
+        "desc": "Analysieren Sie Interview-Transkripte mit umfassender Bewertung und Betrugs-Erkennung."
+      },
+      "invitation": {
+        "title": "Kandidaten-Einladungen",
+        "desc": "Generieren Sie automatisch professionelle Interview-Einladungs-E-Mails."
+      },
+      "multilingual": {
+        "title": "Mehrsprachige Unterstützung",
+        "desc": "Unterstützung für 7 Sprachen einschließlich Deutsch, Englisch, Chinesisch und mehr."
+      },
+      "webhooks": {
+        "title": "Webhook-Integration",
+        "desc": "Erhalten Sie Echtzeit-Updates über Webhooks, wenn Kandidaten verarbeitet werden."
+      }
+    },
+    "playground": {
+      "title": "Im Playground ausprobieren",
+      "description": "Testen Sie unsere APIs interaktiv, bevor Sie sie in Ihre Anwendung integrieren.",
+      "cta": "Playground öffnen"
+    },
+    "cta": {
+      "title": "Ihren API-Schlüssel erhalten",
+      "description": "Beginnen Sie noch heute mit dem Aufbau KI-gestützter Einstellungsfunktionen. Kostenlos starten, keine Kreditkarte erforderlich.",
+      "getStarted": "Loslegen",
+      "viewDocs": "Dokumentation ansehen"
+    }
+  },
+  "hiring": {
+    "templateSelected": "Ich möchte einstellen: {{title}}",
+    "templateLoaded": "Tolle Wahl! Ich habe die Vorlage für {{title}} geladen.\n\n",
+    "keySkills": "Kernkompetenzen",
+    "experienceLevel": "Erfahrungsniveau",
+    "customizePrompt": "Möchten Sie diese Anforderungen anpassen oder mit dieser Vorlage starten? Sie können:\n\n- 'yes' eingeben, um mit dieser Vorlage fortzufahren\n- Spezifische Anforderungen oder Änderungen hinzufügen\n- Eine detaillierte Stellenbeschreibung hochladen",
+    "quickStartSelected": "Ich möchte einen {{role}} einstellen",
+    "requiredSkills": "Erforderliche Fähigkeiten",
+    "teamContext": "Teamkontext",
+    "keyResponsibilities": "Hauptaufgaben",
+    "gotIt": "Super! Ich habe Ihre Anforderungen erfasst. Zusammenfassung:\n\n",
+    "position": "Position",
+    "keyRequirements": "Wesentliche Anforderungen",
+    "confirmPrompt": "Ist das korrekt? Geben Sie 'yes' ein, um zu starten, oder fügen Sie Details hinzu.",
+    "moreInfo": "Guter Start! Können Sie mir mehr erzählen über:\n\n",
+    "specificResponsibilities": "Konkrete Verantwortlichkeiten",
+    "loginRequired": "Um Ihre Einstellungsanfrage zu erstellen, müssen Sie sich zuerst anmelden.\n\n",
+    "loginPrompt": "Klicken Sie unten auf den Button, um sich anzumelden. Ihre Anforderungen werden gespeichert.",
+    "success": "Ihre Einstellungsanfrage wurde erstellt! 🎉\n\n",
+    "nextSteps": "**Nächste Schritte:**\n",
+    "step1": "Unsere KI beginnt mit der Vorauswahl eingehender Kandidaten",
+    "step2": "Passende Kandidaten werden automatisch interviewt",
+    "step3": "Sie erhalten Bewertungsberichte für die besten Kandidaten",
+    "visitDashboard": "Besuchen Sie Ihr Dashboard, um den Fortschritt zu verfolgen und Kandidaten zu verwalten.",
+    "errorCreating": "Beim Erstellen Ihrer Anfrage ist ein Problem aufgetreten: ",
+    "tryAgain": "Bitte versuchen Sie es erneut oder kontaktieren Sie den Support, wenn das Problem weiterhin besteht.",
+    "errorGeneric": "Beim Erstellen Ihrer Anfrage ist ein Problem aufgetreten. Bitte versuchen Sie es erneut.",
+    "quickRoles": {
+      "engineer": "Softwareentwickler",
+      "pm": "Produktmanager",
+      "designer": "UX-Designer",
+      "data": "Datenwissenschaftler"
+    },
+    "newRequest": "Neue Anfrage",
+    "signInToContinue": "Zum Fortfahren anmelden",
+    "goToDashboard": "Zum Dashboard",
+    "inputPlaceholder": "Beschreiben Sie Ihren idealen Kandidaten...",
+    "uploadJd": "Stellenbeschreibung hochladen",
+    "quickStartFromJd": "Kandidat basierend auf der Stellenbeschreibung",
+    "heroTitle": "Mit KI einstellen",
+    "heroSubtitle": "Sagen Sie uns, wen Sie suchen. Unsere KI hilft beim Finden, Filtern und Bewerten von Kandidaten.",
+    "templatesTitle": "Beliebte Rollen-Vorlagen",
+    "templatesSubtitle": "Starten Sie mit einer Vorlage oder beschreiben Sie Ihre Anforderungen",
+    "viewAllTemplates": "Alle Vorlagen anzeigen",
+    "howItWorksTitle": "So funktioniert es",
+    "howItWorks": {
+      "step1": {
+        "title": "Rolle beschreiben",
+        "desc": "Nennen Sie die gewünschten Fähigkeiten, Erfahrungen und Eigenschaften."
+      },
+      "step2": {
+        "title": "KI filtert Kandidaten",
+        "desc": "Unsere KI prüft Lebensläufe, führt erste Interviews und bewertet die Passung."
+      },
+      "step3": {
+        "title": "Top-Matches prüfen",
+        "desc": "Erhalten Sie detaillierte Berichte und treffen Sie schneller Entscheidungen."
+      }
+    },
+    "ctaTitle": "Bereit, Ihre Einstellung zu vereinfachen?",
+    "ctaSubtitle": "Schließen Sie sich Tausenden von Unternehmen an, die mit KI schneller einstellen.",
+    "ctaButton": "Jetzt einstellen",
+    "useTemplate": "Vorlage verwenden",
+    "searchTemplates": "Vorlagen suchen...",
+    "allCategories": "Alle",
+    "noTemplatesFound": "Keine Vorlagen gefunden",
+    "tryDifferentSearch": "Versuche einen anderen Begriff oder eine andere Kategorie",
+    "showingTemplates": "{{count}} Vorlagen angezeigt",
+    "categories": {
+      "engineering": "Engineering",
+      "product": "Produkt",
+      "design": "Design",
+      "sales": "Vertrieb",
+      "marketing": "Marketing",
+      "operations": "Operations",
+      "finance": "Finanzen",
+      "hr": "HR"
+    },
+    "templates": {
+      "aiSoftwareEngineer": {
+        "title": "KI-Softwareentwickler/in",
+        "description": "KI-Produkte von der Idee bis zur Produktion bauen",
+        "experienceLevel": "4+ Jahre",
+        "requirements": "Wir suchen eine/n KI-Softwareentwickler/in, um KI-Produkte end-to-end zu bauen.\n\n**Aufgaben:**\n- KI-Funktionen vom Prototyp bis zur Produktion umsetzen\n- Modell-APIs, Vektorsuche und Datenpipelines integrieren\n- Skalierbare Inferenz-Services und Monitoring designen\n- Mit dem Produktteam KI-User-Experiences definieren\n\n**Anforderungen:**\n- 4+ Jahre Erfahrung in der Softwareentwicklung\n- Sehr gute Python/TypeScript- und Backend-Skills\n- Erfahrung mit LLM-APIs oder ML-Frameworks\n- Verständnis für Vektor-Datenbanken und RAG-Patterns\n- Kenntnisse in Cloud-Services und Observability\n\n**Wünschenswert:**\n- Erfahrung mit Fine-Tuning oder Model-Evaluation\n- Erfahrung mit MLOps/ML-Plattformen\n- NLP-Background",
+        "skills": ["Python", "TypeScript", "LLM", "Vektorsuche", "MLOps"]
+      },
+      "aiLlmEngineer": {
+        "title": "KI-LLM-Engineer",
+        "description": "LLM-Pipelines, Evaluation und Qualität verantworten",
+        "experienceLevel": "3+ Jahre",
+        "requirements": "Wir suchen eine/n KI-LLM-Engineer, um unseren LLM-Stack und die Evaluation zu verantworten.\n\n**Aufgaben:**\n- Prompt- und Retrieval-Pipelines für LLM-Apps bauen\n- Latenz, Kosten und Qualität der Outputs optimieren\n- Evaluations-Frameworks und Guardrails implementieren\n- Mit Daten arbeiten, um die Modellleistung zu verbessern\n\n**Anforderungen:**\n- 3+ Jahre ML/AI-Engineering-Erfahrung\n- Tiefe Erfahrung mit LLM, RAG und Embeddings\n- Sehr gute Python- und moderne ML-Tooling-Kenntnisse\n- Erfahrung mit Vector Stores und Evaluationsmetriken\n- Starkes Verständnis von Prompt Design und Sicherheit\n\n**Wünschenswert:**\n- Fine-Tuning-Erfahrung (OpenAI/Anthropic/OSS)\n- Erfahrung mit LangChain oder LlamaIndex\n- NLP-Forschungsbackground",
+        "skills": ["LLM", "RAG", "Embeddings", "Python", "Evaluation"]
+      },
+      "fullStackEngineer": {
+        "title": "Full Stack Engineer",
+        "description": "Features über Frontend und Backend liefern",
+        "experienceLevel": "4+ Jahre",
+        "requirements": "Wir suchen eine/n Full Stack Engineer, um Features über Frontend und Backend zu liefern.\n\n**Aufgaben:**\n- Web-Apps und APIs bauen und betreiben\n- Features von der UI bis zur Datenbank verantworten\n- Mit Design und Produkt für ein poliertes UX zusammenarbeiten\n- Performance, Zuverlässigkeit und Tests verbessern\n\n**Anforderungen:**\n- 4+ Jahre Full-Stack-Entwicklung\n- Starke React- und TypeScript-Skills\n- Erfahrung mit REST-APIs (Node, Python oder Go)\n- Sicherer Umgang mit SQL und ORMs\n- Verständnis für Cloud-Deployments und CI/CD\n\n**Wünschenswert:**\n- Next.js-Erfahrung\n- Observability/Monitoring-Erfahrung\n- Startup-Erfahrung",
+        "skills": ["React", "TypeScript", "Node.js", "SQL", "API-Design"]
+      },
+      "seniorSoftwareEngineer": {
+        "title": "Senior Software Engineer",
+        "description": "Skalierbare Systeme bauen und Junioren coachen",
+        "experienceLevel": "5+ Jahre",
+        "requirements": "Wir suchen eine/n Senior Software Engineer für unser Team.\n\n**Aufgaben:**\n- Skalierbare Backend-Services designen und implementieren\n- Technische Diskussionen und Code Reviews führen\n- Junioren coachen und zur Engineering-Kultur beitragen\n- Mit Produkt und Design eng zusammenarbeiten\n\n**Anforderungen:**\n- 5+ Jahre Softwareentwicklung\n- Sehr gute Kenntnisse in einer oder mehreren Sprachen (Python, Java, TypeScript, Go)\n- Erfahrung mit Cloud-Services (AWS, GCP oder Azure)\n- Datenbankerfahrung (SQL und NoSQL)\n- Starkes Problemlösungsvermögen und Detailgenauigkeit\n\n**Wünschenswert:**\n- Erfahrung mit Microservices-Architektur\n- Container-Erfahrung (Docker, Kubernetes)\n- Open-Source-Beiträge",
+        "skills": ["Python", "TypeScript", "AWS", "Systemdesign", "Microservices"]
+      },
+      "frontendDeveloper": {
+        "title": "Frontend Entwickler/in",
+        "description": "Schöne, performante UIs bauen",
+        "experienceLevel": "3+ Jahre",
+        "requirements": "Wir suchen eine/n Frontend Entwickler/in für herausragende User Experiences.\n\n**Aufgaben:**\n- Responsive Web-Apps mit React/Vue entwickeln\n- Pixelgenaue Umsetzung von Figma-Designs\n- Performance optimieren\n- Sauberen, wartbaren Code mit Tests schreiben\n\n**Anforderungen:**\n- 3+ Jahre Frontend-Erfahrung\n- Sehr gute Kenntnisse in React oder Vue.js\n- Starke CSS-Skills (Tailwind, styled-components)\n- Erfahrung mit TypeScript\n- Verständnis von Web-Performance-Optimierung\n\n**Wünschenswert:**\n- Next.js- oder Nuxt.js-Erfahrung\n- Mobile Erfahrung (React Native)\n- UI/UX-Sensibilität",
+        "skills": ["React", "TypeScript", "CSS", "Tailwind", "Next.js"]
+      },
+      "devopsEngineer": {
+        "title": "DevOps Engineer",
+        "description": "Robuste CI/CD-Pipelines aufbauen",
+        "experienceLevel": "4+ Jahre",
+        "requirements": "Wir benötigen eine/n DevOps Engineer zur Verbesserung von Infrastruktur und Deployment.\n\n**Aufgaben:**\n- CI/CD-Pipelines designen und betreiben\n- Cloud-Infrastruktur (AWS/GCP) managen\n- Monitoring und Alerting implementieren\n- Security Best Practices sicherstellen\n\n**Anforderungen:**\n- 4+ Jahre DevOps/SRE-Erfahrung\n- Sehr gute Kenntnisse in AWS oder GCP\n- Erfahrung mit Kubernetes und Docker\n- Infrastructure-as-Code (Terraform, CloudFormation)\n- Scripting-Skills (Python, Bash)\n\n**Wünschenswert:**\n- Security-Zertifizierungen\n- GitOps-Erfahrung\n- On-Call-Erfahrung",
+        "skills": ["AWS", "Kubernetes", "Terraform", "Docker", "CI/CD"]
+      },
+      "dataScientist": {
+        "title": "Data Scientist",
+        "description": "Daten in Insights und ML-Modelle übersetzen",
+        "experienceLevel": "3+ Jahre",
+        "requirements": "Wir suchen eine/n Data Scientist, um unsere Daten zu nutzen.\n\n**Aufgaben:**\n- ML-Modelle bauen und deployen\n- Große Datensätze analysieren und Insights ableiten\n- Mit Produktteams an datengetriebenen Features arbeiten\n- Dashboards und Visualisierungen erstellen\n\n**Anforderungen:**\n- 3+ Jahre Data-Science-Erfahrung\n- Starke Python-Skills (pandas, scikit-learn, TensorFlow/PyTorch)\n- Erfahrung mit SQL und Data Warehouses\n- Grundlagen in Statistik und ML\n- Sehr gute Kommunikationsfähigkeit\n\n**Wünschenswert:**\n- NLP- oder Computer-Vision-Erfahrung\n- MLOps-Erfahrung\n- PhD in einem quantitativen Fach",
+        "skills": ["Python", "Machine Learning", "SQL", "TensorFlow", "Statistik"]
+      },
+      "productManager": {
+        "title": "Product Manager",
+        "description": "Produktstrategie definieren und umsetzen",
+        "experienceLevel": "4+ Jahre",
+        "requirements": "Wir brauchen eine/n Product Manager, um die Produktentwicklung zu leiten.\n\n**Aufgaben:**\n- Roadmap und Strategie definieren\n- Anforderungen sammeln und priorisieren\n- Eng mit Engineering und Design zusammenarbeiten\n- Metriken analysieren und Entscheidungen treiben\n\n**Anforderungen:**\n- 4+ Jahre Product-Management-Erfahrung\n- Erfahrung mit agilen Methoden\n- Starke analytische und Problemlösungsfähigkeiten\n- Exzellente Kommunikation und Stakeholder-Management\n- Technischer Hintergrund ist von Vorteil\n\n**Wünschenswert:**\n- B2B-SaaS-Erfahrung\n- SQL- und Datenanalyse-Skills\n- MBA oder relevanter Abschluss",
+        "skills": ["Produktstrategie", "Agile", "Datenanalyse", "Roadmapping", "Stakeholder-Management"]
+      },
+      "scrumMaster": {
+        "title": "Scrum Master",
+        "description": "Agile Prozesse und Team-Effizienz fördern",
+        "experienceLevel": "3+ Jahre",
+        "requirements": "Wir suchen eine/n Scrum Master, um Teams bei der Delivery zu unterstützen.\n\n**Aufgaben:**\n- Sprint-Zeremonien moderieren\n- Hindernisse entfernen und Team coachen\n- Teammetriken verfolgen und verbessern\n- Kontinuierliche Verbesserung fördern\n\n**Anforderungen:**\n- 3+ Jahre als Scrum Master\n- CSM-Zertifizierung oder vergleichbar\n- Erfahrung mit mehreren agilen Frameworks\n- Starke Moderationsfähigkeiten\n- Erfahrung mit Jira oder ähnlichen Tools\n\n**Wünschenswert:**\n- Technischer Hintergrund\n- SAFe-Zertifizierung\n- Coaching-Zertifizierung",
+        "skills": ["Scrum", "Agile", "Moderation", "Jira", "Team-Coaching"]
+      },
+      "uxDesigner": {
+        "title": "UX Designer/in",
+        "description": "Intuitive und angenehme Nutzererlebnisse gestalten",
+        "experienceLevel": "3+ Jahre",
+        "requirements": "Wir suchen eine/n UX Designer/in, um die Produkterfahrung zu gestalten.\n\n**Aufgaben:**\n- Nutzerforschung und Usability-Tests durchführen\n- Wireframes, Prototypen und User Flows erstellen\n- Mit Produkt und Engineering zusammenarbeiten\n- Design System pflegen und weiterentwickeln\n\n**Anforderungen:**\n- 3+ Jahre UX-Design-Erfahrung\n- Figma-Kenntnisse\n- Starkes Portfolio mit UX-Prozess\n- Erfahrung mit User-Research-Methoden\n- Verständnis von Accessibility-Standards\n\n**Wünschenswert:**\n- UI-Design-Skills\n- Motion-Design-Erfahrung\n- Design-System-Erfahrung",
+        "skills": ["Figma", "Nutzerforschung", "Prototyping", "Wireframing", "Usability-Tests"]
+      },
+      "uiDesigner": {
+        "title": "UI Designer/in",
+        "description": "Visuell starke Interfaces gestalten",
+        "experienceLevel": "2+ Jahre",
+        "requirements": "Wir suchen eine/n UI Designer/in für überzeugende Interfaces.\n\n**Aufgaben:**\n- Pixelgenaue Interfaces gestalten\n- Design-System-Komponenten erstellen und pflegen\n- Mit Entwicklern an der Umsetzung arbeiten\n- Marken- und Marketingmaterial erstellen\n\n**Anforderungen:**\n- 2+ Jahre UI-Design-Erfahrung\n- Expertenlevel in Figma\n- Starkes visuelles Portfolio\n- Verständnis von Designprinzipien und Typografie\n- Grundkenntnisse in HTML/CSS\n\n**Wünschenswert:**\n- Animation/Motion Design\n- Illustrations-Skills\n- Branding-Erfahrung",
+        "skills": ["Figma", "Visuelles Design", "Design System", "Typografie", "Farbe"]
+      },
+      "accountExecutive": {
+        "title": "Account Executive",
+        "description": "Deals abschließen und Enterprise-Accounts ausbauen",
+        "experienceLevel": "3+ Jahre",
+        "requirements": "Wir suchen eine/n Account Executive für Umsatzwachstum.\n\n**Aufgaben:**\n- Den gesamten Sales Cycle von Prospecting bis Close managen\n- Beziehungen zu Enterprise-Kunden aufbauen\n- Quartalsziele erreichen und übertreffen\n- Mit SDRs und Customer Success zusammenarbeiten\n\n**Anforderungen:**\n- 3+ Jahre B2B-SaaS-Vertriebserfahrung\n- Nachweisliche Quoten-Erfüllung\n- Erfahrung mit Enterprise-Sales-Zyklen\n- Hervorragende Präsentations- und Verhandlungskompetenz\n- CRM-Erfahrung (Salesforce)\n\n**Wünschenswert:**\n- Erfahrung im Verkauf an HR/Rekrutierungsteams\n- Technischer Hintergrund\n- Netzwerk in der Zielbranche",
+        "skills": ["B2B-Vertrieb", "Salesforce", "Enterprise Sales", "Verhandlung", "Prospecting"]
+      },
+      "salesEngineer": {
+        "title": "Sales Engineer",
+        "description": "Technik und Vertrieb verbinden",
+        "experienceLevel": "4+ Jahre",
+        "requirements": "Wir suchen eine/n Sales Engineer zur Unterstützung des Sales-Teams.\n\n**Aufgaben:**\n- Technische Demos und POCs leiten\n- Technische Fragen im Sales-Prozess beantworten\n- Technische Dokumentation und Vorschläge erstellen\n- Feedback aus Kundenprojekten ins Produkt zurückspielen\n\n**Anforderungen:**\n- 4+ Jahre Sales Engineering / Solutions Architect Erfahrung\n- Solider technischer Hintergrund (Softwareentwicklung)\n- Sehr gute Präsentations- und Kommunikationsfähigkeiten\n- Fähigkeit, komplexe Themen verständlich zu erklären\n- Erfahrung mit APIs und Integrationen\n\n**Wünschenswert:**\n- Vorherige Softwareentwicklung\n- Branchenzertifizierungen\n- Erfahrung im HR-Tech-Bereich",
+        "skills": ["Technische Demos", "API-Integration", "Solution Architecture", "Präsentation", "POC"]
+      },
+      "marketingManager": {
+        "title": "Marketing Manager",
+        "description": "Marketingkampagnen und Markenstrategie führen",
+        "experienceLevel": "4+ Jahre",
+        "requirements": "Wir suchen eine/n Marketing Manager, um die Marke auszubauen.\n\n**Aufgaben:**\n- Marketingkampagnen planen und umsetzen\n- Marketingbudget und ROI steuern\n- Content- und Markenstrategie führen\n- Kennzahlen analysieren und optimieren\n\n**Anforderungen:**\n- 4+ Jahre Marketing-Erfahrung\n- B2B-SaaS-Marketing-Erfahrung\n- Starke analytische Fähigkeiten\n- Sehr gute Text- und Kommunikationsskills\n- Erfahrung mit Marketing-Tools (HubSpot, Google Analytics)\n\n**Wünschenswert:**\n- Product-Marketing-Erfahrung\n- Demand-Generation-Expertise\n- Teamführungserfahrung",
+        "skills": ["Kampagnenmanagement", "Content-Strategie", "Analytics", "B2B-Marketing", "HubSpot"]
+      },
+      "contentWriter": {
+        "title": "Content Writer",
+        "description": "Inhalte erstellen, die konvertieren",
+        "experienceLevel": "2+ Jahre",
+        "requirements": "Wir suchen eine/n Content Writer, um unsere Story zu erzählen.\n\n**Aufgaben:**\n- Blogposts, Case Studies und Whitepaper schreiben\n- Website- und Produkttexte erstellen\n- E-Mail-Marketing-Inhalte entwickeln\n- SEO-Optimierung\n\n**Anforderungen:**\n- 2+ Jahre Content-Writing-Erfahrung\n- Sehr gute Schreib- und Editierfähigkeiten\n- Verständnis von SEO-Best-Practices\n- Erfahrung mit B2B/SaaS-Content\n- Fähigkeit, technische Themen verständlich zu erklären\n\n**Wünschenswert:**\n- Portfolio veröffentlichter Arbeiten\n- Erfahrung mit CMS\n- Erfahrung im Schreiben von Video-Skripten",
+        "skills": ["Copywriting", "SEO", "Blog", "E-Mail-Marketing", "Storytelling"]
+      },
+      "operationsManager": {
+        "title": "Operations Manager",
+        "description": "Prozesse optimieren und skalieren",
+        "experienceLevel": "5+ Jahre",
+        "requirements": "Wir suchen eine/n Operations Manager zur Prozessoptimierung.\n\n**Aufgaben:**\n- Operative Prozesse designen und implementieren\n- Lieferantenbeziehungen managen\n- Operative Kennzahlen tracken und reporten\n- Effizienzsteigerungen vorantreiben\n\n**Anforderungen:**\n- 5+ Jahre Operations-Erfahrung\n- Starke Projektmanagement-Skills\n- Erfahrung in Prozessoptimierung\n- Ausgeprägte analytische Fähigkeiten\n- Erfahrung mit Operations-Tools\n\n**Wünschenswert:**\n- Six-Sigma- oder Lean-Zertifizierung\n- Erfahrung in Tech/SaaS-Unternehmen\n- Teamführungserfahrung",
+        "skills": ["Prozessoptimierung", "Projektmanagement", "Lieferantenmanagement", "Analytics", "Lean"]
+      },
+      "financialAnalyst": {
+        "title": "Financial Analyst",
+        "description": "Finanzplanung und -analyse vorantreiben",
+        "experienceLevel": "3+ Jahre",
+        "requirements": "Wir suchen eine/n Financial Analyst zur Unterstützung des Finance-Teams.\n\n**Aufgaben:**\n- Finanzmodelle und Forecasts erstellen\n- Monatliche Finanzberichte vorbereiten\n- Geschäftsperformance analysieren\n- Budgetierungsprozess unterstützen\n\n**Anforderungen:**\n- 3+ Jahre FP&A-Erfahrung\n- Sehr gute Excel-Kenntnisse\n- Erfahrung in Financial Modeling\n- Verständnis von SaaS-Metriken\n- Hohe Detailgenauigkeit\n\n**Wünschenswert:**\n- CPA oder CFA\n- Erfahrung mit NetSuite oder ähnlichen Tools\n- SQL-Kenntnisse",
+        "skills": ["Financial Modeling", "Excel", "FP&A", "Budgetierung", "SaaS-Metriken"]
+      },
+      "hrManager": {
+        "title": "HR Manager",
+        "description": "Kultur aufbauen und Mitarbeitende unterstützen",
+        "experienceLevel": "4+ Jahre",
+        "requirements": "Wir suchen eine/n HR Manager für People Operations.\n\n**Aufgaben:**\n- Den kompletten Employee Lifecycle managen\n- HR-Richtlinien und Programme entwickeln\n- Mitarbeiterbeziehungen betreuen\n- Compensation & Benefits verantworten\n\n**Anforderungen:**\n- 4+ Jahre HR-Erfahrung\n- Kenntnisse im Arbeitsrecht\n- Erfahrung mit HRIS-Systemen\n- Starke zwischenmenschliche Fähigkeiten\n- Tech-Unternehmenserfahrung von Vorteil\n\n**Wünschenswert:**\n- PHR- oder SHRM-Zertifizierung\n- Aufbau von HR-Strukturen von Grund auf\n- Internationale HR-Erfahrung",
+        "skills": ["Employee Relations", "HRIS", "Compensation", "Compliance", "Kultur"]
+      },
+      "technicalRecruiter": {
+        "title": "Technical Recruiter",
+        "description": "Top Engineering-Talente gewinnen",
+        "experienceLevel": "3+ Jahre",
+        "requirements": "Wir suchen eine/n Technical Recruiter, um unser Team zu vergrößern.\n\n**Aufgaben:**\n- Full-Cycle-Recruiting für Engineering-Rollen\n- Passive Kandidaten sourcen und ansprechen\n- Partnerschaft mit Hiring Managern\n- Recruiting-Prozesse verbessern\n\n**Anforderungen:**\n- 3+ Jahre technisches Recruiting\n- Starke Sourcing-Skills\n- Erfahrung mit ATS-Systemen\n- Verständnis technischer Rollen und Skills\n- Sehr gute Kommunikationsfähigkeit\n\n**Wünschenswert:**\n- Inhouse-Erfahrung in Tech-Unternehmen\n- Employer-Branding-Erfahrung\n- Diversity-Recruiting-Erfahrung",
+        "skills": ["Technical Sourcing", "ATS", "Interviews", "Employer Branding", "LinkedIn Recruiting"]
+      }
+    }
+  },
   "pages": {
     "matchResume": {
       "title": "Lebenslauf mit JD abgleichen",

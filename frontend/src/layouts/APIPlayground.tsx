@@ -4,11 +4,11 @@ import { useAuth } from '../context/AuthContext';
 import LanguageSwitcher from '../components/LanguageSwitcher';
 
 const navItems = [
-  { path: '/api-playground/match-resume', labelKey: 'nav.matchResume', icon: '🎯' },
-  { path: '/api-playground/invite', labelKey: 'nav.inviteCandidate', icon: '📧' },
-  { path: '/api-playground/evaluate', labelKey: 'nav.evaluateInterview', icon: '📊' },
-  { path: '/api-playground/parse-resume', labelKey: 'nav.parseResume', icon: '📄' },
-  { path: '/api-playground/parse-jd', labelKey: 'nav.parseJd', icon: '📋' },
+  { path: '/api-playground/match-resume', labelKey: 'nav.matchResume' },
+  { path: '/api-playground/invite', labelKey: 'nav.inviteCandidate' },
+  { path: '/api-playground/evaluate', labelKey: 'nav.evaluateInterview' },
+  { path: '/api-playground/parse-resume', labelKey: 'nav.parseResume' },
+  { path: '/api-playground/parse-jd', labelKey: 'nav.parseJd' },
 ];
 
 export default function APIPlayground() {
@@ -103,14 +103,13 @@ export default function APIPlayground() {
               <li key={item.path}>
                 <Link
                   to={item.path}
-                  className={`flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg transition-colors whitespace-nowrap text-sm ${
+                  className={`block px-3 py-2 sm:px-4 sm:py-2.5 rounded-lg transition-colors whitespace-nowrap text-sm font-medium ${
                     location.pathname === item.path
                       ? 'bg-indigo-50 text-indigo-600'
                       : 'text-gray-600 hover:bg-gray-50'
                   }`}
                 >
-                  <span>{item.icon}</span>
-                  <span className="font-medium">{t(item.labelKey)}</span>
+                  {t(item.labelKey)}
                 </Link>
               </li>
             ))}

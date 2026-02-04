@@ -65,6 +65,440 @@
       "title": "JSONレスポンス"
     }
   },
+  "landing": {
+    "nav": {
+      "services": "サービス",
+      "howItWorks": "仕組み",
+      "api": "API",
+      "docs": "ドキュメント",
+      "features": "機能",
+      "pricing": "料金",
+      "signIn": "ログイン",
+      "getStarted": "はじめる",
+      "dashboard": "ダッシュボード"
+    },
+    "hero": {
+      "badge": "AI採用プラットフォーム",
+      "headline": "優秀な人材を",
+      "headlineHighlight": "誰より早く",
+      "subheadline": "大量の履歴書チェックに時間を奪われるのは終わり。RoboHireのAIが候補者をスクリーニングし、面接し、評価レポートまで自動で届けます。",
+      "ctaPrimary": "かんたん採用を始める",
+      "ctaSecondary": "APIを見る",
+      "stat1": "時間削減",
+      "stat2": "選考スピード",
+      "stat3": "導入企業",
+      "stat4": "24時間稼働"
+    },
+    "services": {
+      "title": "採用の選択肢は2つ",
+      "subtitle": "ニーズに合わせて選ぶか、両方使って最大効率へ。",
+      "hiring": {
+        "title": "採用を始める",
+        "subtitle": "AI採用エージェント",
+        "description": "面倒な作業はAIにお任せ。履歴書の選別から面接、評価レポートまで自動化。あなたは優秀な人材と向き合うだけ。",
+        "feature1": "履歴書の自動スクリーニング",
+        "feature2": "AI面接",
+        "feature3": "詳細な評価レポート",
+        "feature4": "Webhook連携",
+        "cta": "今すぐ始める",
+        "badge": "一番人気"
+      },
+      "api": {
+        "title": "RoboHire API",
+        "subtitle": "開発者向け",
+        "description": "既存システムにAI採用機能を統合。履歴書解析、候補者マッチング、面接評価までAPIで。",
+        "feature1": "履歴書＆JD解析",
+        "feature2": "AIマッチング",
+        "feature3": "面接評価",
+        "feature4": "REST APIエンドポイント",
+        "cta": "APIを試す"
+      }
+    },
+    "howItWorks": {
+      "badge": "かんたん4ステップ",
+      "title": "RoboHireの流れ",
+      "subtitle": "AIが採用担当者として、履歴書の精査から候補者への連絡・面接、評価レポートまで自動で実行します。",
+      "step1": {
+        "title": "求人を設定",
+        "description": "理想の候補者像を入力、または職務記述をアップロード。必須スキルや経験も指定できます。"
+      },
+      "step2": {
+        "title": "ワークフローに接続",
+        "description": "ATSをAPIやWebhookで連携。大がかりな作業は不要です。"
+      },
+      "step3": {
+        "title": "最適な候補者を受け取る",
+        "description": "AIが応募者を評価し、面接を実施、適合度で順位付けします。"
+      },
+      "step4": {
+        "title": "即時レポート",
+        "description": "Webhookで評価レポートが届きます。スキル評価や面接分析、採用推奨まで一目で把握。"
+      }
+    },
+    "features": {
+      "badge": "強力な機能",
+      "title": "採用をスマートにする全機能",
+      "subtitle": "AIスクリーニングから自動面接まで一通り揃っています。",
+      "aiScreening": {
+        "title": "AI履歴書スクリーニング",
+        "description": "要件に照らして履歴書を解析し、必須スキルや不足点を把握。"
+      },
+      "autoInterviews": {
+        "title": "自動面接",
+        "description": "24/7で一次面接。適切な質問とリアルタイム評価。"
+      },
+      "evalReports": {
+        "title": "評価レポート",
+        "description": "スキル評価、面接分析、強み・弱み、採用判断まで網羅。"
+      },
+      "timeSavings": {
+        "title": "時間を90%削減",
+        "description": "ミスマッチな候補者に時間を使わず、優秀人材に集中。"
+      },
+      "apiAccess": {
+        "title": "開発者向けAPI",
+        "description": "解析・マッチング・評価に使えるREST APIを提供。"
+      },
+      "webhooks": {
+        "title": "Webhook配信",
+        "description": "候補者のショートリストとレポートを自動配信。"
+      },
+      "multilingual": {
+        "title": "多言語対応",
+        "description": "英語・中国語・日本語・スペイン語・フランス語・ポルトガル語・ドイツ語をサポート。"
+      },
+      "cheatingDetection": {
+        "title": "不正検知",
+        "description": "AI支援回答を検知し、本来の実力を評価します。"
+      }
+    },
+    "cta": {
+      "title": "スマート採用を始めませんか？",
+      "subtitle": "AIで採用を加速する企業が続々参加中。無料トライアルは今すぐ。",
+      "primary": "かんたん採用を始める",
+      "secondary": "相談する",
+      "benefit1": "クレジットカード不要",
+      "benefit2": "14日間の無料トライアル",
+      "benefit3": "いつでも解約可能"
+    },
+    "footer": {
+      "tagline": "AIで優秀人材をいち早く採用できるプラットフォーム。",
+      "product": "プロダクト",
+      "startHiring": "採用を始める",
+      "api": "API",
+      "playground": "Playground",
+      "apiDocs": "APIドキュメント",
+      "pricing": "料金",
+      "developers": "開発者向け",
+      "docs": "ドキュメント",
+      "apiReference": "APIリファレンス",
+      "quickStart": "クイックスタート",
+      "apiKeys": "APIキー",
+      "changelog": "更新履歴",
+      "company": "会社情報",
+      "about": "会社概要",
+      "blog": "ブログ",
+      "careers": "採用情報",
+      "contact": "お問い合わせ",
+      "resources": "リソース",
+      "help": "ヘルプセンター",
+      "guides": "ガイド",
+      "status": "稼働状況",
+      "legal": "法的情報",
+      "privacy": "プライバシーポリシー",
+      "terms": "利用規約",
+      "cookies": "Cookieポリシー",
+      "security": "セキュリティ",
+      "rights": "無断転載を禁じます。"
+    }
+  },
+  "apiLanding": {
+    "hero": {
+      "badge": "RoboHire API",
+      "headline": "数分でAI採用機能を構築",
+      "subheadline": "わずか数行のコードで、インテリジェントな履歴書マッチング、面接評価、候補者スクリーニングをアプリケーションに統合できます。",
+      "getKey": "APIキーを取得",
+      "readDocs": "ドキュメントを読む"
+    },
+    "what": {
+      "badge": "これは何ですか？",
+      "title": "強力なAI採用API",
+      "description": "RoboHire APIは、AI採用ツールの完全なスイートを提供します。シンプルなREST APIエンドポイントで、履歴書と職務記述のマッチング、ドキュメント解析、面接評価、候補者コミュニケーションの自動化を実現します。",
+      "exploreDocs": "ドキュメントを探索"
+    },
+    "howItWorks": {
+      "badge": "はじめに",
+      "title": "仕組み"
+    },
+    "steps": {
+      "signup": {
+        "title": "サインアップまたはログイン",
+        "desc": "無料アカウントを作成するか、ログインしてRoboHire APIダッシュボードにアクセスしてください。"
+      },
+      "apikey": {
+        "title": "APIキーを取得",
+        "desc": "ダッシュボードからAPIキーを生成してAPI呼び出しを開始します。"
+      },
+      "develop": {
+        "title": "構築を開始",
+        "desc": "包括的なドキュメントを使用してRoboHireをアプリケーションに統合します。"
+      }
+    },
+    "features": {
+      "badge": "主な機能",
+      "title": "採用自動化に必要なすべて",
+      "subtitle": "複雑なAI作業をバックグラウンドで処理する強力なAPI。",
+      "matching": {
+        "title": "AI履歴書マッチング",
+        "desc": "AIによるスコアリングと詳細分析で履歴書を職務記述とマッチング。"
+      },
+      "parsing": {
+        "title": "ドキュメント解析",
+        "desc": "PDF形式の履歴書と職務記述から構造化データを抽出。"
+      },
+      "evaluation": {
+        "title": "面接評価",
+        "desc": "包括的なスコアリングと不正検知で面接記録を分析。"
+      },
+      "invitation": {
+        "title": "候補者招待",
+        "desc": "プロフェッショナルな面接招待メールを自動生成。"
+      },
+      "multilingual": {
+        "title": "多言語サポート",
+        "desc": "日本語、英語、中国語など7言語をサポート。"
+      },
+      "webhooks": {
+        "title": "Webhook統合",
+        "desc": "候補者処理時にWebhookでリアルタイム更新を受信。"
+      }
+    },
+    "playground": {
+      "title": "Playgroundで試す",
+      "description": "アプリケーションに統合する前に、APIをインタラクティブにテストできます。",
+      "cta": "Playgroundを開く"
+    },
+    "cta": {
+      "title": "APIキーを取得",
+      "description": "今すぐAI採用機能の構築を始めましょう。無料で開始、クレジットカード不要。",
+      "getStarted": "始める",
+      "viewDocs": "ドキュメントを見る"
+    }
+  },
+  "hiring": {
+    "templateSelected": "採用したい: {{title}}",
+    "templateLoaded": "素晴らしい選択です！{{title}}テンプレートを読み込みました。\n\n",
+    "keySkills": "主要スキル",
+    "experienceLevel": "経験レベル",
+    "customizePrompt": "要件をカスタマイズしますか？このテンプレートで進めることもできます。\n\n- 「yes」と入力してこのテンプレートで進む\n- 具体的な要件や修正を追加\n- 詳細な職務記述をアップロード",
+    "quickStartSelected": "{{role}}を採用したい",
+    "requiredSkills": "必須スキル",
+    "teamContext": "チームの状況",
+    "keyResponsibilities": "主要な責務",
+    "gotIt": "要件を把握しました。要約します。\n\n",
+    "position": "職種",
+    "keyRequirements": "主要要件",
+    "confirmPrompt": "これでよろしいですか？「yes」と入力して採用を開始するか、詳細を追加してください。",
+    "moreInfo": "いいスタートです。次の点を教えてください：\n\n",
+    "specificResponsibilities": "具体的な業務内容",
+    "loginRequired": "採用リクエストを作成するにはサインインが必要です。\n\n",
+    "loginPrompt": "下のボタンからサインインしてください。要件は保存されます。",
+    "success": "採用リクエストを作成しました！ 🎉\n\n",
+    "nextSteps": "**次のステップ：**\n",
+    "step1": "AIが応募者のスクリーニングを開始します",
+    "step2": "一致した候補者は自動的に面接されます",
+    "step3": "上位候補の評価レポートが届きます",
+    "visitDashboard": "ダッシュボードで進捗を確認し、候補者を管理できます。",
+    "errorCreating": "リクエスト作成中に問題が発生しました: ",
+    "tryAgain": "もう一度お試しください。問題が続く場合はサポートへお問い合わせください。",
+    "errorGeneric": "リクエスト作成中に問題が発生しました。もう一度お試しください。",
+    "quickRoles": {
+      "engineer": "ソフトウェアエンジニア",
+      "pm": "プロダクトマネージャー",
+      "designer": "UXデザイナー",
+      "data": "データサイエンティスト"
+    },
+    "newRequest": "新規リクエスト",
+    "signInToContinue": "サインインして続行",
+    "goToDashboard": "ダッシュボードへ",
+    "inputPlaceholder": "理想の候補者について教えてください...",
+    "uploadJd": "職務記述をアップロード",
+    "quickStartFromJd": "職務記述に基づく候補者",
+    "heroTitle": "AIで採用を始める",
+    "heroSubtitle": "求める人材を教えてください。AIが候補者の検索・スクリーニング・評価を支援します。",
+    "templatesTitle": "人気の職種テンプレート",
+    "templatesSubtitle": "テンプレートから始めるか、要件を自由に記入してください。",
+    "viewAllTemplates": "すべてのテンプレートを見る",
+    "howItWorksTitle": "仕組み",
+    "howItWorks": {
+      "step1": {
+        "title": "職種を説明する",
+        "desc": "必要なスキル、経験、人物像を教えてください。"
+      },
+      "step2": {
+        "title": "AIが候補者をスクリーニング",
+        "desc": "AIが履歴書を解析し、一次面接と適合度評価を行います。"
+      },
+      "step3": {
+        "title": "上位候補を確認",
+        "desc": "最適な候補の詳細レポートを確認し、意思決定を加速します。"
+      }
+    },
+    "ctaTitle": "採用を効率化しませんか？",
+    "ctaSubtitle": "数千社がAIでより速く賢く採用しています。",
+    "ctaButton": "今すぐ採用を始める",
+    "useTemplate": "テンプレートを使う",
+    "searchTemplates": "テンプレートを検索...",
+    "allCategories": "すべて",
+    "noTemplatesFound": "テンプレートが見つかりません",
+    "tryDifferentSearch": "別のキーワードやカテゴリで試してください",
+    "showingTemplates": "{{count}} 件のテンプレートを表示中",
+    "categories": {
+      "engineering": "エンジニア",
+      "product": "プロダクト",
+      "design": "デザイン",
+      "sales": "営業",
+      "marketing": "マーケティング",
+      "operations": "オペレーション",
+      "finance": "ファイナンス",
+      "hr": "人事"
+    },
+    "templates": {
+      "aiSoftwareEngineer": {
+        "title": "AI ソフトウェアエンジニア",
+        "description": "AIプロダクトを企画から本番まで構築",
+        "experienceLevel": "4年以上",
+        "requirements": "AIプロダクトをエンドツーエンドで構築するAIソフトウェアエンジニアを募集します。\n\n**職務内容：**\n- AI機能をプロトタイプから本番まで実装\n- モデルAPI、ベクトル検索、データパイプラインの統合\n- 推論サービスと監視の設計\n- プロダクトと連携してAIの体験設計を推進\n\n**必須要件：**\n- ソフトウェアエンジニア経験4年以上\n- Python/TypeScriptとバックエンドの実務力\n- LLM APIまたはMLフレームワークの経験\n- ベクトルDBやRAGパターンの理解\n- クラウドと可観測性の知識\n\n**歓迎要件：**\n- モデルの微調整・評価経験\n- MLOps/MLプラットフォーム経験\n- NLPのバックグラウンド",
+        "skills": ["Python", "TypeScript", "LLM", "ベクトル検索", "MLOps"]
+      },
+      "aiLlmEngineer": {
+        "title": "AI LLM エンジニア",
+        "description": "LLMパイプラインと評価を統括",
+        "experienceLevel": "3年以上",
+        "requirements": "LLMスタックと評価を担当するAI LLMエンジニアを募集します。\n\n**職務内容：**\n- LLMアプリのプロンプト/検索パイプライン構築\n- 出力の品質・コスト・レイテンシ最適化\n- 評価フレームワークとガードレールの実装\n- データチームと連携して性能改善\n\n**必須要件：**\n- ML/AIエンジニア経験3年以上\n- LLM・RAG・Embeddingsの深い理解\n- Pythonと最新MLツールの実務経験\n- ベクトル検索と評価指標の経験\n- プロンプト設計と安全性の理解\n\n**歓迎要件：**\n- OpenAI/Anthropic/OSSの微調整経験\n- LangChainまたはLlamaIndexの経験\n- NLP研究のバックグラウンド",
+        "skills": ["LLM", "RAG", "Embeddings", "Python", "評価"]
+      },
+      "fullStackEngineer": {
+        "title": "フルスタックエンジニア",
+        "description": "フロントからバックエンドまで一貫して開発",
+        "experienceLevel": "4年以上",
+        "requirements": "フロントエンドからバックエンドまで一貫して開発するフルスタックエンジニアを募集します。\n\n**職務内容：**\n- WebアプリとAPIの構築・運用\n- UIからデータベースまで機能を一貫して担当\n- デザイン/プロダクトと連携しUXを磨き込む\n- 性能・信頼性・テストの改善\n\n**必須要件：**\n- フルスタック開発4年以上\n- ReactとTypeScriptに精通\n- REST API開発経験（Node/Python/Go）\n- SQLデータベースとORMの実務経験\n- クラウド運用とCI/CDの理解\n\n**歓迎要件：**\n- Next.js経験\n- 可観測性/監視の経験\n- スタートアップ経験",
+        "skills": ["React", "TypeScript", "Node.js", "SQL", "API設計"]
+      },
+      "seniorSoftwareEngineer": {
+        "title": "シニアソフトウェアエンジニア",
+        "description": "スケーラブルなシステム構築とメンター",
+        "experienceLevel": "5年以上",
+        "requirements": "チームに参画いただくシニアソフトウェアエンジニアを募集します。\n\n**職務内容：**\n- スケーラブルなバックエンドサービスの設計・実装\n- 技術議論とコードレビューのリード\n- ジュニアエンジニアの育成とカルチャーづくり\n- プロダクト/デザインとの協業\n\n**必須要件：**\n- ソフトウェア開発経験5年以上\n- Python/Java/TypeScript/Goのいずれかに精通\n- クラウド（AWS/GCP/Azure）の利用経験\n- SQL/NoSQLのデータベース経験\n- 問題解決力と細部へのこだわり\n\n**歓迎要件：**\n- マイクロサービスアーキテクチャ経験\n- Docker/Kubernetesなどのコンテナ経験\n- OSSへの貢献経験",
+        "skills": ["Python", "TypeScript", "AWS", "システム設計", "マイクロサービス"]
+      },
+      "frontendDeveloper": {
+        "title": "フロントエンドエンジニア",
+        "description": "美しく高速なUIを実装",
+        "experienceLevel": "3年以上",
+        "requirements": "優れたユーザー体験を作るフロントエンドエンジニアを募集します。\n\n**職務内容：**\n- React/VueでレスポンシブなWebアプリ開発\n- Figmaのデザインを正確に実装\n- パフォーマンス最適化\n- テストを含む保守性の高いコード作成\n\n**必須要件：**\n- フロントエンド開発3年以上\n- ReactまたはVue.jsに精通\n- CSS（Tailwind、styled-components）に強い\n- TypeScriptの実務経験\n- パフォーマンス最適化の知識\n\n**歓迎要件：**\n- Next.js/Nuxt.js経験\n- React Nativeなどのモバイル経験\n- UI/UXの感度",
+        "skills": ["React", "TypeScript", "CSS", "Tailwind", "Next.js"]
+      },
+      "devopsEngineer": {
+        "title": "DevOpsエンジニア",
+        "description": "堅牢なCI/CDとインフラ運用",
+        "experienceLevel": "4年以上",
+        "requirements": "インフラとデプロイを改善するDevOpsエンジニアを募集します。\n\n**職務内容：**\n- CI/CDパイプラインの設計・運用\n- クラウドインフラ（AWS/GCP）の管理\n- 監視・アラート基盤の構築\n- セキュリティベストプラクティスの徹底\n\n**必須要件：**\n- DevOps/SRE経験4年以上\n- AWSまたはGCPの深い知識\n- Kubernetes/Dockerの実務経験\n- IaC（Terraform/CloudFormation）の経験\n- スクリプト作成能力（Python/Bash）\n\n**歓迎要件：**\n- セキュリティ関連資格\n- GitOpsの経験\n- オンコール経験",
+        "skills": ["AWS", "Kubernetes", "Terraform", "Docker", "CI/CD"]
+      },
+      "dataScientist": {
+        "title": "データサイエンティスト",
+        "description": "データから洞察とMLモデルを創出",
+        "experienceLevel": "3年以上",
+        "requirements": "データを活用するデータサイエンティストを募集します。\n\n**職務内容：**\n- 機械学習モデルの構築・運用\n- 大規模データの分析と洞察抽出\n- データドリブン機能をプロダクトと連携\n- ダッシュボードや可視化の作成\n\n**必須要件：**\n- データサイエンス経験3年以上\n- Python（pandas、scikit-learn、TensorFlow/PyTorch）に強い\n- SQLとデータウェアハウスの経験\n- 統計・機械学習の基礎\n- 高いコミュニケーション能力\n\n**歓迎要件：**\n- NLP/コンピュータビジョン経験\n- MLOps経験\n- 定量系の博士号",
+        "skills": ["Python", "機械学習", "SQL", "TensorFlow", "統計"]
+      },
+      "productManager": {
+        "title": "プロダクトマネージャー",
+        "description": "戦略を描き実行を推進",
+        "experienceLevel": "4年以上",
+        "requirements": "プロダクト開発をリードするプロダクトマネージャーを募集します。\n\n**職務内容：**\n- プロダクトロードマップと戦略の策定\n- 要件の収集と優先順位付け\n- エンジニア/デザインと密に協業\n- 指標分析と意思決定の推進\n\n**必須要件：**\n- プロダクトマネジメント経験4年以上\n- アジャイル手法の経験\n- 分析力と問題解決力\n- ステークホルダーとの優れた調整力\n- 技術的バックグラウンドがあると尚可\n\n**歓迎要件：**\n- B2B SaaS経験\n- SQLやデータ分析のスキル\n- MBAまたは関連学位",
+        "skills": ["プロダクト戦略", "アジャイル", "データ分析", "ロードマップ", "ステークホルダー管理"]
+      },
+      "scrumMaster": {
+        "title": "スクラムマスター",
+        "description": "アジャイル運営とチーム改善を支援",
+        "experienceLevel": "3年以上",
+        "requirements": "チームのデリバリーを支えるスクラムマスターを募集します。\n\n**職務内容：**\n- スプリントイベントのファシリテーション\n- 障害の除去とチームのコーチング\n- チーム指標のトラッキングと改善\n- 継続的改善の促進\n\n**必須要件：**\n- スクラムマスター経験3年以上\n- CSM等の認定資格\n- 複数のアジャイルフレームワーク経験\n- ファシリテーション能力\n- Jira等のツール経験\n\n**歓迎要件：**\n- 技術的バックグラウンド\n- SAFe認定\n- コーチング認定",
+        "skills": ["Scrum", "アジャイル", "ファシリテーション", "Jira", "チームコーチング"]
+      },
+      "uxDesigner": {
+        "title": "UXデザイナー",
+        "description": "直感的で心地よい体験を設計",
+        "experienceLevel": "3年以上",
+        "requirements": "プロダクト体験を形作るUXデザイナーを募集します。\n\n**職務内容：**\n- ユーザーリサーチとユーザビリティテスト\n- ワイヤーフレーム/プロトタイプ/ユーザーフローの作成\n- プロダクト/エンジニアと協業\n- デザインシステムの維持・改善\n\n**必須要件：**\n- UXデザイン経験3年以上\n- Figmaの高いスキル\n- UXプロセスを示すポートフォリオ\n- ユーザーリサーチ手法の理解\n- アクセシビリティ基準への理解\n\n**歓迎要件：**\n- UIデザインスキル\n- モーションデザイン経験\n- デザインシステム経験",
+        "skills": ["Figma", "ユーザーリサーチ", "プロトタイピング", "ワイヤーフレーム", "ユーザビリティテスト"]
+      },
+      "uiDesigner": {
+        "title": "UIデザイナー",
+        "description": "美しく一貫性のあるUIを設計",
+        "experienceLevel": "2年以上",
+        "requirements": "魅力的なUIを作るUIデザイナーを募集します。\n\n**職務内容：**\n- ピクセルパーフェクトなUI設計\n- デザインシステムコンポーネントの作成・管理\n- 開発との実装連携\n- ブランド/マーケ素材の制作\n\n**必須要件：**\n- UIデザイン経験2年以上\n- Figmaの高いスキル\n- ビジュアルデザインの強いポートフォリオ\n- タイポグラフィ/デザイン原則の理解\n- HTML/CSSの基礎理解\n\n**歓迎要件：**\n- アニメーション/モーションデザイン\n- イラスト制作スキル\n- ブランドデザイン経験",
+        "skills": ["Figma", "ビジュアルデザイン", "デザインシステム", "タイポグラフィ", "配色"]
+      },
+      "accountExecutive": {
+        "title": "アカウントエグゼクティブ",
+        "description": "エンタープライズ案件のクロージング",
+        "experienceLevel": "3年以上",
+        "requirements": "売上成長を牽引するアカウントエグゼクティブを募集します。\n\n**職務内容：**\n- 見込み開拓からクロージングまでの営業活動\n- エンタープライズ顧客との関係構築\n- 四半期目標の達成\n- SDR/カスタマーサクセスとの連携\n\n**必須要件：**\n- B2B SaaS営業経験3年以上\n- 目標達成実績\n- エンタープライズセールス経験\n- プレゼン/交渉スキル\n- CRM（Salesforce）利用経験\n\n**歓迎要件：**\n- HR/採用領域への営業経験\n- 技術バックグラウンド\n- 既存ネットワーク",
+        "skills": ["B2Bセールス", "Salesforce", "エンタープライズ営業", "交渉", "新規開拓"]
+      },
+      "salesEngineer": {
+        "title": "セールスエンジニア",
+        "description": "技術と営業を橋渡し",
+        "experienceLevel": "4年以上",
+        "requirements": "営業チームを技術面で支えるセールスエンジニアを募集します。\n\n**職務内容：**\n- 技術デモやPOCのリード\n- 営業プロセスでの技術的質疑対応\n- 技術資料や提案書の作成\n- 顧客フィードバックをプロダクトに共有\n\n**必須要件：**\n- セールスエンジニア/ソリューションアーキテクト経験4年以上\n- ソフトウェア開発の技術背景\n- 高いプレゼン/コミュニケーション力\n- 複雑な技術をわかりやすく説明できる\n- API/連携の経験\n\n**歓迎要件：**\n- ソフトウェア開発経験\n- 業界資格\n- HR Tech経験",
+        "skills": ["技術デモ", "API連携", "ソリューション設計", "プレゼン", "POC"]
+      },
+      "marketingManager": {
+        "title": "マーケティングマネージャー",
+        "description": "キャンペーンとブランド戦略を推進",
+        "experienceLevel": "4年以上",
+        "requirements": "ブランド拡大を担うマーケティングマネージャーを募集します。\n\n**職務内容：**\n- マーケティング施策の企画・実行\n- 予算とROIの管理\n- コンテンツ/ブランド戦略の推進\n- 指標分析と最適化\n\n**必須要件：**\n- マーケティング経験4年以上\n- B2B SaaSマーケ経験\n- 分析力\n- 優れたライティング/コミュニケーション力\n- HubSpotやGoogle Analyticsの経験\n\n**歓迎要件：**\n- プロダクトマーケ経験\n- デマンドジェネレーション経験\n- チームマネジメント経験",
+        "skills": ["キャンペーン運用", "コンテンツ戦略", "分析", "B2Bマーケ", "HubSpot"]
+      },
+      "contentWriter": {
+        "title": "コンテンツライター",
+        "description": "成果につながるコンテンツを制作",
+        "experienceLevel": "2年以上",
+        "requirements": "ブランドストーリーを伝えるコンテンツライターを募集します。\n\n**職務内容：**\n- ブログ/ケーススタディ/ホワイトペーパーの執筆\n- Webサイト/プロダクトコピーの作成\n- メールマーケティングコンテンツ作成\n- SEO最適化\n\n**必須要件：**\n- コンテンツライティング経験2年以上\n- 高い文章力/編集力\n- SEOの基本理解\n- B2B/SaaSコンテンツ経験\n- 技術内容をわかりやすく説明できる\n\n**歓迎要件：**\n- 公開実績/ポートフォリオ\n- CMS運用経験\n- 動画台本の執筆経験",
+        "skills": ["コピーライティング", "SEO", "ブログ", "メールマーケ", "ストーリーテリング"]
+      },
+      "operationsManager": {
+        "title": "オペレーションマネージャー",
+        "description": "業務プロセスを改善し拡大を支援",
+        "experienceLevel": "5年以上",
+        "requirements": "業務プロセスを最適化するオペレーションマネージャーを募集します。\n\n**職務内容：**\n- 業務プロセスの設計と実装\n- ベンダー管理\n- 指標の追跡とレポート\n- 効率化の推進\n\n**必須要件：**\n- オペレーション経験5年以上\n- プロジェクト管理能力\n- プロセス改善の経験\n- 高い分析力\n- オペレーションツールの使用経験\n\n**歓迎要件：**\n- Six Sigma/Leanの認定\n- SaaS/テック企業経験\n- チームマネジメント経験",
+        "skills": ["プロセス改善", "プロジェクト管理", "ベンダー管理", "分析", "Lean"]
+      },
+      "financialAnalyst": {
+        "title": "財務アナリスト",
+        "description": "財務計画と分析を推進",
+        "experienceLevel": "3年以上",
+        "requirements": "財務チームを支える財務アナリストを募集します。\n\n**職務内容：**\n- 財務モデルと予測の作成\n- 月次レポート作成\n- 事業パフォーマンス分析\n- 予算策定の支援\n\n**必須要件：**\n- FP&A経験3年以上\n- 高度なExcelスキル\n- 財務モデリング経験\n- SaaS指標の理解\n- 細部への注意力\n\n**歓迎要件：**\n- CPA/CFA\n- NetSuiteなどの経験\n- SQLスキル",
+        "skills": ["財務モデリング", "Excel", "FP&A", "予算", "SaaS指標"]
+      },
+      "hrManager": {
+        "title": "人事マネージャー",
+        "description": "カルチャー構築と人材支援",
+        "experienceLevel": "4年以上",
+        "requirements": "人事オペレーションをリードする人事マネージャーを募集します。\n\n**職務内容：**\n- 従業員ライフサイクル全体の管理\n- HRポリシー/プログラムの策定\n- 労務対応\n- 報酬/福利厚生の運用\n\n**必須要件：**\n- 人事経験4年以上\n- 労働法の知識\n- HRISの運用経験\n- 高い対人スキル\n- テック企業経験があると尚可\n\n**歓迎要件：**\n- PHR/SHRM認定\n- 人事制度の立ち上げ経験\n- グローバル人事経験",
+        "skills": ["労務対応", "HRIS", "報酬福利厚生", "コンプライアンス", "カルチャー"]
+      },
+      "technicalRecruiter": {
+        "title": "テクニカルリクルーター",
+        "description": "エンジニア採用をリード",
+        "experienceLevel": "3年以上",
+        "requirements": "エンジニア採用を拡大するテクニカルリクルーターを募集します。\n\n**職務内容：**\n- エンジニア職の一連の採用プロセス\n- 候補者のソーシングとエンゲージ\n- 採用マネージャーとの連携\n- 採用プロセス改善\n\n**必須要件：**\n- テクニカルリクルーティング経験3年以上\n- 高いソーシングスキル\n- ATS利用経験\n- 技術職種/スキルへの理解\n- 優れたコミュニケーション力\n\n**歓迎要件：**\n- 事業会社での採用経験\n- 雇用ブランド経験\n- ダイバーシティ採用経験",
+        "skills": ["ソーシング", "ATS", "面接", "採用ブランディング", "LinkedIn"]
+      }
+    }
+  },
   "pages": {
     "matchResume": {
       "title": "レジュメとJDの照合",

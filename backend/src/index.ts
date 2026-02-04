@@ -15,6 +15,9 @@ import passport from 'passport';
 import apiRouter from './routes/api.js';
 import authRouter from './routes/auth.js';
 import hiringRouter from './routes/hiring.js';
+import hiringSessionsRouter from './routes/hiringSessions.js';
+import hiringChatRouter from './routes/hiringChat.js';
+import apiKeysRouter from './routes/apiKeys.js';
 import { logger } from './services/LoggerService.js';
 import { documentStorage } from './services/DocumentStorageService.js';
 
@@ -37,6 +40,9 @@ app.use(passport.initialize());
 app.use('/api/auth', authRouter);
 app.use('/api/v1', apiRouter);
 app.use('/api/v1/hiring-requests', hiringRouter);
+app.use('/api/v1/hiring-sessions', hiringSessionsRouter);
+app.use('/api/v1/hiring-chat', hiringChatRouter);
+app.use('/api/v1/api-keys', apiKeysRouter);
 
 // Root endpoint
 app.get('/', (_req, res) => {

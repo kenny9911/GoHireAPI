@@ -1,15 +1,77 @@
 import type { Request, Response, NextFunction } from 'express';
 import authService from '../services/AuthService.js';
-import type { AuthUser } from '../types/auth.js';
+import prisma from '../lib/prisma.js';
+import type { AuthUser, ApiKeyScope } from '../types/auth.js';
 // Import auth types to extend Express
 import '../types/auth.js';
 
 /**
- * Authentication middleware - requires valid JWT or session token
+ * Validate an API key and return the associated user
+ */
+async function validateApiKey(apiKey: string): Promise<{
+  user: AuthUser | null;
+  apiKeyId: string | null;
+  scopes: ApiKeyScope[] | null;
+}> {
+  try {
+    const keyRecord = await prisma.apiKey.findUnique({
+      where: { key: apiKey },
+      include: {
+        user: {
+          select: {
+            id: true,
+            email: true,
+            name: true,
+            company: true,
+            avatar: true,
+            provider: true,
+            providerId: true,
+            createdAt: true,
+            updatedAt: true,
+          },
+        },
+      },
+    });
+
+    if (!keyRecord) {
+      return { user: null, apiKeyId: null, scopes: null };
+    }
+
+    // Check if key is active
+    if (!keyRecord.isActive) {
+      return { user: null, apiKeyId: null, scopes: null };
+    }
+
+    // Check if key has expired
+    if (keyRecord.expiresAt && keyRecord.expiresAt < new Date()) {
+      return { user: null, apiKeyId: null, scopes: null };
+    }
+
+    // Update lastUsedAt (async, don't wait)
+    prisma.apiKey.update({
+      where: { id: keyRecord.id },
+      data: { lastUsedAt: new Date() },
+    }).catch(err => console.error('Failed to update API key lastUsedAt:', err));
+
+    return {
+      user: keyRecord.user,
+      apiKeyId: keyRecord.id,
+      scopes: keyRecord.scopes as ApiKeyScope[],
+    };
+  } catch (error) {
+    console.error('API key validation error:', error);
+    return { user: null, apiKeyId: null, scopes: null };
+  }
+}
+
+/**
+ * Authentication middleware - requires valid JWT, session token, or API key
  * Extracts token from:
- * 1. Authorization header: "Bearer <token>"
- * 2. Cookie: "session_token=<token>"
- * 3. Query parameter: "?token=<token>"
+ * 1. Authorization header: "Bearer <token>" (JWT or API key starting with "rh_")
+ * 2. X-API-Key header: "<api_key>"
+ * 3. Cookie: "session_token=<token>"
+ * 4. X-Session-Token header: "<session_token>"
+ * 5. Query parameter: "?token=<token>"
  */
 export async function requireAuth(
   req: Request,
@@ -19,11 +81,27 @@ export async function requireAuth(
   try {
     let token: string | undefined;
     let isSessionToken = false;
+    let isApiKey = false;
 
-    // Check Authorization header first (JWT)
-    const authHeader = req.headers.authorization;
-    if (authHeader?.startsWith('Bearer ')) {
-      token = authHeader.slice(7);
+    // Check X-API-Key header first (API key)
+    const apiKeyHeader = req.headers['x-api-key'];
+    if (apiKeyHeader && typeof apiKeyHeader === 'string' && apiKeyHeader.startsWith('rh_')) {
+      token = apiKeyHeader;
+      isApiKey = true;
+    }
+
+    // Check Authorization header (JWT or API key)
+    if (!token) {
+      const authHeader = req.headers.authorization;
+      if (authHeader?.startsWith('Bearer ')) {
+        const bearerToken = authHeader.slice(7);
+        if (bearerToken.startsWith('rh_')) {
+          token = bearerToken;
+          isApiKey = true;
+        } else {
+          token = bearerToken;
+        }
+      }
     }
 
     // Check for session token in cookie
@@ -54,7 +132,15 @@ export async function requireAuth(
 
     let user: AuthUser | null = null;
 
-    if (isSessionToken) {
+    if (isApiKey) {
+      // Validate API key
+      const { user: apiKeyUser, apiKeyId, scopes } = await validateApiKey(token);
+      if (apiKeyUser) {
+        user = apiKeyUser;
+        req.apiKeyId = apiKeyId || undefined;
+        req.apiKeyScopes = scopes || undefined;
+      }
+    } else if (isSessionToken) {
       // Validate session token
       const sessionUser = await authService.validateSession(token);
       if (sessionUser) {
@@ -102,11 +188,27 @@ export async function optionalAuth(
   try {
     let token: string | undefined;
     let isSessionToken = false;
+    let isApiKey = false;
 
-    // Check Authorization header
-    const authHeader = req.headers.authorization;
-    if (authHeader?.startsWith('Bearer ')) {
-      token = authHeader.slice(7);
+    // Check X-API-Key header first (API key)
+    const apiKeyHeader = req.headers['x-api-key'];
+    if (apiKeyHeader && typeof apiKeyHeader === 'string' && apiKeyHeader.startsWith('rh_')) {
+      token = apiKeyHeader;
+      isApiKey = true;
+    }
+
+    // Check Authorization header (JWT or API key)
+    if (!token) {
+      const authHeader = req.headers.authorization;
+      if (authHeader?.startsWith('Bearer ')) {
+        const bearerToken = authHeader.slice(7);
+        if (bearerToken.startsWith('rh_')) {
+          token = bearerToken;
+          isApiKey = true;
+        } else {
+          token = bearerToken;
+        }
+      }
     }
 
     // Check for session token in cookie
@@ -124,7 +226,15 @@ export async function optionalAuth(
     if (token) {
       let user: AuthUser | null = null;
 
-      if (isSessionToken) {
+      if (isApiKey) {
+        // Validate API key
+        const { user: apiKeyUser, apiKeyId, scopes } = await validateApiKey(token);
+        if (apiKeyUser) {
+          user = apiKeyUser;
+          req.apiKeyId = apiKeyId || undefined;
+          req.apiKeyScopes = scopes || undefined;
+        }
+      } else if (isSessionToken) {
         const sessionUser = await authService.validateSession(token);
         if (sessionUser) {
           const { passwordHash: _, ...userWithoutPassword } = sessionUser;
@@ -149,6 +259,34 @@ export async function optionalAuth(
     console.error('Optional auth error:', error);
     next();
   }
+}
+
+/**
+ * Middleware to require specific API key scopes
+ */
+export function requireScopes(...requiredScopes: ApiKeyScope[]) {
+  return (req: Request, res: Response, next: NextFunction): void => {
+    // If not using API key auth, allow (JWT/session users have full access)
+    if (!req.apiKeyId) {
+      next();
+      return;
+    }
+
+    // Check if API key has all required scopes
+    const userScopes = req.apiKeyScopes || [];
+    const hasAllScopes = requiredScopes.every(scope => userScopes.includes(scope));
+
+    if (!hasAllScopes) {
+      res.status(403).json({
+        success: false,
+        error: `API key missing required scopes: ${requiredScopes.join(', ')}`,
+        code: 'INSUFFICIENT_SCOPES',
+      });
+      return;
+    }
+
+    next();
+  };
 }
 
 /**

@@ -98,6 +98,8 @@
     "nav": {
       "services": "服务",
       "howItWorks": "工作原理",
+      "api": "API",
+      "docs": "文档",
       "features": "功能特点",
       "pricing": "价格",
       "signIn": "登录",
@@ -109,7 +111,7 @@
       "headline": "比别人更快地",
       "headlineHighlight": "招到精英人才",
       "subheadline": "告别花费大量时间翻阅简历堆。我们的 AI 招聘助手自动筛选候选人、进行面试，并提供全面的评估报告。",
-      "ctaPrimary": "免费开始招聘",
+      "ctaPrimary": "轻松开始招聘",
       "ctaSecondary": "探索 API",
       "stat1": "节省时间",
       "stat2": "筛选更快",
@@ -202,7 +204,7 @@
     "cta": {
       "title": "准备好智能招聘了吗？",
       "subtitle": "加入数百家使用 AI 更快找到精英人才的公司。立即开始免费试用 - 无需信用卡。",
-      "primary": "免费开始招聘",
+      "primary": "轻松开始招聘",
       "secondary": "联系销售",
       "benefit1": "无需信用卡",
       "benefit2": "14 天免费试用",
@@ -212,8 +214,15 @@
       "tagline": "AI 驱动的招聘平台，帮助您比他人更快地找到和雇用精英人才。",
       "product": "产品",
       "startHiring": "开始招聘",
+      "api": "API",
+      "playground": "Playground",
       "apiDocs": "API 文档",
       "pricing": "价格",
+      "developers": "开发者",
+      "docs": "文档",
+      "apiReference": "API 参考",
+      "quickStart": "快速开始",
+      "apiKeys": "API 密钥",
       "changelog": "更新日志",
       "company": "公司",
       "about": "关于我们",
@@ -223,7 +232,6 @@
       "resources": "资源",
       "help": "帮助中心",
       "guides": "指南",
-      "api": "API 参考",
       "status": "服务状态",
       "legal": "法律",
       "privacy": "隐私政策",
@@ -257,7 +265,207 @@
     "goToDashboard": "前往控制面板",
     "uploadJd": "上传职位描述",
     "inputPlaceholder": "描述您理想的候选人...",
-    "helperText": "按 Enter 发送，Shift+Enter 换行。上传 JD 文件可获得更详细的匹配。"
+    "helperText": "按 Enter 发送，Shift+Enter 换行。上传 JD 文件可获得更详细的匹配。",
+    "inputHelperText": "按 Enter 发送，Shift+Enter 换行。上传 JD 文件可更快设置。",
+    "heroTitle": "开始使用 AI 招聘",
+    "heroSubtitle": "告诉我们你要找的人才，我们的 AI 将帮助你筛选、评估并找到最佳候选人。",
+    "templatesTitle": "热门岗位模板",
+    "templatesSubtitle": "从预设模板开始，或描述你的需求",
+    "viewAllTemplates": "查看全部模板",
+    "howItWorksTitle": "工作原理",
+    "howItWorks": {
+      "step1": {
+        "title": "描述你的岗位",
+        "desc": "告诉我们所需的技能、经验和特质。"
+      },
+      "step2": {
+        "title": "AI 筛选候选人",
+        "desc": "AI 会审阅简历、进行初筛面试并评估匹配度。"
+      },
+      "step3": {
+        "title": "查看最佳匹配",
+        "desc": "获取最佳候选人的详细报告，加速招聘决策。"
+      }
+    },
+    "ctaTitle": "准备好简化招聘了吗？",
+    "ctaSubtitle": "加入数千家企业，使用 AI 更快更聪明地招聘。",
+    "ctaButton": "立即开始招聘",
+    "newRequest": "新建请求",
+    "quickStartSelected": "我想招聘一名{{role}}",
+    "quickStartFromJd": "基于职位描述的候选人",
+    "quickRoles": {
+      "engineer": "软件工程师",
+      "pm": "产品经理",
+      "designer": "UX 设计师",
+      "data": "数据科学家"
+    },
+    "history": "历史记录",
+    "expandSidebar": "展开侧边栏",
+    "collapseSidebar": "收起侧边栏",
+    "newChat": "新聊天",
+    "backToDashboard": "返回控制面板",
+    "today": "今天",
+    "yesterday": "昨天",
+    "lastWeek": "最近 7 天",
+    "older": "更早",
+    "chatSessions": "聊天记录",
+    "noSessions": "暂无聊天记录",
+    "pastRequisitions": "历史招聘需求",
+    "noRequisitions": "暂无招聘需求",
+    "untitledChat": "未命名聊天",
+    "deleteSession": "删除聊天",
+    "confirmDelete": "确定要删除这个聊天吗？",
+    "useTemplate": "使用模板",
+    "searchTemplates": "搜索模板...",
+    "allCategories": "全部",
+    "noTemplatesFound": "未找到模板",
+    "tryDifferentSearch": "换个关键词或分类试试",
+    "showingTemplates": "共显示 {{count}} 个模板",
+    "categories": {
+      "engineering": "工程",
+      "product": "产品",
+      "design": "设计",
+      "sales": "销售",
+      "marketing": "市场",
+      "operations": "运营",
+      "finance": "财务",
+      "hr": "人力资源"
+    },
+    "templates": {
+      "aiSoftwareEngineer": {
+        "title": "AI 软件工程师",
+        "description": "打造 AI 产品的全栈工程，从原型到上线",
+        "experienceLevel": "4 年以上",
+        "requirements": "我们正在招聘一名 AI 软件工程师，负责端到端构建 AI 功能。\n\n**职责：**\n- 将 AI 原型落地为可扩展的生产功能\n- 集成模型 API、向量检索与数据管道\n- 设计推理服务与监控体系\n- 与产品协作打造 AI 用户体验\n\n**要求：**\n- 4 年以上软件工程经验\n- 扎实的 Python/TypeScript 与后端能力\n- 有 LLM API 或 ML 框架使用经验\n- 熟悉向量数据库与 RAG 方案\n- 了解云服务与可观测性体系\n\n**加分项：**\n- 模型微调或评测经验\n- MLOps / ML 平台经验\n- NLP 相关背景",
+        "skills": ["Python", "TypeScript", "LLM", "向量检索", "MLOps"]
+      },
+      "aiLlmEngineer": {
+        "title": "AI LLM 工程师",
+        "description": "负责大模型流程、评测与效果优化",
+        "experienceLevel": "3 年以上",
+        "requirements": "我们正在寻找 AI LLM 工程师，负责大模型应用与评测体系。\n\n**职责：**\n- 搭建 LLM 应用的提示词与检索流程\n- 优化模型输出的延迟、成本和质量\n- 建立评测框架与安全护栏\n- 与数据团队协作提升模型效果\n\n**要求：**\n- 3 年以上 ML/AI 工程经验\n- 深度理解 LLM、RAG 与 Embeddings\n- 精通 Python 与主流 ML 工具链\n- 有向量检索与评测指标经验\n- 熟悉提示词设计与安全性实践\n\n**加分项：**\n- OpenAI/Anthropic/开源模型微调经验\n- LangChain 或 LlamaIndex 经验\n- NLP 研究背景",
+        "skills": ["LLM", "RAG", "Embeddings", "Python", "评测"]
+      },
+      "fullStackEngineer": {
+        "title": "全栈工程师",
+        "description": "前后端一体化交付，快速上线功能",
+        "experienceLevel": "4 年以上",
+        "requirements": "我们正在招聘全栈工程师，负责从前端到后端的完整交付。\n\n**职责：**\n- 构建并维护 Web 应用与 API\n- 从 UI 到数据库全流程负责功能交付\n- 与产品、设计协作打造高质量体验\n- 优化性能、稳定性与测试体系\n\n**要求：**\n- 4 年以上全栈开发经验\n- 熟练掌握 React 与 TypeScript\n- 有 REST API 开发经验（Node/Python/Go）\n- 熟悉 SQL 数据库与 ORM\n- 了解云部署与 CI/CD\n\n**加分项：**\n- Next.js 经验\n- 可观测性/监控经验\n- 创业公司背景",
+        "skills": ["React", "TypeScript", "Node.js", "SQL", "API 设计"]
+      },
+      "seniorSoftwareEngineer": {
+        "title": "高级软件工程师",
+        "description": "构建可扩展系统并指导初级工程师",
+        "experienceLevel": "5 年以上",
+        "requirements": "我们正在招聘一名高级软件工程师加入团队。\n\n**职责：**\n- 设计并实现可扩展的后端服务\n- 牵头技术讨论与代码评审\n- 指导初级工程师并共建工程文化\n- 与产品、设计团队紧密协作\n\n**要求：**\n- 5 年以上软件开发经验\n- 精通至少一种编程语言（Python/Java/TypeScript/Go）\n- 有云服务经验（AWS/GCP/Azure）\n- 熟悉数据库（SQL 与 NoSQL）\n- 解决问题能力强，注重细节\n\n**加分项：**\n- 微服务架构经验\n- 容器化经验（Docker/Kubernetes）\n- 有开源贡献",
+        "skills": ["Python", "TypeScript", "AWS", "系统设计", "微服务"]
+      },
+      "frontendDeveloper": {
+        "title": "前端工程师",
+        "description": "打造美观且高性能的用户界面",
+        "experienceLevel": "3 年以上",
+        "requirements": "我们正在招聘前端工程师，打造出色的用户体验。\n\n**职责：**\n- 使用 React/Vue 开发响应式 Web 应用\n- 将 Figma 设计高保真还原\n- 优化页面性能与加载速度\n- 编写可维护且有测试的代码\n\n**要求：**\n- 3 年以上前端开发经验\n- 精通 React 或 Vue.js\n- 扎实的 CSS 能力（Tailwind、styled-components）\n- TypeScript 实战经验\n- 了解前端性能优化\n\n**加分项：**\n- Next.js 或 Nuxt.js 经验\n- 移动端开发经验（React Native）\n- 具备 UI/UX 设计感",
+        "skills": ["React", "TypeScript", "CSS", "Tailwind", "Next.js"]
+      },
+      "devopsEngineer": {
+        "title": "DevOps 工程师",
+        "description": "构建并维护稳定的 CI/CD 流水线",
+        "experienceLevel": "4 年以上",
+        "requirements": "我们需要一名 DevOps 工程师来优化基础设施与发布流程。\n\n**职责：**\n- 设计并维护 CI/CD 流水线\n- 管理云基础设施（AWS/GCP）\n- 搭建监控与告警体系\n- 保障安全最佳实践\n\n**要求：**\n- 4 年以上 DevOps/SRE 经验\n- 熟悉 AWS 或 GCP\n- 熟练使用 Kubernetes 与 Docker\n- 基础设施即代码经验（Terraform/CloudFormation）\n- 脚本能力（Python/Bash）\n\n**加分项：**\n- 安全相关认证\n- GitOps 经验\n- 轮值值班经验",
+        "skills": ["AWS", "Kubernetes", "Terraform", "Docker", "CI/CD"]
+      },
+      "dataScientist": {
+        "title": "数据科学家",
+        "description": "把数据转化为洞察与机器学习模型",
+        "experienceLevel": "3 年以上",
+        "requirements": "我们正在招聘数据科学家，帮助我们释放数据价值。\n\n**职责：**\n- 构建并部署机器学习模型\n- 分析大规模数据集并输出洞察\n- 与产品团队协作落地数据驱动功能\n- 制作报表与可视化\n\n**要求：**\n- 3 年以上数据科学经验\n- 精通 Python（pandas、scikit-learn、TensorFlow/PyTorch）\n- 熟悉 SQL 与数据仓库\n- 统计学与机器学习基础扎实\n- 良好的沟通能力\n\n**加分项：**\n- NLP 或计算机视觉经验\n- MLOps 经验\n- 量化领域博士学位",
+        "skills": ["Python", "机器学习", "SQL", "TensorFlow", "统计学"]
+      },
+      "productManager": {
+        "title": "产品经理",
+        "description": "制定产品战略并推动落地",
+        "experienceLevel": "4 年以上",
+        "requirements": "我们需要一名产品经理来推动产品发展。\n\n**职责：**\n- 制定产品路线图与策略\n- 收集并优先级排序需求\n- 与工程与设计紧密协作\n- 关注指标并驱动产品决策\n\n**要求：**\n- 4 年以上产品管理经验\n- 熟悉敏捷方法\n- 出色的分析与问题解决能力\n- 优秀的沟通与干系人管理\n- 有技术背景更佳\n\n**加分项：**\n- B2B SaaS 经验\n- SQL 与数据分析能力\n- MBA 或相关学历",
+        "skills": ["产品战略", "敏捷", "数据分析", "路线图", "干系人管理"]
+      },
+      "scrumMaster": {
+        "title": "Scrum Master",
+        "description": "促进敏捷流程与团队效率",
+        "experienceLevel": "3 年以上",
+        "requirements": "我们正在招聘 Scrum Master，帮助团队高效交付。\n\n**职责：**\n- 主持敏捷会议与迭代节奏\n- 清除障碍并辅导团队\n- 跟踪并优化团队指标\n- 促进持续改进\n\n**要求：**\n- 3 年以上 Scrum Master 经验\n- CSM 或同等认证\n- 熟悉多种敏捷框架\n- 优秀的引导与协作能力\n- 熟悉 Jira 或类似工具\n\n**加分项：**\n- 技术背景\n- SAFe 认证\n- 教练/辅导认证",
+        "skills": ["Scrum", "敏捷", "引导", "Jira", "团队辅导"]
+      },
+      "uxDesigner": {
+        "title": "UX 设计师",
+        "description": "打造直观且愉悦的用户体验",
+        "experienceLevel": "3 年以上",
+        "requirements": "我们需要一名 UX 设计师来塑造产品体验。\n\n**职责：**\n- 进行用户研究与可用性测试\n- 输出线框图、原型和用户流程\n- 与产品和工程团队协作\n- 维护并演进设计系统\n\n**要求：**\n- 3 年以上 UX 设计经验\n- 熟练使用 Figma\n- 作品集体现完整 UX 流程\n- 熟悉用户研究方法\n- 理解无障碍标准\n\n**加分项：**\n- UI 设计能力\n- 动效设计经验\n- 设计系统经验",
+        "skills": ["Figma", "用户研究", "原型设计", "线框图", "可用性测试"]
+      },
+      "uiDesigner": {
+        "title": "UI 设计师",
+        "description": "打造精致的视觉设计与界面",
+        "experienceLevel": "2 年以上",
+        "requirements": "我们正在寻找 UI 设计师，打造出色的界面视觉。\n\n**职责：**\n- 设计精美且高还原度的界面\n- 创建并维护设计系统组件\n- 与开发协作落地实现\n- 制作品牌与营销物料\n\n**要求：**\n- 2 年以上 UI 设计经验\n- 精通 Figma\n- 出色的视觉设计作品集\n- 理解设计原则与排版\n- 具备基础 HTML/CSS 认知\n\n**加分项：**\n- 动画/动效设计能力\n- 插画能力\n- 品牌设计经验",
+        "skills": ["Figma", "视觉设计", "设计系统", "排版", "色彩"]
+      },
+      "accountExecutive": {
+        "title": "客户经理（AE）",
+        "description": "负责成交并拓展企业客户",
+        "experienceLevel": "3 年以上",
+        "requirements": "我们需要一名客户经理（AE）推动营收增长。\n\n**职责：**\n- 全流程销售：拓客到成交\n- 建立并维护企业客户关系\n- 达成季度销售目标\n- 与 SDR/客户成功协作\n\n**要求：**\n- 3 年以上 B2B SaaS 销售经验\n- 有持续达成指标的记录\n- 熟悉企业级销售周期\n- 出色的展示与谈判能力\n- 熟练使用 CRM（如 Salesforce）\n\n**加分项：**\n- 有招聘/HR 领域销售经验\n- 技术背景\n- 目标行业人脉",
+        "skills": ["B2B 销售", "Salesforce", "企业销售", "谈判", "拓客"]
+      },
+      "salesEngineer": {
+        "title": "售前工程师",
+        "description": "连接技术与销售，推动成交",
+        "experienceLevel": "4 年以上",
+        "requirements": "我们正在招聘售前工程师，支持销售团队。\n\n**职责：**\n- 负责技术演示与 POC\n- 解答销售过程中的技术问题\n- 编写技术文档与解决方案\n- 将客户反馈传递给产品团队\n\n**要求：**\n- 4 年以上售前/解决方案架构经验\n- 扎实的技术背景（软件开发）\n- 优秀的表达与沟通能力\n- 能清晰讲解复杂技术概念\n- 有 API/集成相关经验\n\n**加分项：**\n- 软件开发经验\n- 行业认证\n- HR 科技领域经验",
+        "skills": ["技术演示", "API 集成", "解决方案架构", "演示", "POC"]
+      },
+      "marketingManager": {
+        "title": "市场经理",
+        "description": "主导市场活动与品牌策略",
+        "experienceLevel": "4 年以上",
+        "requirements": "我们需要一名市场经理提升品牌影响力。\n\n**职责：**\n- 策划并执行市场活动\n- 管理市场预算与 ROI\n- 负责内容与品牌策略\n- 分析数据并持续优化\n\n**要求：**\n- 4 年以上市场经验\n- B2B SaaS 市场经验\n- 强数据分析能力\n- 优秀的写作与沟通能力\n- 熟悉营销工具（HubSpot、Google Analytics）\n\n**加分项：**\n- 产品营销经验\n- 增长/获客经验\n- 团队管理经验",
+        "skills": ["活动策划", "内容策略", "数据分析", "B2B 营销", "HubSpot"]
+      },
+      "contentWriter": {
+        "title": "内容写作",
+        "description": "创作有转化力的内容",
+        "experienceLevel": "2 年以上",
+        "requirements": "我们正在寻找内容写作，讲好品牌故事。\n\n**职责：**\n- 撰写博客、案例与白皮书\n- 负责网站与产品文案\n- 制作邮件营销内容\n- 进行 SEO 优化\n\n**要求：**\n- 2 年以上内容写作经验\n- 优秀的写作与编辑能力\n- 理解 SEO 最佳实践\n- 具备 B2B/SaaS 内容经验\n- 能将技术内容解释清楚\n\n**加分项：**\n- 有发表作品集\n- 了解 CMS/内容管理系统\n- 视频脚本写作经验",
+        "skills": ["文案写作", "SEO", "博客写作", "邮件营销", "叙事能力"]
+      },
+      "operationsManager": {
+        "title": "运营经理",
+        "description": "优化流程并支撑业务规模化",
+        "experienceLevel": "5 年以上",
+        "requirements": "我们需要一名运营经理优化流程与效率。\n\n**职责：**\n- 设计并落地运营流程\n- 管理供应商与合作伙伴\n- 跟踪并汇报运营指标\n- 推动效率提升\n\n**要求：**\n- 5 年以上运营经验\n- 出色的项目管理能力\n- 有流程优化经验\n- 强分析能力\n- 熟悉运营工具\n\n**加分项：**\n- 六西格玛或精益认证\n- 科技/SaaS 公司经验\n- 团队管理经验",
+        "skills": ["流程优化", "项目管理", "供应商管理", "分析", "精益"]
+      },
+      "financialAnalyst": {
+        "title": "财务分析师",
+        "description": "推动财务规划与分析",
+        "experienceLevel": "3 年以上",
+        "requirements": "我们正在招聘财务分析师支持财务团队。\n\n**职责：**\n- 构建财务模型与预测\n- 编制月度财务报表\n- 分析业务表现\n- 支持预算编制\n\n**要求：**\n- 3 年以上 FP&A 经验\n- 高级 Excel 技能\n- 有财务建模经验\n- 理解 SaaS 指标\n- 细致严谨\n\n**加分项：**\n- CPA 或 CFA\n- 有 NetSuite 等系统经验\n- SQL 技能",
+        "skills": ["财务建模", "Excel", "FP&A", "预算", "SaaS 指标"]
+      },
+      "hrManager": {
+        "title": "人力资源经理",
+        "description": "建设文化并支持员工成长",
+        "experienceLevel": "4 年以上",
+        "requirements": "我们需要一名人力资源经理负责人才与组织运营。\n\n**职责：**\n- 管理员工全生命周期\n- 制定 HR 政策与项目\n- 处理员工关系\n- 负责薪酬与福利\n\n**要求：**\n- 4 年以上 HR 经验\n- 熟悉劳动法律法规\n- 有 HRIS 系统经验\n- 出色的沟通与协作能力\n- 科技公司经验优先\n\n**加分项：**\n- PHR/SHRM 认证\n- 从 0 到 1 搭建 HR 体系\n- 国际化 HR 经验",
+        "skills": ["员工关系", "HRIS", "薪酬福利", "合规", "文化建设"]
+      },
+      "technicalRecruiter": {
+        "title": "技术招聘",
+        "description": "吸引并招聘顶尖工程人才",
+        "experienceLevel": "3 年以上",
+        "requirements": "我们正在寻找技术招聘，帮助团队扩张。\n\n**职责：**\n- 负责工程岗位的全流程招聘\n- 主动寻访并吸引候选人\n- 与用人经理紧密合作\n- 优化招聘流程\n\n**要求：**\n- 3 年以上技术招聘经验\n- 强大的寻访能力\n- 熟悉 ATS 招聘系统\n- 理解技术岗位与技能\n- 优秀的沟通能力\n\n**加分项：**\n- 互联网/科技公司招聘经验\n- 雇主品牌建设经验\n- 多元化招聘经验",
+        "skills": ["技术寻访", "ATS", "面试", "雇主品牌", "LinkedIn 招聘"]
+      }
+    }
   },
   "dashboard": {
     "nav": {
@@ -294,6 +502,79 @@
     "startHiring": "开始招聘",
     "endpoints": "API 接口",
     "logout": "退出登录"
+  },
+  "apiLanding": {
+    "hero": {
+      "badge": "RoboHire API",
+      "headline": "几分钟内构建AI招聘功能",
+      "subheadline": "只需几行代码，即可将智能简历匹配、面试评估和候选人筛选集成到您的应用程序中。",
+      "getKey": "获取 API 密钥",
+      "readDocs": "阅读文档"
+    },
+    "what": {
+      "badge": "这是什么？",
+      "title": "强大的AI招聘API",
+      "description": "RoboHire API 提供完整的 AI 招聘工具套件。通过简单的 REST API 端点，实现简历与职位描述匹配、文档解析、面试评估和候选人沟通自动化。",
+      "exploreDocs": "浏览文档"
+    },
+    "howItWorks": {
+      "badge": "快速入门",
+      "title": "工作原理"
+    },
+    "steps": {
+      "signup": {
+        "title": "注册或登录",
+        "desc": "创建免费账户或登录以访问您的 RoboHire API 控制面板。"
+      },
+      "apikey": {
+        "title": "获取 API 密钥",
+        "desc": "从控制面板生成 API 密钥以开始进行 API 调用。"
+      },
+      "develop": {
+        "title": "开始开发",
+        "desc": "使用我们全面的文档将 RoboHire 集成到您的应用程序中。"
+      }
+    },
+    "features": {
+      "badge": "核心功能",
+      "title": "自动化招聘所需的一切",
+      "subtitle": "强大的 API 在后台处理复杂的 AI 工作。",
+      "matching": {
+        "title": "AI 简历匹配",
+        "desc": "使用 AI 驱动的评分和详细分析将简历与职位描述进行匹配。"
+      },
+      "parsing": {
+        "title": "文档解析",
+        "desc": "从 PDF 格式的简历和职位描述中提取结构化数据。"
+      },
+      "evaluation": {
+        "title": "面试评估",
+        "desc": "分析面试记录，提供全面评分和作弊检测。"
+      },
+      "invitation": {
+        "title": "候选人邀请",
+        "desc": "自动生成专业的面试邀请邮件。"
+      },
+      "multilingual": {
+        "title": "多语言支持",
+        "desc": "支持7种语言，包括中文、英文、日文等。"
+      },
+      "webhooks": {
+        "title": "Webhook 集成",
+        "desc": "在处理候选人时通过 Webhook 接收实时更新。"
+      }
+    },
+    "playground": {
+      "title": "在 Playground 中试用",
+      "description": "在集成到您的应用程序之前，交互式测试我们的 API。",
+      "cta": "打开 Playground"
+    },
+    "cta": {
+      "title": "获取您的 API 密钥",
+      "description": "立即开始构建 AI 招聘功能。免费开始，无需信用卡。",
+      "getStarted": "立即开始",
+      "viewDocs": "查看文档"
+    }
   },
   "pages": {
     "matchResume": {
