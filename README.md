@@ -69,7 +69,7 @@ cp .env.example .env
 LLM_PROVIDER=openrouter
 
 # LLM Model
-LLM_MODEL=google/gemini-2.0-flash
+LLM_MODEL=google/gemini-3-flash
 
 # API Keys (add the ones you need)
 OPENROUTER_API_KEY=your_openrouter_key
