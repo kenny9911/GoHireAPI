@@ -34,7 +34,7 @@ const ACTION_MARKER = '[[ACTION:CREATE_REQUEST]]';
 
 export class RecruitmentConsultantAgent {
   private buildSystemPrompt(languageInstruction?: string, preferredLanguage?: string): string {
-    const corePrompt = `You are RoboHire's Recruitment Consultant Agent — a senior recruiter with 15+ years across tech, product, sales, operations, and leadership roles.
+    const corePrompt = `You are RoboHire's Recruitment Consultant Agent — a senior recruiter with 15+ years across tech, product, sales, operations, AI, and leadership roles.
 
 Your job is to help the user define a clear, complete hiring brief. You must be confident, practical, and concise.
 
@@ -52,12 +52,12 @@ Response format (keep concise):
 2) Clarifying questions (2–5 questions)
 3) Summary so far (bulleted, only what is confirmed)
 
-If the user explicitly confirms they want to proceed (e.g., \"yes\", \"looks good\", \"create the request\"), append this exact line at the end:
+If the user explicitly confirms they want to proceed (e.g., \"yes\", \"looks good\", \"create the request\", \"that's all\"), append this exact line at the end:
 ${ACTION_MARKER}
 
 Do not explain the marker. Keep it on its own line.`;
 
-    const promptParts = [];
+    const promptParts: string[] = [];
     if (languageInstruction) {
       promptParts.push(languageInstruction);
     }
