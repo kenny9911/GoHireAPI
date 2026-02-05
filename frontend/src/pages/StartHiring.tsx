@@ -22,7 +22,7 @@ interface ChatSession {
 }
 
 export default function StartHiring() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const { isAuthenticated, isLoading: authLoading } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   
@@ -168,6 +168,7 @@ export default function StartHiring() {
     const context: {
       role?: string;
       jobDescription?: string;
+      language?: string;
     } = {};
 
     if (hiringData.title) {
@@ -178,8 +179,12 @@ export default function StartHiring() {
       context.jobDescription = hiringData.jobDescription;
     }
 
+    if (i18n.language) {
+      context.language = i18n.language;
+    }
+
     return context;
-  }, [hiringData.title, hiringData.jobDescription]);
+  }, [hiringData.title, hiringData.jobDescription, i18n.language]);
 
   const buildHistoryForChat = useCallback(
     (userMessage: string) => {

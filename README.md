@@ -1,25 +1,36 @@
 # RoboHire API
 
-AI-Powered Recruitment APIs with multi-LLM provider support.
+AI-powered recruitment platform and APIs with multi-LLM provider support.
 
 ## Features
 
 ### Platform
-- **Start Hiring Service**: AI-powered hiring agent that screens candidates, conducts interviews, and delivers evaluation reports
+- **Start Hiring Service**: Recruitment Consultant AI that captures requirements, recommends role needs, and summarizes a hiring brief
+- **Hiring Sessions & History**: Persisted chat sessions for signed-in users with titles and message history
+- **Template Library**: Localized role templates and quick-start cards (including AI roles) on `/start-hiring`
 - **User Authentication**: Email/password login with Google, GitHub, and LinkedIn OAuth
-- **Hiring Dashboard**: Manage hiring requests and track candidates
+- **Developer Experience**: API keys, docs (`/docs`), developer landing (`/developers`), and API Playground
 - **Modern Landing Page**: SEO-optimized marketing page with i18n support (7 languages)
 
 ### AI-Powered APIs
-- **5 AI-Powered APIs** for recruitment automation
+- **Recruitment Consultant Chat**: `/api/v1/hiring-chat` for requirement intake and summaries (optional auth)
 - **Multi-LLM Provider Support**: OpenAI, OpenRouter, Google Gemini
-- **Language Detection**: Automatically responds in the same language as the job description
+- **Language Response Control**: Responds in user-selected UI language or detected JD language
 - **PDF Parsing**: Extract structured data from resume and JD PDFs with intelligent caching
 - **React Admin Dashboard**: Test and manage APIs through a modern UI with code examples
-- **Comprehensive Logging**: File-based JSON Lines logging with daily rotation
+- **Comprehensive Logging**: File-based JSON Lines logging with daily rotation, tokens, and cost
 - **Document Storage**: Automatic caching of parsed documents and match results
 - **Interview Questions Generator**: Technical, behavioral, and situational questions with probing areas
 - **Cheating Detection**: AI analysis to detect AI-assisted interview answers
+
+## Recent Enhancements
+
+- Recruitment Consultant Agent with action markers to create hiring requests
+- `/start-hiring` redesign with Gemini-style prompt, templates, JD upload, and session history
+- Fully localized homepage, Start Hiring, Developers, and Docs pages (7 languages)
+- Expanded template library (19 roles) including AI Software Engineer, AI LLM Engineer, and Full Stack Engineer
+- New Hiring Chat and Hiring Sessions APIs for session-aware conversations
+- Dedicated developer landing (`/developers`) and documentation hub (`/docs`)
 
 ## Screenshots
 
@@ -28,7 +39,8 @@ The admin dashboard provides an easy way to test all APIs with built-in code exa
 
 ## Documentation
 
-📚 **[Full API Documentation](./API_DOCUMENTATION.md)** - Complete API reference with examples in cURL, JavaScript, and Python.
+- **UI Docs**: http://localhost:3607/docs
+- 📚 **[Full API Documentation](./API_DOCUMENTATION.md)** - Complete API reference with examples in cURL, JavaScript, and Python.
 
 ## API Endpoints
 
@@ -45,6 +57,23 @@ The admin dashboard provides an easy way to test all APIs with built-in code exa
 | `/api/auth/linkedin` | GET | LinkedIn OAuth login |
 
 **Demo Account:** `demo@robohire.io` / `demo1234`
+
+### Hiring Chat
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/v1/hiring-chat` | POST | Chat with Recruitment Consultant Agent (optional auth; session-aware) |
+
+### Hiring Sessions (Protected)
+
+| Endpoint | Method | Description |
+|----------|--------|-------------|
+| `/api/v1/hiring-sessions` | POST | Create a new hiring session |
+| `/api/v1/hiring-sessions` | GET | List user's hiring sessions |
+| `/api/v1/hiring-sessions/:id` | GET | Get hiring session with messages |
+| `/api/v1/hiring-sessions/:id` | PATCH | Update hiring session (title, messages, status) |
+| `/api/v1/hiring-sessions/:id/messages` | POST | Add a message to a session |
+| `/api/v1/hiring-sessions/:id` | DELETE | Delete hiring session |
 
 ### Hiring Requests (Protected)
 
@@ -139,10 +168,12 @@ npm run dev --workspace=frontend  # Starts frontend on port 3607
 - **Landing Page**: http://localhost:3607
 - **Login**: http://localhost:3607/login
 - **Start Hiring**: http://localhost:3607/start-hiring
+- **Developers**: http://localhost:3607/developers
+- **Docs**: http://localhost:3607/docs
 - **Dashboard**: http://localhost:3607/dashboard (requires login)
-- **API Playground**: http://localhost:3607/api-playground (requires login)
+- **API Playground**: http://localhost:3607/api-playground
 - **API Server**: http://localhost:4607
-- **API Documentation**: http://localhost:4607 (root endpoint)
+- **API Documentation (backend)**: http://localhost:4607 (root endpoint)
 
 ## API Usage Examples
 
@@ -227,9 +258,12 @@ RoboHireAPI/
 │   ├── src/
 │   │   ├── index.ts                    # Express server entry
 │   │   ├── routes/
-│   │   │   └── api.ts                  # API route definitions
+│   │   │   ├── api.ts                  # API route definitions
+│   │   │   ├── hiringChat.ts           # Recruitment Consultant chat
+│   │   │   └── hiringSessions.ts       # Hiring session CRUD
 │   │   ├── agents/
 │   │   │   ├── BaseAgent.ts            # Abstract base agent
+│   │   │   ├── RecruitmentConsultantAgent.ts # Hiring requirements chat
 │   │   │   ├── ResumeMatchAgent.ts     # Resume-JD matching
 │   │   │   ├── InviteAgent.ts          # Invitation email generation
 │   │   │   ├── ResumeParseAgent.ts     # Resume parsing
@@ -263,11 +297,16 @@ RoboHireAPI/
 │   │   │   ├── TextArea.tsx            # Textarea with copy/paste buttons
 │   │   │   └── ResultViewer.tsx        # Result display with copy/download
 │   │   ├── pages/
+│   │   │   ├── Landing.tsx
+│   │   │   ├── Login.tsx
+│   │   │   ├── StartHiring.tsx
+│   │   │   ├── APILanding.tsx
 │   │   │   ├── MatchResume.tsx
 │   │   │   ├── ParseResume.tsx
 │   │   │   ├── ParseJD.tsx
 │   │   │   ├── InviteCandidate.tsx
-│   │   │   └── EvaluateInterview.tsx
+│   │   │   ├── EvaluateInterview.tsx
+│   │   │   └── docs/                   # Developer docs pages
 │   │   └── context/
 │   │       └── FormDataContext.tsx     # Shared form state (synced resume/JD)
 │   └── package.json
@@ -309,9 +348,9 @@ Comprehensive logging with JSON Lines format:
 - `llm-YYYY-MM-DD.jsonl` - LLM calls with token usage and cost
 - `requests-YYYY-MM-DD.jsonl` - API request summaries
 
-### Language Detection
+### Language Responses
 
-The system automatically detects the primary language in the Job Description and instructs the LLM to respond in that language:
+The system responds in the user-selected UI language when provided, otherwise it detects the primary language in the Job Description and replies in that language:
 
 - English
 - Chinese (中文)

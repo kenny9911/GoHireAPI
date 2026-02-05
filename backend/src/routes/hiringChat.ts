@@ -23,6 +23,7 @@ interface ChatRequestBody {
     mustHaves?: string[];
     niceToHaves?: string[];
     jobDescription?: string;
+    language?: string;
   };
 }
 
