@@ -159,8 +159,9 @@ export default function DashboardHeader() {
         if (!detail?.success || !detail.data) {
           return [];
         }
-        const requestTitle = detail.data.title || t('dashboard.requests.title', 'Hiring Request');
-        const candidates = detail.data.candidates || [];
+        const requestData = detail.data;
+        const requestTitle = requestData.title || t('dashboard.requests.title', 'Hiring Request');
+        const candidates = requestData.candidates || [];
         return candidates.map((candidate) => {
           const candidateName = candidate.name || candidate.email || t('notifications.candidate', 'Candidate');
           const type: NotificationType = candidate.status === 'screening'
@@ -178,7 +179,7 @@ export default function DashboardHeader() {
               request: requestTitle,
             }),
             timestamp,
-            requestId: detail.data.id,
+            requestId: requestData.id,
           };
         });
       });
