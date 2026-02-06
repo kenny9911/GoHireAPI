@@ -55,7 +55,6 @@ services:
   - type: web
     name: robohire-web
     runtime: static
-    region: ohio
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist
