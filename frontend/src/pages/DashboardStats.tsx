@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { API_BASE } from '../config';
 import DashboardHeader from '../components/dashboard/DashboardHeader';
 
 interface HiringRequest {
@@ -47,7 +48,7 @@ export default function DashboardStats() {
     const fetchStats = async () => {
       try {
         const token = localStorage.getItem('auth_token');
-        const response = await fetch(`/api/v1/hiring-requests?limit=${REQUEST_LIMIT}`, {
+        const response = await fetch(`${API_BASE}/api/v1/hiring-requests?limit=${REQUEST_LIMIT}`, {
           headers: token ? { Authorization: `Bearer ${token}` } : undefined,
           credentials: 'include',
         });
@@ -76,7 +77,7 @@ export default function DashboardStats() {
 
         const detailResponses = await Promise.all(
           requestList.map((request) =>
-            fetch(`/api/v1/hiring-requests/${request.id}`, {
+            fetch(`${API_BASE}/api/v1/hiring-requests/${request.id}`, {
               headers: token ? { Authorization: `Bearer ${token}` } : undefined,
               credentials: 'include',
             })

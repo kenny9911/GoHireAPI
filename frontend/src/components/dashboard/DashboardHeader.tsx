@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../context/AuthContext';
+import { API_BASE } from '../../config';
 import LanguageSelector from '../LanguageSelector';
 
 type NotificationType = 'match' | 'invitation' | 'interview';
@@ -135,7 +136,7 @@ export default function DashboardHeader() {
 
     try {
       const token = localStorage.getItem('auth_token');
-      const response = await fetch('/api/v1/hiring-requests?limit=20', {
+      const response = await fetch(`${API_BASE}/api/v1/hiring-requests?limit=20`, {
         headers: token ? { Authorization: `Bearer ${token}` } : undefined,
         credentials: 'include',
       });
@@ -147,7 +148,7 @@ export default function DashboardHeader() {
       const requests: HiringRequestSummary[] = (data.data || []).slice(0, MAX_NOTIFICATION_REQUESTS);
       const detailResponses = await Promise.all(
         requests.map((request) =>
-          fetch(`/api/v1/hiring-requests/${request.id}`, {
+          fetch(`${API_BASE}/api/v1/hiring-requests/${request.id}`, {
             headers: token ? { Authorization: `Bearer ${token}` } : undefined,
             credentials: 'include',
           })

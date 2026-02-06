@@ -5,6 +5,7 @@ import ReactMarkdown from 'react-markdown';
 import type { Components } from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE } from '../config';
 import type { HiringTemplate } from '../data/hiringTemplates';
 import { getLocalizedTemplates } from '../data/hiringTemplates';
 
@@ -102,7 +103,7 @@ export default function StartHiring() {
 
   const loadSessions = async () => {
     try {
-      const response = await fetch('/api/v1/hiring-sessions', {
+      const response = await fetch(`${API_BASE}/api/v1/hiring-sessions`, {
         headers: getAuthHeaders(),
         credentials: 'include',
       });
@@ -117,7 +118,7 @@ export default function StartHiring() {
 
   const loadSession = async (sessionId: string) => {
     try {
-      const response = await fetch(`/api/v1/hiring-sessions/${sessionId}`, {
+      const response = await fetch(`${API_BASE}/api/v1/hiring-sessions/${sessionId}`, {
         headers: getAuthHeaders(),
         credentials: 'include',
       });
@@ -136,7 +137,7 @@ export default function StartHiring() {
     if (!isAuthenticated) return null;
     
     try {
-      const response = await fetch('/api/v1/hiring-sessions', {
+      const response = await fetch(`${API_BASE}/api/v1/hiring-sessions`, {
         method: 'POST',
         headers: getAuthHeaders(),
         credentials: 'include',
@@ -229,7 +230,7 @@ export default function StartHiring() {
         context,
       };
 
-      const response = await fetch('/api/v1/hiring-chat', {
+      const response = await fetch(`${API_BASE}/api/v1/hiring-chat`, {
         method: 'POST',
         headers: getAuthHeaders(),
         credentials: 'include',
@@ -265,7 +266,7 @@ export default function StartHiring() {
       return '';
     }
 
-    const response = await fetch('/api/v1/hiring-requests/title-suggestion', {
+    const response = await fetch(`${API_BASE}/api/v1/hiring-requests/title-suggestion`, {
       method: 'POST',
       headers: getAuthHeaders(),
       credentials: 'include',
@@ -297,7 +298,7 @@ export default function StartHiring() {
       return '';
     }
 
-    const response = await fetch('/api/v1/hiring-requests/jd-draft', {
+    const response = await fetch(`${API_BASE}/api/v1/hiring-requests/jd-draft`, {
       method: 'POST',
       headers: getAuthHeaders(),
       credentials: 'include',
@@ -478,7 +479,7 @@ export default function StartHiring() {
   const createHiringRequest = async () => {
     try {
       const finalJobDescription = jdDraft.trim();
-      const response = await fetch('/api/v1/hiring-requests', {
+      const response = await fetch(`${API_BASE}/api/v1/hiring-requests`, {
         method: 'POST',
         headers: getAuthHeaders(),
         credentials: 'include',
