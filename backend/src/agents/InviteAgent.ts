@@ -3,9 +3,10 @@ import { logger } from '../services/LoggerService.js';
 import { llmService } from '../services/llm/LLMService.js';
 import { languageService } from '../services/LanguageService.js';
 
+// External invitation API – override via ROBOHIRE_INVITATION_API env var
 const ROBOHIRE_INVITATION_API =
   process.env.ROBOHIRE_INVITATION_API ||
-  'https://report-agent.gohire.top/instant/instant/v1/invitation';
+  'https://api.robohire.io/instant/instant/v1/invitation';
 
 /**
  * Agent for sending interview invitations via RoboHire 一键邀约 API

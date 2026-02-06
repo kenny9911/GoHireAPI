@@ -116,8 +116,8 @@ The admin dashboard provides an easy way to test all APIs with built-in code exa
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/RoboHireAPI.git
-cd RoboHireAPI
+git clone https://github.com/kenny9911/RoboHire.git
+cd RoboHire
 
 # Install dependencies for all workspaces
 npm install
@@ -253,7 +253,7 @@ curl -X POST http://localhost:4607/api/v1/evaluate-interview \
 ## Project Structure
 
 ```
-RoboHireAPI/
+RoboHire/
 ├── backend/
 │   ├── src/
 │   │   ├── index.ts                    # Express server entry
